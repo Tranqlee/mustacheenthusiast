@@ -1,0 +1,9 @@
+.Navigatie {
+    margin-right: 5cm;
+    margin-left: 5cm;
+    padding-bottom: 0.5cm;
+    z-index: 0;
+    background-image: linear-gradient(to bottom right, #636B7C, #323C54);
+    border-radius: 0.25cm;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+}
