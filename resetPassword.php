@@ -1,30 +1,56 @@
 <?php
     require_once('comm.php');
     session_start();
+    $link = getDatabase();
 
-    if(isset($_POST['Resetpassword']))
-    {
-        if($_POST['Newpassword'] == $_POST['Repeatnewpassword'])
+    if(isset($_POST['Username']))
+    {        
+        //checks if username exists
+        $stmt = $link->prepare("SELECT * FROM klant WHERE Gebruikersnaam = :username");
+        $stmt->bindParam(':username',$_POST['Username']);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $username = $result['Gebruikersnaam'];
+
+        if($_POST['Username'] == $username)
         {
-            try
+            //checks if password is correct
+            if($_POST['Newpassword'] == $_POST['Repeatnewpassword'])
             {
-                $link = getDatabase();
-                $stmt = $link->prepare("UPDATE klant SET Wachtwoord = :wachtwoord WHERE Gebruikersnaam = :username");
-                $stmt->bindParam(':username',$_POST['Username']);
-                $stmt->bindParam(':wachtwoord',$_POST['Newpassword'])
-                $stmt->execute();
-                $error = "";
-                header('Location: loginSHOP.php');
+                $passwordhash = password_hash($_POST['Newpassword'], PASSWORD_DEFAULT);
+
+                //checks if the user is an admin
+                if($result['isAdmin'] != 1)
+                {
+                    try
+                    {
+                        $stmt = $link->prepare("UPDATE klant SET Wachtwoord = :wachtwoord WHERE Gebruikersnaam = :username");
+                        $stmt->bindParam(':username',$_POST['Username']);
+                        $stmt->bindParam(':wachtwoord',$passwordhash);
+                        $stmt->execute();
+    
+                        $error = "";
+                        header('Location: loginSHOP.php');
+                    }
+                    catch(PDOException $e)
+                    {
+                        echo 'Error!:'.$e->getMessage().'<br/>';
+                        die();
+                    }
+                }
+                else
+                {
+                    $error = "Gebruiker is een Admin";
+                }
             }
-            catch(PDOException $e)
+            else
             {
-                echo 'Error!:'.$e->getMessage().'<br/>';
-                die();
+                $error = "Wachtwoorden komen niet overeen";
             }
         }
         else
         {
-            $error = "'New password' en 'Repeat new password' zijn niet hetzelfde";   
+            $error = "Gebruiker bestaat niet";
         }
     }
 ?>
@@ -45,10 +71,31 @@
             background-repeat: no-repeat;
             background-position: center;
         }
-        .error
-        {
-            color: red;
-        }
+        <?php
+            if($error == "")
+            {
+                ?>
+                .error
+                {
+                    border: none;
+                    background-color: transparent;
+                }
+                <?php
+            }
+            else
+            {
+                ?>
+                .error
+                {
+                    color: white;
+                    border: 1px solid black;
+                    border-radius: 0.25cm;
+                    background-color: red;
+                    padding: 0 0.25cm 0 0.25cm;
+                }
+                <?php
+            }
+        ?>
         input
         {
             display: block;
@@ -68,7 +115,7 @@
             transform: translate(-50%, -52.5%);
         }
 
-        .buttonlogin input {
+        .buttonresetpassword input {
             padding: 0.25cm;
             margin: 0 auto 0 auto;
             border-radius: 0.25cm;
@@ -77,7 +124,7 @@
             justify-content: center;
             font-weight: bold;
         }
-        .buttonlogin input:hover {
+        .buttonresetpassword input:hover {
             padding: 0.25cm;
             width: 100%;
             border-radius: 0.25cm;
@@ -115,13 +162,47 @@
                             </div>
                             <br>
                             <div class="buttonresetpassword">
-                                <input class="buttonresetpassword" type="submit" value="Resetpassword" style="width: 100%;"/>
+                                <input class="buttonresetpassword" type="submit" value="Reset password" style="width: 100%;"/>
                             </div>
                             <br>
                         </form>
-                        <div class="buttonresetpassword">
-                            <label><?php echo $error; ?></label>
+                        <br>
+                        <div class="error">
+                            <p><?php echo $error; ?></p>
                         </div>
+                        <br><br>
+                        <style>
+                            .buttonresetpassword {
+                                width: 100%;
+                            }
+                            .buttonresetpassword button {
+                                padding: 0.25cm;
+                                width: 100%;
+                                margin: 0 auto 0 auto;
+                                border-radius: 0.25cm;
+                                background-color: lightgray;
+                                color: black;
+                                border: 1px solid black;
+                                justify-content: center;
+                                font-weight: bold;
+                                text-decoration: none;
+                            }
+                            .buttonresetpassword button:hover {
+                                padding: 0.25cm;
+                                width: 100%;
+                                border-radius: 0.25cm;
+                                background-color: gray;
+                                color: black;
+                                border: 1px solid black;
+                                justify-content: center;
+                                transition: 0.1s;
+                                font-weight: bold;
+                                text-decoration: none;
+                            }
+                        </style>
+                        <form action="loginSHOP.php" class="buttonresetpassword">
+                            <button type="submit">Return to login page</button>
+                        </form>
                     </div>
                 </td>
             </tr>
