@@ -66,7 +66,7 @@
         }
         .main
         {
-            background-color: gray;
+            background-color: white;
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -89,7 +89,7 @@
                 {
                     color: white;
                     border: 1px solid black;
-                    border-radius: 0.25cm;
+                    border-radius: 0.15cm;
                     background-color: red;
                     padding: 0 0.25cm 0 0.25cm;
                 }
@@ -118,8 +118,8 @@
         .buttonresetpassword input {
             padding: 0.25cm;
             margin: 0 auto 0 auto;
-            border-radius: 0.25cm;
-            background-color: lightgray;
+            border-radius: 0.15cm;
+            background-color: lightgreen;
             border: 1px solid black;
             justify-content: center;
             font-weight: bold;
@@ -127,8 +127,8 @@
         .buttonresetpassword input:hover {
             padding: 0.25cm;
             width: 100%;
-            border-radius: 0.25cm;
-            background-color: gray;
+            border-radius: 0.15cm;
+            background-color: green;
             border: 1px solid black;
             justify-content: center;
             transition: 0.1s;
@@ -136,8 +136,8 @@
         }
     </style>
 </head>
-<body class="main" style="width: fit-content; margin: 0 auto 0 auto; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; background-color: rgb(35,35,35);">
-    <div class="center" style="background-color: white; margin: auto; padding: 0 1cm 0 1cm; width: fit-content; height: fit-content; border-radius: 0.5cm; border: none;">
+<body class="main" style="width: fit-content; margin: 0 auto 0 auto; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+    <div class="center" style="background-color: rgb(35,35,35); margin: auto; padding: 0 1cm 0 1cm; width: fit-content; height: fit-content; border-radius: 0.35cm; border: none; box-shadow: 0px 0px 10px 1px black; color: white;">
         <table>
             <tr>
                 <th>
@@ -147,62 +147,55 @@
             <tr>
                 <td>
                     <div>
+                        <style>
+                            input {
+                                padding: 0.6cm 0.15cm 0.25cm 0.15cm;
+                                border-radius: 0.15cm;
+                                margin: -0.6cm 0 0 0;
+                            }
+                            label {
+                                padding: 0 0 0 0.15cm;
+                                color: black;
+                            }
+                        </style>
                         <form action="" method="POST">
                             <div class="cssform">
                                 <label for="Username">Username</label>
-                                <input type="text" name="Username" id="txtUsername" required/>
+                                <input type="text" name="Username" id="txtUsername" size="45cm" required/>
                             </div>
+                            <br>
                             <div class="cssform">
                                 <label for="password">New password</label>
-                                <input type="password" name="Newpassword" id="txtNewPassword" required/>
+                                <input type="password" name="Newpassword" id="txtNewPassword" size="45cm" required/>
                             </div>
+                            <br>
                             <div class="cssform">
                                 <label for="password">Repeat new password</label>
-                                <input type="password" name="Repeatnewpassword" id="txtRepeatNewPassword" required/>  
+                                <input type="password" name="Repeatnewpassword" id="txtRepeatNewPassword" size="45cm" required/>  
                             </div>
                             <br>
                             <div class="buttonresetpassword">
                                 <input class="buttonresetpassword" type="submit" value="Reset password" style="width: 100%;"/>
                             </div>
-                            <br>
                         </form>
+                        <style>
+                            a {
+                                color: dodgerblue;
+                                font-weight: normal;
+                            }
+                            a:hover {
+                                color: white;
+                                font-weight: normal;
+                            }
+                        </style>
+                        <div style="margin: 0 auto 0 auto; width: fit-content;">
+                            <p><a href="loginSHOP.php">Return to login page</a></p>
+                        </div>
                         <br>
                         <div class="error">
                             <p><?php echo $error; ?></p>
                         </div>
-                        <br><br>
-                        <style>
-                            .buttonresetpassword {
-                                width: 100%;
-                            }
-                            .buttonresetpassword button {
-                                padding: 0.25cm;
-                                width: 100%;
-                                margin: 0 auto 0 auto;
-                                border-radius: 0.25cm;
-                                background-color: lightgray;
-                                color: black;
-                                border: 1px solid black;
-                                justify-content: center;
-                                font-weight: bold;
-                                text-decoration: none;
-                            }
-                            .buttonresetpassword button:hover {
-                                padding: 0.25cm;
-                                width: 100%;
-                                border-radius: 0.25cm;
-                                background-color: gray;
-                                color: black;
-                                border: 1px solid black;
-                                justify-content: center;
-                                transition: 0.1s;
-                                font-weight: bold;
-                                text-decoration: none;
-                            }
-                        </style>
-                        <form action="loginSHOP.php" class="buttonresetpassword">
-                            <button type="submit">Return to login page</button>
-                        </form>
+                        <br>
                     </div>
                 </td>
             </tr>

@@ -21,19 +21,37 @@
                 <!--<a href="index.html">
                     <img src="images/NewLogo1.png" alt="" style="z-index: 0;margin-left: -17vw;margin-top: -2.5dvw;float: left;width: auto;height: 4.5cm;border-radius: 0.25cm;box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);">
                 </a>-->
-                <ul id="navigation" class="Navigatie" style="position: fixed; padding-right: 1cm; padding-left: 1cm; margin: -2cm auto 0 auto; padding-bottom: 0.5cm; z-index: 1; background-image: linear-gradient(to bottom right, #636B7C, #323C54); border-radius: 0.25cm; box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);">
+                <ul id="navigation" class="Navigatie" style="position: fixed; padding-right: 1cm; padding-left: 1cm; margin: 0 auto 0 auto; padding-bottom: 0.5cm; z-index: 1; background-image: linear-gradient(to bottom right, #636B7C, #323C54); border-radius: 0.25cm; box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);">
                     <li class="selected">
                         <a href="http://gip.epizy.com/index.php">| Home |</a>
                     </li>
                     <li>
-                        <a href="http://gip.epizy.com/gallery.php">| Products | </a>
-                    </li>
-                    <li>
-                        <a href="http://gip.epizy.com/shoppingcart.php">| Cart |</a>
-                    </li>
-                    <li>
                         <a href="http://gip.epizy.com/about.html">| About |</a>
                     </li>
+                    <?php
+                    if($isAdmin['isAdmin'] == 1)
+                    {
+                        ?>
+                        <li>
+                            <a href="http://gip.epizy.com/adminPanel.php">| Admin panel |</a>
+                        </li>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                        <li>
+                            <a href="http://gip.epizy.com/gallery.php">| Gallery |</a>
+                        </li>
+                        <?php
+                    }
+                        ?>
+                        <li>
+                            <a href="http://gip.epizy.com/gallery.php">| Gallery |</a>
+                        </li>
+                        <?php
+                    }
+                    ?>
                 </ul>
                 <ul id="navigation" class="Navigatie" style="position:absolute; top: 0; right: 0; padding: 0.25cm 1cm 0.25cm 0cm; z-index: 1; background-image: linear-gradient(to top right, #323C54, #636B7C);border-radius: 0cm 0cm 0cm 0.25cm;box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);">
                     <li style="align-items: right;">
@@ -45,12 +63,22 @@
                     </li>
                 </ul>
             </div>
-            <div id="body">
-                <div id="featured">
-                    <img src="images/BackLogo.png " alt="" style="z-index: -1;position: absolute; margin-top: -4cm;">
-                    <!--<div style="margin-top: 12cm; margin-left: -30.5cm; text-align: left;">
-                        <h2>Dit is de webshop voor mijn GIP</h2>
-                    </div>-->
+            <div>
+                <div>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="http://gip.epizy.com/gallery.php">
+                                    <img src="images/Shop.png" alt="Shopping image" style="width: 2cm; height: 2cm; margin-left: 1cm; margin-top: 1cm;">
+                                </a>
+                            </td>
+                            <td>
+                                <a href="http://gip.epizy.com/shoppingcart.php">
+                                    <img src="images/Cart.png" alt="Cart image" style="width: 2cm; height: 2cm; margin-left: 1cm; margin-top: 1cm;">
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </body>
