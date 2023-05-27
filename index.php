@@ -22,9 +22,6 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
 </head>
 <body style="overflow:hidden;">
 <div id="header">
-    <!--<a href="index.html">
-        <img src="images/NewLogo1.png" alt="" style="z-index: 0;margin-left: -17vw;margin-top: -2.5dvw;float: left;width: auto;height: 4.5cm;border-radius: 0.25cm;box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);">
-    </a>-->
     <ul id="navigation" class="Navigatie"
         style="position: fixed; padding-right: 1cm; padding-left: 1cm; margin: 0 auto 0 auto; padding-bottom: 0.5cm; z-index: 1; background-image: linear-gradient(to bottom right, #636B7C, #323C54); border-radius: 0.25cm; box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);">
         <li class="selected">
@@ -54,9 +51,6 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
         <li>
             <a href="http://gip.epizy.com/gallery.php">| Gallery |</a>
         </li>
-        <?php
-            }
-            ?>
     </ul>
     <ul id="navigation" class="Navigatie"
         style="position:absolute; top: 0; right: 0; padding: 0.25cm 1cm 0.25cm 0cm; z-index: 1; background-image: linear-gradient(to top right, #323C54, #636B7C);border-radius: 0cm 0cm 0cm 0.25cm;box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);">
