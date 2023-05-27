@@ -47,7 +47,7 @@
         }
     }
 ?>
-<!DOCTYPE hmtl>
+<!DOCTYPE html>
 <head>
     <title>Webtoepassign Signup</title>
     <style>
