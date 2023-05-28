@@ -227,6 +227,7 @@ if(isset($_POST['Username']))
                     border-radius: 0.25cm;
                     width: 30cm;
                     padding: 0.5cm;
+                    box-shadow: 0px 0px 10px 1px black;
                 }
                 .centertable th {
                     width: 25%;
@@ -274,7 +275,6 @@ if(isset($_POST['Username']))
             </tr>
             <tr>
                 <td>
-                    <br>
                 </td>
             </tr>
             <tr>
@@ -318,12 +318,6 @@ if(isset($_POST['Username']))
                 </td>
             </tr>
         </table>
-        <br><br>
-        <div class="center2">
-            <style>
-            </style>
-            <h3>Change user information</h3>
-        </div>
     </div>
 </body>
 </html>

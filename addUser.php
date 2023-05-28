@@ -2,6 +2,7 @@
     require_once('comm.php');
     session_start();
     $link = getDatabase();
+    unset($_SESSION['user']);
 
     $isUsernameAndPasswordCorrect = false;
 
@@ -49,7 +50,7 @@
 ?>
 <!DOCTYPE html>
 <head>
-    <title>Webtoepassign Signup</title>
+    <title>Webtoepassing Sign up</title>
     <style>
         html
         {

@@ -2,6 +2,7 @@
     require_once('comm.php');
     session_start();
     $link = getDatabase();
+    unset($_SESSION['user']);
 
     if(isset($_POST['Username']))
     {        

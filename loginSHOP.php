@@ -33,7 +33,7 @@ if (isset($_POST['Username'])) {
 
 <!DOCTYPE html>
 <head>
-    <title>Webtoepassing Login</title>
+    <title>Webtoepassing Log in</title>
     <link rel="stylesheet" href="login.css" />
 </head>
 <body class="main"
