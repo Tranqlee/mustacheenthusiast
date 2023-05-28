@@ -12,6 +12,57 @@ $stmt = $link->prepare("SELECT * FROM klant WHERE Gebruikersnaam = :username");
 $stmt->bindParam(':username', $_SESSION['user']);
 $stmt->execute();
 $result = $stmt->fetch();
+
+if(isset($_POST['Username']))
+{        
+    //checks if username exists
+    $stmt = $link->prepare("SELECT * FROM klant WHERE Gebruikersnaam = :username");
+    $stmt->bindParam(':username',$_POST['Username']);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $username = $result['Gebruikersnaam'];
+
+    if($_POST['Username'] == $username)
+    {
+        //checks if password is correct
+        if($_POST['Newpassword'] == $_POST['Repeatnewpassword'])
+        {
+            $passwordhash = password_hash($_POST['Newpassword'], PASSWORD_DEFAULT);
+
+            //checks if the user is an admin
+            if($result['isAdmin'] != 1)
+            {
+                try
+                {
+                    $stmt = $link->prepare("UPDATE klant SET Wachtwoord = :wachtwoord WHERE Gebruikersnaam = :username");
+                    $stmt->bindParam(':username',$_POST['Username']);
+                    $stmt->bindParam(':wachtwoord',$passwordhash);
+                    $stmt->execute();
+
+                    $error = "";
+                    header('Location: loginSHOP.php');
+                }
+                catch(PDOException $e)
+                {
+                    echo 'Error!:'.$e->getMessage().'<br/>';
+                    die();
+                }
+            }
+            else
+            {
+                $error = "Gebruiker is een Admin";
+            }
+        }
+        else
+        {
+            $error = "Wachtwoorden komen niet overeen";
+        }
+    }
+    else
+    {
+        $error = "Gebruiker bestaat niet";
+    }
+}
 ?>
 
 <!-- Website Template by freewebsitetemplates.com -->
@@ -201,9 +252,11 @@ $result = $stmt->fetch();
                     <?php echo $result['Gebruikersnaam']; ?>
                 </th>
                 <td>
+                    Password:
                 </td>
-                <td>
-                </td>
+                <th>
+                    <a href="resetPassword.php" style="color: dodgerblue;">Change your password</a>
+                </th>
             </tr>
             <tr>
                 <td>
@@ -265,6 +318,12 @@ $result = $stmt->fetch();
                 </td>
             </tr>
         </table>
+        <br><br>
+        <div class="center2">
+            <style>
+            </style>
+            <h3>Change user information</h3>
+        </div>
     </div>
 </body>
 </html>
