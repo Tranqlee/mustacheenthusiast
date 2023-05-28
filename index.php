@@ -36,6 +36,7 @@ $result = $stmt->fetch();
         <style>
             .navbar {
                 background-color: rgb(35, 35, 35);
+                box-shadow: 0px 0px 10px 1px black;
                 color: white;
             }
             .navbar , .navbar tr {
@@ -67,12 +68,12 @@ $result = $stmt->fetch();
                             justify-content: center;
                         }
                         .leftnav p, .leftnav p:hover {
-                            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+                            padding: 0.05cm 0.5cm 0.05cm 0.5cm;
                             margin-left: 0.25cm;
                             width: fit-content;
                             border: none;
                             border-radius: 0.25cm;
-                            background-color: lightgray;
+                            background-color: lightblue;
                         }
                         .leftnav button {
                             background-color: transparent;
