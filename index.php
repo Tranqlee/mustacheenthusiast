@@ -1,14 +1,20 @@
 <?php
+require_once('comm.php');
 session_start();
+$link = getDatabase();
+
 
 if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
     header('Location: login.php');
 }
+
+$stmt = $link->prepare("SELECT * FROM klant WHERE Gebruikersnaam = :username");
+$stmt->bindParam(':username', $_SESSION['user']);
+$stmt->execute();
+$result = $stmt->fetch();
 ?>
 
-
-    <!doctype html>
-    <!-- Website Template by freewebsitetemplates.com -->
+<!-- Website Template by freewebsitetemplates.com -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,68 +27,180 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body style="overflow:hidden;">
-<div id="header">
-    <ul id="navigation" class="Navigatie"
-        style="position: fixed; padding-right: 1cm; padding-left: 1cm; margin: 0 auto 0 auto; padding-bottom: 0.5cm; z-index: 1; background-image: linear-gradient(to bottom right, #636B7C, #323C54); border-radius: 0.25cm; box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);">
-        <li class="selected">
-            <a href="http://gip.epizy.com/index.php">| Home |</a>
-        </li>
-        <li>
-            <a href="http://gip.epizy.com/about.html">| About |</a>
-        </li>
-        <?php
-        if($isAdmin['isAdmin'] == 1)
-        {
-        ?>
-        <li>
-            <a href="http://gip.epizy.com/adminPanel.php">| Admin panel |</a>
-        </li>
-        <?php
+    <style>
+        body {
+            width: 100%;
         }
-        else
-        {
-        ?>
-        <li>
-            <a href="http://gip.epizy.com/gallery.php">| Gallery |</a>
-        </li>
-        <?php
-        }
-        ?>
-        <li>
-            <a href="http://gip.epizy.com/gallery.php">| Gallery |</a>
-        </li>
-    </ul>
-    <ul id="navigation" class="Navigatie"
-        style="position:absolute; top: 0; right: 0; padding: 0.25cm 1cm 0.25cm 0cm; z-index: 1; background-image: linear-gradient(to top right, #323C54, #636B7C);border-radius: 0cm 0cm 0cm 0.25cm;box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);">
-        <li style="align-items: right;">
-            <?php
-            echo "Ingelogd als: " . $_SESSION['user'];
-            echo "<br><br>";
-            echo "<a href='loginSHOP.php'>Uitloggen</a>";
-            ?>
-        </li>
-    </ul>
-</div>
-<div>
-    <div>
-        <table>
-            <tr>
-                <td>
-                    <a href="http://gip.epizy.com/gallery.php">
-                        <img src="images/Shop.png" alt="Shopping image"
-                             style="width: 2cm; height: 2cm; margin-left: 1cm; margin-top: 1cm;">
+    </style>
+    <table class="navbar">
+        <style>
+            .navbar {
+                background-color: rgb(35, 35, 35);
+                color: white;
+            }
+            .navbar , .navbar tr {
+                width: 100%;
+                height: 2cm;
+            }
+            .navbar td:first-child {
+                width: 25%;
+                height: 100%;
+                border: none;
+            }
+            .navbar td {
+                width: 50%;
+                height: 100%;
+                border: none;
+            }
+            .navbar td:last-child {
+                width: 25%;
+                height: 100%;
+                border: none;
+                text-align: right;
+            }
+        </style>
+        <tr>
+            <td>
+                <div class="leftnav">
+                    <style>
+                        .leftnav {
+                            justify-content: center;
+                        }
+                        .leftnav p, .leftnav p:hover {
+                            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+                            margin-left: 0.25cm;
+                            width: fit-content;
+                            border: none;
+                            border-radius: 0.25cm;
+                            background-color: lightgray;
+                        }
+                        .leftnav button {
+                            background-color: transparent;
+                            border: none;
+                        }
+                    </style>
+                    <p>
+                        <button><h3>Ingelogd als: <?php echo $_SESSION['user']; ?></h3></button>
+                    </p>
+                </div>
+            </td>
+            <td>
+                <div class="middlenav">
+                    <style>
+                        .middlenav {
+                            justify-content: center;
+                            align: center;
+                            float: center;
+                            width: 100%;
+                        }
+                        .middlenav table {
+                            width: 100%;
+                            height: 100%;
+                        }
+                        .middlenav td:first-child, .middlenav td, .middlenav td:last-child {
+                            width: auto;
+                            height: 100%;
+                            border: none;
+                            text-align: center;
+                        }
+                    </style>
+                    <table>
+                        <style>
+                            .button {
+                                justify-content: center;
+                                align: center;
+                                float: center;
+                                width: 100%;
+                            }
+                            .button a {
+                                padding: 0.5cm;
+                                width: 75%;
+                                border: none;
+                                border-radius: 0.25cm;
+                                background-color: lightgray;
+                                transition: 0.05s;
+                            }
+                            .button a:hover {
+                                background-color: gray;
+                                width: 75%;
+                                transition: 0.05s;
+                            }
+                            .button button {
+                                background-color: transparent;
+                                border: none;
+                                margin: -0.5cm;
+                                width: 100%;
+                            }
+                        </style>
+                        <tr>
+                            <td>
+                                <div class="button">
+                                    <a href="index.php">
+                                        <button><h3>HOME</h3></button>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button">
+                                    <a href="about.html">
+                                        <button><h3>About</h3></button>
+                                    </a>
+                                </div>
+                            </td>
+                            <?php
+                            if($result['isAdmin'] == 1) {
+                                ?>
+                                <td>
+                                    <div class="button">
+                                        <a href="admin.php">
+                                            <button><h3>Admin</h3></button>
+                                        </a>
+                                    </div>
+                                </td>
+                                <?php
+                            }
+                            ?>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td>
+                <div class="rightnav">
+                    <style>
+                        .rightnav {
+                            justify-content: center;
+                            align: right;
+                            float: right;
+                            width: fit-content;
+                        }
+                        .rightnav a {
+                            padding: 0.5cm;
+                            margin-right: 0.25cm;
+                            width: fit-content;
+                            border: none;
+                            border-radius: 0.25cm;
+                            background-color: firebrick;
+                            transition: 0.05s;
+                        }
+                        .rightnav a:hover {
+                            background-color: red;
+                            transition: 0.05s;
+                        }
+                        .rightnav button {
+                            background-color: transparent;
+                            border: none;
+                        }
+                        .rightnav h3 {
+                            color: lightgray;
+                        }
+                    </style>
+                    <a href="loginSHOP.php">
+                        <button><h3>UITLOGGEN</h3></button>
                     </a>
-                </td>
-                <td>
-                    <a href="http://gip.epizy.com/shoppingcart.php">
-                        <img src="images/Cart.png" alt="Cart image"
-                             style="width: 2cm; height: 2cm; margin-left: 1cm; margin-top: 1cm;">
-                    </a>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
+                </div>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
 <?php
