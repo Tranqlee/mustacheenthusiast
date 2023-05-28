@@ -152,6 +152,9 @@ $result = $stmt->fetch();
                             .selected h3 {
                                 text-decoration: underline 1.5px solid black;
                             }
+                            .selected a {
+                                background-color: white;
+                            }
                         </style>
                         <tr>
                             <td>
