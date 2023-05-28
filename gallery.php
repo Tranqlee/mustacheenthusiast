@@ -115,7 +115,7 @@
                         <a href="shoppingcart.php">| Cart |</a>
                     </li>
                     <li>
-                        <a href="about.html">| About |</a>
+                        <a href="about.php">| About |</a>
                     </li>
                 </ul>
                 <ul id="navigation" class="Navigatie" style="position:absolute; top: 0; right: 0; padding: 0.25cm 1cm 0.25cm 0cm; z-index: 1; background-image: linear-gradient(to top right, #323C54, #636B7C);border-radius: 0cm 0cm 0cm 0.25cm;box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);">

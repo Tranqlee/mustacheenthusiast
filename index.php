@@ -5,7 +5,7 @@ $link = getDatabase();
 
 
 if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
-    header('Location: login.php');
+    header('Location: loginSHOP.php');
 }
 
 $stmt = $link->prepare("SELECT * FROM klant WHERE Gebruikersnaam = :username");
@@ -159,7 +159,7 @@ $result = $stmt->fetch();
                             </td>
                             <td>
                                 <div class="button">
-                                    <a href="about.html">
+                                    <a href="about.php">
                                         <button><h3>ABOUT</h3></button>
                                     </a>
                                 </div>
@@ -287,4 +287,3 @@ $result = $stmt->fetch();
     </div>
 </body>
 </html>
-<?php

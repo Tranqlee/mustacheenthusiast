@@ -19,7 +19,7 @@ $result = $stmt->fetch();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webtoepassing User information</title>
+    <title>Webtoepassing About</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width : 568px)">
     <link rel="stylesheet" type="text/css" href="css/NewStyle.css">
@@ -92,8 +92,8 @@ $result = $stmt->fetch();
                             color: black;
                         }
                     </style>
-                    <a href="index.php">
-                        <button><h3>Back to main menu</h3></button>
+                    <a href="user.php">
+                        <button><h3>Logged in as: <?php echo $_SESSION['user']; ?></h3></button>
                     </a>
                 </div>
             </td>
@@ -104,15 +104,81 @@ $result = $stmt->fetch();
                             justify-content: center;
                             align: center;
                             float: center;
-                            width: fit-content;
-                            margin: auto;
+                            width: 100%;
                         }
-                        .middlenav h1 {
-                            color: white;
-                            padding-top: 0.5cm;
+                        .middlenav table {
+                            width: 100%;
+                            height: 100%;
+                        }
+                        .middlenav td:first-child, .middlenav td, .middlenav td:last-child {
+                            width: 33.333%;
+                            height: 100%;
+                            border: none;
+                            text-align: center;
                         }
                     </style>
-                    <h1>User information</h1>
+                    <table>
+                        <style>
+                            .button {
+                                justify-content: center;
+                                align: center;
+                                float: center;
+                                width: 95%;
+                                background-color: transparent;
+                            }
+                            .button a {
+                                padding: 0.5cm;
+                                width: 75%;
+                                border: none;
+                                border-radius: 0.25cm;
+                                background-color: lightgray;
+                                transition: 0.05s;
+                                box-shadow: 0px 0px 10px 2px black;
+                            }
+                            .button a:hover {
+                                background-color: white;
+                                width: 75%;
+                                transition: 0.05s;
+                                box-shadow: 0px 0px 10px 2px black;
+                            }
+                            .button button {
+                                background-color: transparent;
+                                border: none;
+                                margin: -0.5cm;
+                                width: 100%;
+                                height: 100%;
+                            }
+                        </style>
+                        <tr>
+                            <td>
+                                <div class="button">
+                                    <a href="index.php">
+                                        <button><h3>HOME</h3></button>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button">
+                                    <a href="about.php">
+                                        <button><h3>ABOUT</h3></button>
+                                    </a>
+                                </div>
+                            </td>
+                            <?php
+                            if($result['isAdmin'] == 1) {
+                                ?>
+                                <td>
+                                    <div class="button">
+                                        <a href="admin.php">
+                                            <button><h3>ADMIN PANEL</h3></button>
+                                        </a>
+                                    </div>
+                                </td>
+                                <?php
+                            }
+                            ?>
+                        </tr>
+                    </table>
                 </div>
             </td>
             <td>
@@ -161,112 +227,14 @@ $result = $stmt->fetch();
                 align-items: center;
                 height: 550px;
                 margin: auto;
-                margin-top: 1cm;
+                margin-top: 1.5cm;
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -52.5%);
             }
         </style>
-        <table class="centertable">
-            <style>
-                .centertable {
-                    background-color: rgb(35, 35, 35);
-                    color: white;
-                    border-radius: 0.25cm;
-                    width: 30cm;
-                    padding: 0.5cm;
-                    box-shadow: 0px 0px 10px 1px black;
-                }
-                .centertable th {
-                    width: 25%;
-                    height: 1cm;
-                    border: none;
-                    text-align: right;
-                    padding-right: 0.5cm;
-                    color: cornflowerblue;
-                }
-                .centertable td {
-                    width: 25%;
-                    height: 1cm;
-                    border: none;
-                    text-align: left;
-                    padding-left: 0.5cm;
-                }
-            </style>
-            <tr>
-                <td>
-                    Username:
-                </td>
-                <th>
-                    <?php echo $result['Gebruikersnaam']; ?>
-                </th>
-                <td>
-                    Password:
-                </td>
-                <th>
-                    <a href="resetPassword.php" style="color: dodgerblue;">Change your password</a>
-                </th>
-            </tr>
-            <tr>
-                <td>
-                    E-mail:
-                </td>
-                <th>
-                    <?php echo $result['Email']; ?>
-                </th>
-                <td>
-                    Phone number:
-                </td>
-                <th>
-                    <?php echo $result['Telefoonnummer']; ?>
-                </th>
-            </tr>
-            <tr>
-                <td>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Streetname:
-                </td>
-                <th>
-                    <?php echo $result['Straatnaam']; ?> 
-                </th>
-                <td>
-                    House number:
-                </td>
-                <th>
-                    <?php echo $result['Huisnummer']; ?>
-                </th>
-            </tr>
-            <tr>
-                <td>
-                    Postal code:
-                </td>
-                <th>
-                    <?php echo $result['Postcode']; ?>
-                </th>
-                <td>
-                    Town/City:
-                </td>
-                <th>
-                    <?php echo $result['Gemeente']; ?>
-                </th>
-            </tr>
-            <tr>
-                <td>
-                    Date of birth:
-                </td>
-                <th>
-                    <?php echo $result['GeboorteDatum']; ?> 
-                </th>
-                <td>
-                </td>
-                <td>
-                </td>
-            </tr>
-        </table>
+        TEST
     </div>
 </body>
 </html>
