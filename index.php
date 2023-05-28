@@ -99,7 +99,7 @@ $result = $stmt->fetch();
                             height: 100%;
                         }
                         .middlenav td:first-child, .middlenav td, .middlenav td:last-child {
-                            width: auto;
+                            width: 33.333%;
                             height: 100%;
                             border: none;
                             text-align: center;
@@ -144,7 +144,7 @@ $result = $stmt->fetch();
                             <td>
                                 <div class="button">
                                     <a href="about.html">
-                                        <button><h3>About</h3></button>
+                                        <button><h3>ABOUT</h3></button>
                                     </a>
                                 </div>
                             </td>
@@ -154,7 +154,7 @@ $result = $stmt->fetch();
                                 <td>
                                     <div class="button">
                                         <a href="admin.php">
-                                            <button><h3>Admin</h3></button>
+                                            <button><h3>ADMINS</h3></button>
                                         </a>
                                     </div>
                                 </td>
