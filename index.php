@@ -30,13 +30,14 @@ $result = $stmt->fetch();
     <style>
         body {
             width: 100%;
+            background-color: rgb(75, 75, 75);
         }
     </style>
     <table class="navbar">
         <style>
             .navbar {
                 background-color: rgb(35, 35, 35);
-                box-shadow: 0px 0px 10px 2px gray;
+                box-shadow: 0px 0px 10px 2px black;
                 color: white;
             }
             .navbar , .navbar tr {
@@ -207,7 +208,7 @@ $result = $stmt->fetch();
                             border: none;
                         }
                         .rightnav h3 {
-                            color: lightgray;
+                            color: black;
                         }
                     </style>
                     <a href="loginSHOP.php">
@@ -253,11 +254,11 @@ $result = $stmt->fetch();
                     border-radius: 1cm;
                     background-color: rgb(35, 35, 35);
                     padding: 1cm;
-                    box-shadow: 0px 0px 10px 2px gray;
+                    box-shadow: 0px 0px 10px 2px black;
                 }
                 .centerbuttons a:hover {
                     padding: 1.1cm;
-                    background-color: rgb(65, 65, 65);
+                    background-color: rgb(25, 25, 25);
                     transition: 0.05s;
                 }
                 .centerbuttons img {

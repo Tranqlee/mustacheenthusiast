@@ -30,13 +30,14 @@ $result = $stmt->fetch();
     <style>
         body {
             width: 100%;
+            background-color: rgb(75, 75, 75);
         }
     </style>
     <table class="navbar">
         <style>
             .navbar {
                 background-color: rgb(35, 35, 35);
-                box-shadow: 0px 0px 10px 2px gray;
+                box-shadow: 0px 0px 10px 2px black;
                 color: white;
             }
             .navbar , .navbar tr {
@@ -103,81 +104,15 @@ $result = $stmt->fetch();
                             justify-content: center;
                             align: center;
                             float: center;
-                            width: 100%;
+                            width: fit-content;
+                            margin: auto;
                         }
-                        .middlenav table {
-                            width: 100%;
-                            height: 100%;
-                        }
-                        .middlenav td:first-child, .middlenav td, .middlenav td:last-child {
-                            width: 33.333%;
-                            height: 100%;
-                            border: none;
-                            text-align: center;
+                        .middlenav h1 {
+                            color: white;
+                            padding-top: 0.5cm;
                         }
                     </style>
-                    <table>
-                        <style>
-                            .button {
-                                justify-content: center;
-                                align: center;
-                                float: center;
-                                width: 95%;
-                                background-color: transparent;
-                            }
-                            .button a {
-                                padding: 0.5cm;
-                                width: 75%;
-                                border: none;
-                                border-radius: 0.25cm;
-                                background-color: lightgray;
-                                transition: 0.05s;
-                                box-shadow: 0px 0px 10px 2px black;
-                            }
-                            .button a:hover {
-                                background-color: white;
-                                width: 75%;
-                                transition: 0.05s;
-                                box-shadow: 0px 0px 10px 2px black;
-                            }
-                            .button button {
-                                background-color: transparent;
-                                border: none;
-                                margin: -0.5cm;
-                                width: 100%;
-                                height: 100%;
-                            }
-                        </style>
-                        <tr>
-                            <td>
-                                <div class="button">
-                                    <a href="index.php">
-                                        <button><h3>HOME</h3></button>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button">
-                                    <a href="about.html">
-                                        <button><h3>ABOUT</h3></button>
-                                    </a>
-                                </div>
-                            </td>
-                            <?php
-                            if($result['isAdmin'] == 1) {
-                                ?>
-                                <td>
-                                    <div class="button">
-                                        <a href="admin.php">
-                                            <button><h3>ADMIN PANEL</h3></button>
-                                        </a>
-                                    </div>
-                                </td>
-                                <?php
-                            }
-                            ?>
-                        </tr>
-                    </table>
+                    <h1>User information</h1>
                 </div>
             </td>
             <td>
@@ -207,11 +142,11 @@ $result = $stmt->fetch();
                             border: none;
                         }
                         .rightnav h3 {
-                            color: lightgray;
+                            color: black;
                         }
                     </style>
                     <a href="loginSHOP.php">
-                        <button><h3>UITLOGGEN</h3></button>
+                        <button><h3>Log out</h3></button>
                     </a>
                 </div>
             </td>
@@ -226,36 +161,63 @@ $result = $stmt->fetch();
                 align-items: center;
                 height: 550px;
                 margin: auto;
-                margin-top: 1.5cm;
+                margin-top: 1cm;
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -52.5%);
             }
         </style>
-        <table class="centerbuttons">
+        <table class="centertable">
+            <style>
+                .centertable {
+                    background-color: rgb(35, 35, 35);
+                    color: white;
+                    border-radius: 0.25cm;
+                    width: 30cm;
+                    padding: 0.5cm;
+                }
+                .centertable th {
+                    width: 25%;
+                    height: 1cm;
+                    border: none;
+                    text-align: right;
+                    padding-right: 0.5cm;
+                    color: cornflowerblue;
+                }
+                .centertable td {
+                    width: 25%;
+                    height: 1cm;
+                    border: none;
+                    text-align: left;
+                    padding-left: 0.5cm;
+                }
+            </style>
             <tr>
+                <td>
+                    Username:
+                </td>
                 <th>
-                    User information
+                    <?php echo $result['Gebruikersnaam']; ?>
                 </th>
                 <td>
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Username: <?php echo $result['Gebruikersnaam']; ?>
                 </td>
                 <td>
                 </td>
             </tr>
             <tr>
                 <td>
-                    E-mail: <?php echo $result['Email']; ?>
+                    E-mail:
                 </td>
+                <th>
+                    <?php echo $result['Email']; ?>
+                </th>
                 <td>
-                    Phone number: <?php echo $result['Telefoonnummer']; ?>
+                    Phone number:
                 </td>
+                <th>
+                    <?php echo $result['Telefoonnummer']; ?>
+                </th>
             </tr>
             <tr>
                 <td>
@@ -264,23 +226,40 @@ $result = $stmt->fetch();
             </tr>
             <tr>
                 <td>
-                    Streetname: <?php echo $result['Straatnaam']; ?> 
+                    Streetname:
                 </td>
+                <th>
+                    <?php echo $result['Straatnaam']; ?> 
+                </th>
                 <td>
-                    House number: <?php echo $result['Huisnummer']; ?>
+                    House number:
                 </td>
+                <th>
+                    <?php echo $result['Huisnummer']; ?>
+                </th>
             </tr>
             <tr>
                 <td>
-                    Postal code: <?php echo $result['Postcode']; ?>
+                    Postal code:
                 </td>
+                <th>
+                    <?php echo $result['Postcode']; ?>
+                </th>
                 <td>
-                    Town/City: <?php echo $result['Plaats']; ?>
+                    Town/City:
                 </td>
+                <th>
+                    <?php echo $result['Gemeente']; ?>
+                </th>
             </tr>
             <tr>
                 <td>
-                    Date of birth: <?php echo $result['Geboortedatum']; ?>
+                    Date of birth:
+                </td>
+                <th>
+                    <?php echo $result['GeboorteDatum']; ?> 
+                </th>
+                <td>
                 </td>
                 <td>
                 </td>
