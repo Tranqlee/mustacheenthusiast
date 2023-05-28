@@ -2,6 +2,7 @@
 require_once('comm.php');
 session_start();
 $link = getDatabase();
+$language = "en";
 
 
 if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
@@ -237,7 +238,160 @@ $result = $stmt->fetch();
                 transform: translate(-50%, -52.5%);
             }
         </style>
-        TEST
+        <div class="about">
+            <style>
+                .about {
+                    background-color: rgb(35, 35, 35);
+                    color: white;
+                    border: none;
+                    border-radius: 1cm;
+                    box-shadow: 0px 0px 10px 2px black;
+                    padding: 0.75cm;
+                }
+                .about p {
+                    text-align: left;
+                    color: white;
+                }
+                .about li {
+                    padding: 0.075cm;
+                }
+            </style>
+            <table>
+                <tr>
+                    <td>
+                        <div>
+
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <a href="<?php $language = 'nl'; ?>"></a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <?php
+            if($language == "nl") {
+                ?>
+                <p>Deze webshop is een project voor mijn GIP dat ik heb opgezet rondom de verkoop van fysieke exemplaren van films.</p>
+                <br><br><br>
+                <p>Op deze webshop kan je:</p>
+                <ul>
+                    <li>
+                        Inloggen
+                    </li>
+                    <li>
+                        Registreren
+                    </li>
+                    <li>
+                        Je wachtwoord veranderen
+                    </li>
+                    <li>
+                        Jouw gebruikersinformatie zien
+                    </li>
+                    <li>
+                        Producten zien
+                    </li>
+                    <li>
+                        Protucten toevoegen aan je winkelmandje
+                    </li>
+                    <li>
+                        Producten verwijderen uit je winkelmandje
+                    </li>
+                    <li>
+                        enz.
+                    </li>
+                </ul>
+                <p>Als een admin kan je ook nog:</p>
+                <ul>
+                    <li>
+                        Product toevoegen
+                    </li>
+                    <li>
+                        Producten aanpassen
+                    </li>
+                    <li>
+                        Producten verwijderen
+                    </li>
+                    <li>
+                        Gebruikers verwijderen
+                    </li>
+                    <li>
+                        Regisseurs toevoegen
+                    </li>
+                    <li>
+                        Regisseurs aanpassen
+                    </li>
+                    <li>
+                        Regisseurs verwijderen
+                    </li>
+                    <li>
+                        etc.
+                    </li>
+                </ul>
+                <?php
+            } else if($language == "en") {
+                ?>
+                <p>This webshop is a project for my GIP which i made around selling physical copies of movies.</p>
+                <br><br><br>
+                <p>On this webshop you can:</p>
+                <ul>
+                    <li>
+                        log in
+                    </li>
+                    <li>
+                        register
+                    </li>
+                    <li>
+                        Reset your password
+                    </li>
+                    <li>
+                        View your user information
+                    </li>
+                    <li>
+                        View products
+                    </li>
+                    <li>
+                        Add products to your cart
+                    </li>
+                    <li>
+                        Remove products from your cart
+                    </li>
+                    <li>
+                        etc.
+                    </li>
+                </ul>
+                <p>As an admin you can also:</p>
+                <ul>
+                    <li>
+                        Add products
+                    </li>
+                    <li>
+                        Edit products
+                    </li>
+                    <li>
+                        Remove products
+                    </li>
+                    <li>
+                        Remove users
+                    </li>
+                    <li>
+                        Add directors
+                    </li>
+                    <li>
+                        Edit directors
+                    </li>
+                    <li>
+                        Remove directors
+                    </li>
+                    <li>
+                        etc.
+                    </li>
+                </ul>
+                <?php
+            }
+            ?>
+        </div>
     </div>
 </body>
 </html>
