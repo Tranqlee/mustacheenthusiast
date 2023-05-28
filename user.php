@@ -19,7 +19,7 @@ $result = $stmt->fetch();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webtoepassing Menu</title>
+    <title>Webtoepassing User information</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width : 568px)">
     <link rel="stylesheet" type="text/css" href="css/NewStyle.css">
@@ -91,8 +91,8 @@ $result = $stmt->fetch();
                             color: black;
                         }
                     </style>
-                    <a href="user.php">
-                        <button><h3>Logged in as: <?php echo $_SESSION['user']; ?></h3></button>
+                    <a href="index.php">
+                        <button><h3>Back to main menu</h3></button>
                     </a>
                 </div>
             </td>
@@ -211,7 +211,7 @@ $result = $stmt->fetch();
                         }
                     </style>
                     <a href="loginSHOP.php">
-                        <button><h3>Log out</h3></button>
+                        <button><h3>UITLOGGEN</h3></button>
                     </a>
                 </div>
             </td>
@@ -234,52 +234,55 @@ $result = $stmt->fetch();
             }
         </style>
         <table class="centerbuttons">
-            <style>
-                .centerbuttons {
-                    width: 100%;
-                    background-color: transparent;
-                    border: none;
-                    text-align: center;
-                }
+            <tr>
+                <th>
+                    User information
+                </th>
+                <td>
 
-                .centerbuttons td {
-                    border: none;
-                    padding: 1rem;
-                }
-
-                .centerbuttons a {
-                    display: inline-block;
-                    border: none;
-                    border-radius: 1cm;
-                    background-color: rgb(35, 35, 35);
-                    padding: 1cm;
-                    box-shadow: 0px 0px 10px 2px gray;
-                }
-                .centerbuttons a:hover {
-                    padding: 1.1cm;
-                    background-color: rgb(65, 65, 65);
-                    transition: 0.05s;
-                }
-                .centerbuttons img {
-                    padding: 1cm;
-                    width: 5cm;
-                    height: 5cm;
-                }
-            </style>
+                </td>
+            </tr>
             <tr>
                 <td>
-                    <div class="centerbutton">
-                        <a href="gallery.php">
-                            <img src="images/productsTRANS.png" alt="Products">
-                        </a>
-                    </div>
+                    Username: <?php echo $result['Gebruikersnaam']; ?>
                 </td>
                 <td>
-                    <div class="centerbutton">
-                        <a href="shoppingcart.php">
-                            <img src="images/cartTRANS.png" alt="Shopping Cart">
-                        </a>
-                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    E-mail: <?php echo $result['Email']; ?>
+                </td>
+                <td>
+                    Phone number: <?php echo $result['Telefoonnummer']; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Streetname: <?php echo $result['Straatnaam']; ?> 
+                </td>
+                <td>
+                    House number: <?php echo $result['Huisnummer']; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Postal code: <?php echo $result['Postcode']; ?>
+                </td>
+                <td>
+                    Town/City: <?php echo $result['Plaats']; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Date of birth: <?php echo $result['Geboortedatum']; ?>
+                </td>
+                <td>
                 </td>
             </tr>
         </table>

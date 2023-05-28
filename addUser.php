@@ -218,7 +218,7 @@
                                         <input type="text" name="Postcode" id="txtPostcode" size="45cm" required/>
                                     </td>
                                     <td>
-                                        <label for="Gemeente">Town</label>
+                                        <label for="Gemeente">Town/City</label>
                                         <input type="text" name="Gemeente" id="txtGemeente" size="45cm" required/>
                                     </td>
                                 </tr>
