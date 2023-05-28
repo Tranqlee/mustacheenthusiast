@@ -233,16 +233,87 @@ if ($result['isAdmin'] != 1) {
                 justify-content: center;
                 flex-direction: column;
                 align-items: center;
-                height: 550px;
                 margin: auto;
-                margin-top: 1.5cm;
+                margin-top: 1cm;
                 position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -52.5%);
             }
         </style>
-        TEST
+        <div class="userlist">
+            <h1>Userlist</h1>
+            <table>
+                <style>
+                    .userlist {
+                        margin: auto;
+                        justify-content: center;
+                    }
+                    .userlist h1 {
+                        text-align: center;
+                        color: white;
+                    }
+                    .userlist table {
+                        width: 95%;
+                        height: 100%;
+                        background-color: rgb(35, 35, 35);
+                        color: white;
+                        padding: 0.5cm;
+                        margin: auto;
+                        border-radius: 1cm;
+                    }
+                    .userlist th {
+                        border-right: 2px solid gray;
+                        border-bottom: 2px solid gray;
+                        padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                    }
+                    .userlist th:last-child {
+                        border-right: none;
+                    }
+                    .userlist td {
+                        border-right: 2px solid gray;
+                        padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                    }
+                    .userlist td:last-child {
+                        border-right: none;
+                    }
+                </style>
+                <?php
+                $query = $link->query("SELECT * FROM klant");
+                $klanten = $query->fetchAll();
+                ?>
+                <tr>
+                    <th style="width: 5cm;">ID</th>
+                    <th style="width: 5cm">Username</th>
+                    <th style="width: 5cm;">E-mail</th>
+                    <th style="width: 5cm;">Phone number</th>
+                    <th style="width: 5cm;">Street number</th>
+                    <th style="width: 2cm;">House number</th>
+                    <th style="width: 2cm;">Postal code</th>
+                    <th style="width: fit-content;">Town/City</th>
+                    <th style="width: 7.5cm;">Date of birth</th>
+                    <th style="width: 5cm;">Delete</th>
+                </tr>
+                <?php 
+                foreach($klanten as $klant):
+                ?>
+                <tr>
+                    <td style="text-align: right;"><?php echo $klant['KlantenID']; ?></td>
+                    <td style="text-align: right;"><?php echo $klant['Gebruikersnaam']; ?></td>
+                    <td style="text-align: right;"><?php echo $klant['Email']; ?></td>
+                    <td style="text-align: right;"><?php echo $klant['Telefoonnummer']; ?></td>
+                    <td style="text-align: right;"><?php echo $klant['Straatnaam']; ?></td>  
+                    <td style="text-align: right;"><?php echo $klant['Huisnummer']; ?></td>
+                    <td style="text-align: right;"><?php echo $klant['Postcode']; ?></td>
+                    <td style="text-align: right;"><?php echo $klant['Gemeente']; ?></td>
+                    <td style="text-align: right;"><?php echo $klant['GeboorteDatum']; ?></td>
+                    <?php
+                    $userid = $klant['KlantenID'];
+                    echo "<td style='text-align: right';><a href='deleteUser.php?nr=$userid'>Delete</a></td>"
+                    ?>
+                </tr>
+                <?php
+                endforeach;
+                ?>
+            </table>
+        </div>
     </div>
 </body>
 </html>
