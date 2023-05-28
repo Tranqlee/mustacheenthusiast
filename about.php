@@ -148,6 +148,9 @@ $result = $stmt->fetch();
                                 width: 100%;
                                 height: 100%;
                             }
+                            .selected h3 {
+                                text-decoration: underline 1.5px solid black;
+                            }
                         </style>
                         <tr>
                             <td>
@@ -158,7 +161,7 @@ $result = $stmt->fetch();
                                 </div>
                             </td>
                             <td>
-                                <div class="button">
+                                <div class="button selected">
                                     <a href="about.php">
                                         <button><h3>ABOUT</h3></button>
                                     </a>
