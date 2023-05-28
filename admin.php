@@ -26,13 +26,15 @@ if ($result['isAdmin'] != 1) {
     <link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width : 568px)">
     <link rel="stylesheet" type="text/css" href="css/NewStyle.css">
     <script type="text/javascript" src="js/mobile.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
 </head>
-<body style="overflow:hidden;">
+<body>
     <style>
         body {
             width: 100%;
+            height: 100%;
             background-color: rgb(75, 75, 75);
+            overflow-y: scroll;
         }
     </style>
     <table class="navbar">
@@ -41,6 +43,8 @@ if ($result['isAdmin'] != 1) {
                 background-color: rgb(35, 35, 35);
                 box-shadow: 0px 0px 10px 2px black;
                 color: white;
+                position: fixed;
+                z-index: 2;
             }
             .navbar , .navbar tr {
                 width: 100%;
@@ -226,6 +230,9 @@ if ($result['isAdmin'] != 1) {
             </td>
         </tr>
     </table>
+    <p>
+        <br><br><br>
+    </p>
     <div class="center">
         <style>
             div.center {
@@ -239,7 +246,7 @@ if ($result['isAdmin'] != 1) {
             }
         </style>
         <div class="userlist">
-            <h1>Userlist</h1>
+            <h1>Users</h1>
             <table>
                 <style>
                     .userlist {
@@ -281,7 +288,7 @@ if ($result['isAdmin'] != 1) {
                 ?>
                 <tr>
                     <th style="width: 5cm;">ID</th>
-                    <th style="width: 5cm">Username</th>
+                    <th style="width: 5cm;">Username</th>
                     <th style="width: 5cm;">E-mail</th>
                     <th style="width: 5cm;">Phone number</th>
                     <th style="width: 5cm;">Street number</th>
@@ -306,10 +313,233 @@ if ($result['isAdmin'] != 1) {
                     <td style="text-align: right;"><?php echo $klant['GeboorteDatum']; ?></td>
                     <?php
                     $userid = $klant['KlantenID'];
-                    echo "<td style='text-align: right';><a href='deleteUser.php?nr=$userid'>Delete</a></td>"
+                    echo "<td style='text-align: right';><a href='deleteUser.php?nr=$userid'>Delete</a></td>";
                     ?>
                 </tr>
                 <?php
+                endforeach;
+                ?>
+            </table>
+        </div>
+        <br>
+        <div class="extralist">
+            <style>
+                .extralist {
+                    margin: auto;
+                    justify-content: center;
+                }
+                .extralist table {
+                    width: 100%;
+                }
+                .extralist tr {
+                    width: 100%;
+                }
+                .extralist td {
+                    width: 50%;
+                    vertical-align: top;
+                }
+            </style>
+            <table>
+                <tr>
+                    <td>
+                        <div class="directorlist">
+                            <h1>Directors</h1>
+                            <table>
+                                <style>
+                                    .directorlist {
+                                        margin: auto;
+                                        justify-content: center;
+                                    }
+                                    .directorlist h1 {
+                                        text-align: center;
+                                        color: white;
+                                    }
+                                    .directorlist table {
+                                        width: 95%;
+                                        height: 100%;
+                                        background-color: rgb(35, 35, 35);
+                                        color: white;
+                                        padding: 0.5cm;
+                                        margin: auto;
+                                        border-radius: 1cm;
+                                    }
+                                    .directorlist th {
+                                        border-right: 2px solid gray;
+                                        border-bottom: 2px solid gray;
+                                        padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                                    }
+                                    .directorlist th:last-child {
+                                        border-right: none;
+                                    }
+                                    .directorlist td {
+                                        border-right: 2px solid gray;
+                                        padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                                    }
+                                    .directorlist td:last-child {
+                                        border-right: none;
+                                    }
+                                </style>
+                                <?php
+                                $query = $link->query("SELECT * FROM regisseuren");
+                                $regisseurs = $query->fetchAll();
+                                ?>
+                                <tr>
+                                    <th style="width: 2cm;">Director ID</th>
+                                    <th style="width: 7.5cm;">Director name</th>
+                                    <th style="width: 2cm;">Delete</th>
+                                </tr>
+                                <?php 
+                                foreach($regisseurs as $regisseur):
+                                ?>
+                                <tr>
+                                    <td style="text-align: right;"><?php echo $regisseur['RegisseurID']; ?></td>
+                                    <td style="text-align: right;"><?php echo $regisseur['Naam']; ?></td>
+                                    <?php
+                                    $directorid = $regisseur['RegisseurID'];
+                                    echo "<td style='text-align: right';><a href='deleteDirector.php?nr=$directorid'>Delete</a></td>";
+                                    ?>
+                                </tr>
+                                <?php
+                                endforeach;
+                                ?>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="agelist">
+                            <h1>Ages</h1>
+                            <table>
+                                <style>
+                                    .agelist {
+                                        margin: auto;
+                                        justify-content: center;
+                                    }
+                                    .agelist h1 {
+                                        text-align: center;
+                                        color: white;
+                                    }
+                                    .agelist table {
+                                        width: 95%;
+                                        height: 100%;
+                                        background-color: rgb(35, 35, 35);
+                                        color: white;
+                                        padding: 0.5cm;
+                                        margin: auto;
+                                        border-radius: 1cm;
+                                    }
+                                    .agelist th {
+                                        border-right: 2px solid gray;
+                                        border-bottom: 2px solid gray;
+                                        padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                                    }
+                                    .agelist th:last-child {
+                                        border-right: none;
+                                    }
+                                    .agelist td {
+                                        border-right: 2px solid gray;
+                                        padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                                    }
+                                    .agelist td:last-child {
+                                        border-right: none;
+                                    }
+                                </style>
+                                <?php
+                                $query = $link->query("SELECT * FROM leeftijden");
+                                $leeftijden = $query->fetchAll();
+                                ?>
+                                <tr>
+                                    <th style="width: 2cm;">Age ID</th>
+                                    <th style="width: 7.5cm;">Age name</th>
+                                    <th style="width: 2cm;">Delete</th>
+                                </tr>
+                                <?php 
+                                foreach($leeftijden as $leeftijd):
+                                ?>
+                                <tr>
+                                    <td style="text-align: right;"><?php echo $leeftijd['LeeftijdID']; ?></td>
+                                    <td style="text-align: right;"><?php echo $leeftijd['Naam']; ?></td>
+                                    <?php
+                                    $leeftijdid = $leeftijd['LeeftijdID'];
+                                    echo "<td style='text-align: right';><a href='deleteAge.php?nr=$leeftijdid'>Delete</a></td>";
+                                    ?>
+                                </tr>
+                                <?php
+                                endforeach;
+                                ?>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="productlist">
+            <h1>Products</h1>
+            <table>
+                <style>
+                    .productlist {
+                        margin: auto;
+                        justify-content: center;
+                    }
+                    .productlist h1 {
+                        text-align: center;
+                        color: white;
+                    }
+                    .productlist table {
+                        width: 95%;
+                        height: 100%;
+                        background-color: rgb(35, 35, 35);
+                        color: white;
+                        padding: 0.5cm;
+                        margin: auto;
+                        border-radius: 1cm 1cm 0cm 0cm;
+                    }
+                    .productlist th {
+                        border-right: 2px solid gray;
+                        border-bottom: 2px solid gray;
+                        padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                    }
+                    .productlist th:last-child {
+                        border-right: none;
+                    }
+                    .productlist td {
+                        border-right: 2px solid gray;
+                        padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                    }
+                    .productlist td:last-child {
+                        border-right: none;
+                    }
+                </style>
+                <?php
+                $query = $link->query("SELECT * FROM product");
+                $producten = $query->fetchAll();
+                ?>
+                <tr>
+                    <th style="width: 2cm;">ProductID</th>
+                    <th style="width: 5cm;">Name</th>
+                    <th style="width: 2cm;">Price</th>
+                    <th style="width: 2cm;">Age Restriction ID</th>
+                    <th style="width: 12cm;">Description</th>
+                    <th style="width: 2cm;">Directors ID</th>
+                    <th style="width: 2cm;">Amount</th>
+                    <th style="width: 2cm;">Delete</th>
+                </tr>
+                <?php 
+                foreach($producten as $product):
+                    ?>
+                    <tr>
+                        <td style="text-align: right;"><?php echo $product['ProductID']; ?></td>
+                        <td style="text-align: right;"><?php echo $product['Naam']; ?></td>
+                        <td style="text-align: right;"><?php echo $product['Prijs']; ?></td>
+                        <td style="text-align: right;"><?php echo $product['Leeftijd']; ?></td>
+                        <td style="text-align: right;"><?php echo $product['Beschrijving']; ?></td>  
+                        <td style="text-align: right;"><?php echo $product['RegisseurID']; ?></td>
+                        <td style="text-align: right;"><?php echo $product['Aantal']; ?></td>
+                        <?php
+                        $productid = $product['ProductID'];
+                        echo "<td style='text-align: right';><a href='deleteProduct.php?nr=$productid'>Delete</a></td>";
+                        ?>
+                    </tr>
+                    <?php
                 endforeach;
                 ?>
             </table>

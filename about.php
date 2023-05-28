@@ -268,7 +268,8 @@ $result = $stmt->fetch();
                     </td>
                     <td>
                         <div>
-                            <a href="<?php $language = 'nl'; ?>"></a>
+                            <a href="<?php $language = 'nl'; ?>">Nederlands/Dutch</a>
+                            <a href="<?php $language = 'en'; ?>">Engels/English</a>
                         </div>
                     </td>
                 </tr>
