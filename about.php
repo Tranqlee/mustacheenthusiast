@@ -233,7 +233,7 @@ $result = $stmt->fetch();
                 flex-direction: column;
                 align-items: center;
                 margin: auto;
-                margin-top: 1cm;
+                margin-top: 2cm;
                 position: absolute;
             }
         </style>
@@ -305,7 +305,7 @@ $result = $stmt->fetch();
                                 Producten verwijderen uit je winkelmandje
                             </li>
                             <li>
-                                enz.
+                                ...
                             </li>
                         </ul>
                         <p>Als een admin kan je ook nog:</p>
@@ -335,7 +335,7 @@ $result = $stmt->fetch();
                                 Leeftijd categorieën verwijderen
                             </li>
                             <li>
-                                etc.
+                                ...
                             </li>
                         </ul>
                     </td>
@@ -345,10 +345,10 @@ $result = $stmt->fetch();
                         <p>On this webshop you can:</p>
                         <ul>
                             <li>
-                                log in
+                                Log in
                             </li>
                             <li>
-                                register
+                                Register
                             </li>
                             <li>
                                 Reset your password
@@ -366,7 +366,7 @@ $result = $stmt->fetch();
                                 Remove products from your cart
                             </li>
                             <li>
-                                etc.
+                                ...
                             </li>
                         </ul>
                         <p>As an admin you can also:</p>
@@ -396,7 +396,7 @@ $result = $stmt->fetch();
                                 Remove age categories
                             </li>
                             <li>
-                                etc.
+                                ...
                             </li>
                         </ul>
                     </td>

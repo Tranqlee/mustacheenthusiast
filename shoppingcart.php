@@ -1,153 +1,226 @@
 <?php
-    require_once('comm.php');
-    session_start();
-    $link = getDatabase();
-        if(isset($_SESSION['user']))
-        {        
-            if(isset($_POST['productname']))
-            {
-                try{
-                    $query = $link->prepare("INSERT INTO product (Naam, ProductID, Kleur, CategorieID, Beschrijving, Prijs) VALUES (:productname, :type, :kleur, :category, :description, :price)");
-                    $query->bindParam(":productname", $_POST['productname']);
-                    $query->bindParam(":type", $_POST['type']);
-                    $query->bindParam(":kleur", $_POST['kleur']);
-                    $query->bindParam(":category", $_POST['category']);
-                    $query->bindParam(":description", $_POST['description']);
-                    $query->bindParam(":price", $_POST['price']);
-                    $query->execute();
-                    // $record = $stmt->fetch();
-                }
-                catch(PDOException $e)
-                {
-                    echo 'Error!:'.$e->getMessage().'<br/>';
-                    die();
-                }
-            }
+require_once('comm.php');
+session_start();
+$link = getDatabase();
 
-            ?>
-            <!doctype html>
-            <!-- Website Template by freewebsitetemplates.com -->
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Webtoepassing Shoppingcart</title>
-                    <link rel="stylesheet" type="text/css" href="css/style.css">
-                    <link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width : 568px)">	
-                    <link rel="stylesheet" type="text/css" href="css/NewStyle.css">
-                    <script type="text/javascript" src="js/mobile.js"></script>
-                </head>
-                <body style="background-color: #626262;">
-                    <div id="header">
-                        <a href="index.html" class="logo">
-                            <img src="images/logo.jpg" alt="">
-                        </a>
-                        <ul id="navigation" class="Navigatie" style="position: fixed; padding-right: 1cm;padding-left: 1cm;margin-top: -2cm;margin-right: 5cm;margin-left: 4.8225cm;padding-bottom: 0.5cm;z-index: 1; background-image: linear-gradient(to bottom right, #636B7C, #323C54);border-radius: 0.25cm;box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);">
-                            <li>
-                                <a href="index.php">| Home |</a>
-                            </li>
-                            <li>
-                                <a href="gallery.php">| Products | </a>
-                            </li>
-                            <li class="selected">
-                                <a href="shoppingcart.php">| Cart |</a>
-                            </li>
-                            <li>
-                                <a href="about.php">| About |</a>
-                            </li>
-                        </ul>
-                        <ul id="navigation" class="Navigatie" style="position:absolute; top: 0; right: 0; padding: 0.25cm 1cm 0.25cm 0cm; z-index: 1; background-image: linear-gradient(to top right, #323C54, #636B7C);border-radius: 0cm 0cm 0cm 0.25cm;box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);">
-                            <li style="align-items: right;">
-                                <?php
-                                    echo "Ingelogd als: " . $_SESSION['user'];
-                                    echo "<br><br>";
-                                    echo "<a href='login.php'>Uitloggen</a>";
-                                ?>
-                            </li>
-                        </ul>
-                    </div>
+
+if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
+    header('Location: loginSHOP.php');
+}
+?>
+
+<!-- Website Template by freewebsitetemplates.com -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webtoepassing Shoppingcart</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width : 568px)">
+    <link rel="stylesheet" type="text/css" href="css/NewStyle.css">
+    <script type="text/javascript" src="js/mobile.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="overflow-y: scroll;">
+    <style>
+        body {
+            width: 100%;
+            background-color: rgb(75, 75, 75);
+        }
+    </style>
+    <table class="navbar">
+        <style>
+            .navbar {
+                background-color: rgb(35, 35, 35);
+                box-shadow: 0px 0px 10px 2px black;
+                color: white;
+            }
+            .navbar , .navbar tr {
+                width: 100%;
+                height: 2cm;
+            }
+            .navbar td:first-child {
+                width: 25%;
+                height: 100%;
+                border: none;
+            }
+            .navbar td {
+                width: 50%;
+                height: 100%;
+                border: none;
+            }
+            .navbar td:last-child {
+                width: 25%;
+                height: 100%;
+                border: none;
+                text-align: right;
+            }
+        </style>
+        <tr>
+            <td>
+                <div class="leftnav">
                     <style>
-                        .error
-                        {
-                            color: red;
+                        .leftnav {
+                            justify-content: left;
+                            align: left;
+                            float: left;
+                            width: fit-content;
                         }
-                        input
-                        {
-                            display: block;
-                            margin-bottom: 10px;
+                        .leftnav a {
+                            padding: 0.5cm;
+                            margin-left: 0.25cm;
+                            width: fit-content;
+                            border: none;
+                            border-radius: 0.25cm;
+                            background-color: lightgray;
+                            transition: 0.05s;
                         }
-                        div.center
-                        {
-                            display: flex;
-                            justify-content: center;
-                            flex-direction: column;
-                            align-items: center;
-                            height: 500px;
+                        .leftnav a:hover {
+                            background-color: white;
+                            transition: 0.05s;
+                        }
+                        .leftnav button {
+                            background-color: transparent;
+                            border: none;
+                        }
+                        .leftnav h3 {
+                            color: black;
                         }
                     </style>
-                    <br><br><br>
+                    <a href="index.php">
+                        <button><h3>HOME</h3></button>
+                    </a>
+                </div>
+            </td>
+            <td>
+                <div class="middlenav">
+                    <style>
+                        .middlenav {
+                            justify-content: center;
+                            align: center;
+                            float: center;
+                            width: 100%;
+                        }
+                        .middlenav table {
+                            width: 100%;
+                            height: 100%;
+                        }
+                        .middlenav td:first-child, .middlenav td, .middlenav td:last-child {
+                            width: 33.333%;
+                            height: 100%;
+                            border: none;
+                            text-align: center;
+                        }
+                    </style>
+                    <table>
                         <style>
-                            table {
-                                border: 0.1cm solid black;
+                            .button {
+                                justify-content: center;
+                                align: center;
+                                float: center;
+                                width: 95%;
+                                background-color: transparent;
+                            }
+                            .button a {
+                                padding: 0.5cm;
+                                width: 75%;
+                                border: none;
+                                border-radius: 0.25cm;
+                                background-color: lightgray;
+                                transition: 0.05s;
+                                box-shadow: 0px 0px 10px 2px black;
+                            }
+                            .button a:hover {
+                                background-color: white;
+                                width: 75%;
+                                transition: 0.05s;
+                                box-shadow: 0px 0px 10px 2px black;
+                            }
+                            .button button {
+                                background-color: transparent;
+                                border: none;
+                                margin: -0.5cm;
+                                width: 100%;
+                                height: 100%;
+                            }
+                            .selected h3 {
+                                text-decoration: underline 1.5px solid black;
+                            }
+                            .selected a {
+                                background-color: white;
                             }
                         </style>
-                        <p>
-                            <fieldset style="margin: 0cm 35cm 0cm 0.5cm; color: white; font-weight: bold; background-image: linear-gradient(to bottom right, #636B7C, #323C54);">
-                                <br>
-                                <form action="" method="POST">
-                                    <label for="deleteKAR">Verwijder de winkelkar</label>
-                                    <input type="submit" name="deleteKAR" value="Verwijder">
-                                </form>
-                            </fieldset>
-                        </p>
-                        <br>
-                        <table style="margin-left: 0.5cm; background-color: lightslategray; border: 1px solid black; border-radius: 10px;">
-                        <?php 
-                            
-                            $query = $link->query("SELECT * FROM product");
-                            $products = $query->fetchAll();
-                        ?>
-                            <tr>
-                                <th style="padding-left: 0.5cm; padding-right: 0.5cm;">ID</th>
-                                <th style="padding-left: 0.5cm; padding-right: 3cm;">Product</th>
-                                <th style="padding-left: 0.5cm; padding-right: 2cm;">Kleur</th>
-                                <th style="padding-left: 0.5cm; padding-right: 2cm;">Categorie</th>
-                                <th style="padding-left: 0.5cm; padding-right: 10cm;">Beschrijving</th>
-                                <th style="padding-left: 0.5cm; padding-right: 1.5cm;">Prijs</th>
-                            </tr>
-                                <?php
-                                    #ontvangt de sessie variabele array en zet deze in een tabel
-                                    if($_SESSION['arrayEmpty'] == false)
-                                    {
-                                        for($i = 0; $i < 10; $i++)
-                                        {
-                                            echo "<tr>";
-                                            for($j = 0; $j < 2; $j++)
-                                                {
-                                                    ?>
-                                                    <td> <?php echo $_SESSION['2dimARRAY'][$i][$j]; ?> </td>
-                                                    <?php
-                                            }
-                                            echo "</tr>";
-                                        }
-                                    }
-                                    else
-                                    {
-                                        ?>
-                                        <tr>
-                                            <td>
-                                                <?php echo "Array is leeg"; ?>
-                                            </td>
-                                        </tr>
-                                        <?php
-                                    }
-                                ?>
-                        </table>
-                </body>
-            </html>
-        <?php
-        }
-        else
-        {
-            header("Location: loginSHOP.php");
-        }
-        ?>
+                        <tr>
+                            <td>
+                                <div class="button">
+                                    <a href="gallery.php">
+                                        <button><h3>Products</h3></button>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button selected">
+                                    <a href="shoppingcart.php">
+                                        <button><h3>Shoppingcart</h3></button>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td>
+                <div class="rightnav">
+                    <style>
+                        .rightnav {
+                            justify-content: center;
+                            align: right;
+                            float: right;
+                            width: fit-content;
+                        }
+                        .rightnav a {
+                            padding: 0.5cm;
+                            margin-right: 0.25cm;
+                            width: fit-content;
+                            border: none;
+                            border-radius: 0.25cm;
+                            background-color: firebrick;
+                            transition: 0.05s;
+                        }
+                        .rightnav a:hover {
+                            background-color: red;
+                            transition: 0.05s;
+                        }
+                        .rightnav button {
+                            background-color: transparent;
+                            border: none;
+                        }
+                        .rightnav h3 {
+                            color: black;
+                        }
+                    </style>
+                    <a href="loginSHOP.php">
+                        <button><h3>Log out</h3></button>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="center">
+        <style>
+            div.center {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                margin: auto;
+                margin-top: 1cm;
+                position: absolute;
+            }
+        </style>
+        <div class="content">
+            <h1>HIER KOMT CODE</h1>
+        </div>
+    </div>
+</body>
+</html>
