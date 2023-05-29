@@ -14,6 +14,44 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
 if ($result['isAdmin'] != 1) {
     header('Location: loginSHOP.php');
 }
+
+if(isset($_POST['directorname']))
+{
+    $stmt = $link->prepare("INSERT INTO regisseuren (Naam) VALUES (:directorname)");
+    $stmt->bindParam(':directorname', $_POST['directorname']);
+    $stmt->execute();
+}
+if(isset($_POST['agename']))
+{
+    $stmt = $link->prepare("INSERT INTO leeftijden (Naam) VALUES (:agename)");
+    $stmt->bindParam(':agename', $_POST['agename']);
+    $stmt->execute();
+}
+
+if(isset($_POST['productname']))
+{
+    $stmt = $link->prepare("INSERT INTO product (Naam, Prijs, Beschrijving, RegisseurID, Leeftijd, Aantal) VALUES (:productname, :productprice, :productdescription, :productdirector, :productage, :productamount)");
+    $stmt->bindParam(':productname', $_POST['productname']);
+    $stmt->bindParam(':productprice', $_POST['productprice']);
+    $stmt->bindParam(':productdescription', $_POST['productdescription']);
+    $stmt->bindParam(':productdirector', $_POST['productdirector']);
+    $stmt->bindParam(':productage', $_POST['productage']);
+    $stmt->bindParam(':productamount', $_POST['productamount']);
+    $stmt->execute();
+}
+
+if(isset($_POST['productnamewijzigen']))
+{
+    $stmt = $link->prepare("UPDATE product SET Naam = :productnamewijzigen, Prijs = :productpricewijzigen, Leeftijd = :productagewijzigen, Beschrijving = :productdescriptionwijzigen, RegisseurID = :productdirectorsidwijzigen, Aantal = :productamountwijzigen WHERE ProductID = :productidwijzigen");
+    $stmt->bindParam(':productnamewijzigen', $_POST['productnamewijzigen']);
+    $stmt->bindParam(':productpricewijzigen', $_POST['productpricewijzigen']);
+    $stmt->bindParam(':productagewijzigen', $_POST['productagewijzigen']);
+    $stmt->bindParam(':productdescriptionwijzigen', $_POST['productdescriptionwijzigen']);
+    $stmt->bindParam(':productdirectorsidwijzigen', $_POST['productdirectorwijzigen']);
+    $stmt->bindParam(':productamountwijzigen', $_POST['productamountwijzigen']);
+    $stmt->bindParam(':productidwijzigen', $_POST['productidwijzigen']);
+    $stmt->execute();
+}
 ?>
 
 <!-- Website Template by freewebsitetemplates.com -->
@@ -252,19 +290,20 @@ if ($result['isAdmin'] != 1) {
                     .userlist {
                         margin: auto;
                         justify-content: center;
+                        width: 95%;
+                        height: 100%;
+                        background-color: rgb(35, 35, 35);
+                        padding: 0.5cm;
+                        margin: auto;
+                        border-radius: 1cm;
                     }
                     .userlist h1 {
                         text-align: center;
                         color: white;
                     }
+
                     .userlist table {
-                        width: 95%;
-                        height: 100%;
-                        background-color: rgb(35, 35, 35);
                         color: white;
-                        padding: 0.5cm;
-                        margin: auto;
-                        border-radius: 1cm;
                     }
                     .userlist th {
                         border-right: 2px solid gray;
@@ -287,7 +326,7 @@ if ($result['isAdmin'] != 1) {
                 $klanten = $query->fetchAll();
                 ?>
                 <tr>
-                    <th style="width: 5cm;">ID</th>
+                    <th style="width: 5cm;">Customer ID</th>
                     <th style="width: 5cm;">Username</th>
                     <th style="width: 5cm;">E-mail</th>
                     <th style="width: 5cm;">Phone number</th>
@@ -330,6 +369,7 @@ if ($result['isAdmin'] != 1) {
                 }
                 .extralist table {
                     width: 100%;
+                    margin: auto;
                 }
                 .extralist tr {
                     width: 100%;
@@ -343,135 +383,219 @@ if ($result['isAdmin'] != 1) {
                 <tr>
                     <td>
                         <div class="directorlist">
-                            <h1>Directors</h1>
-                            <table>
+                            <div>
+                                <h1>Directors</h1>
+                                <table>
+                                    <style>
+                                        .directorlist {
+                                            margin: auto;
+                                            justify-content: center;
+                                            width: 85%;
+                                            height: 100%;
+                                            background-color: rgb(35, 35, 35);
+                                            padding: 0.5cm;
+                                            margin: auto;
+                                            border-radius: 1cm;
+                                        }
+                                        .directorlist h1 {
+                                            text-align: center;
+                                            color: white;
+                                        }
+                                        .directorlist h2 {
+                                            text-align: left;
+                                            color: white;
+                                        }
+                                        .directorlist table {
+                                            color: white;
+                                        }
+                                        .directorlist th {
+                                            border-right: 2px solid gray;
+                                            border-bottom: 2px solid gray;
+                                            padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                                        }
+                                        .directorlist th:last-child {
+                                            border-right: none;
+                                        }
+                                        .directorlist td {
+                                            border-right: 2px solid gray;
+                                            padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                                        }
+                                        .directorlist td:last-child {
+                                            border-right: none;
+                                        }
+                                    </style>
+                                    <?php
+                                    $query = $link->query("SELECT * FROM regisseuren");
+                                    $regisseurs = $query->fetchAll();
+                                    ?>
+                                    <tr>
+                                        <th style="width: 2cm;">Director(s) ID</th>
+                                        <th style="width: 7.5cm;">Director(s) name(s)</th>
+                                        <th style="width: 2cm;">Delete</th>
+                                    </tr>
+                                    <?php 
+                                    foreach($regisseurs as $regisseur):
+                                    ?>
+                                    <tr>
+                                        <td style="text-align: right;"><?php echo $regisseur['RegisseurID']; ?></td>
+                                        <td style="text-align: right;"><?php echo $regisseur['Naam']; ?></td>
+                                        <?php
+                                        $directorid = $regisseur['RegisseurID'];
+                                        echo "<td style='text-align: right';><a href='deleteDirector.php?nr=$directorid'>Delete</a></td>";
+                                        ?>
+                                    </tr>
+                                    <?php
+                                    endforeach;
+                                    ?>
+                                </table>
+                            </div>
+                            <p>
+                                <br><br>
+                            </p>
+                            <div class="directorform">
+                                <h2>Add director(s)</h2>
                                 <style>
-                                    .directorlist {
-                                        margin: auto;
-                                        justify-content: center;
+                                    .directorform {
+                                        width: 100%;
+                                        background-color: rgb(75, 75, 75);
+                                        padding: 0.25cm;
+                                        padding-left: 0.5cm;
+                                        border-radius: 0.5cm;
+                                        margin: 0.25cm;
                                     }
-                                    .directorlist h1 {
-                                        text-align: center;
+                                    .directorform, .directorform form {
+                                        width: auto;
+                                    }
+                                    .directorform input {
+                                        padding: 0.15cm;
+                                        border-radius: 0.15cm;
+                                        border: none;
+                                    }
+
+                                    .directorform label {
                                         color: white;
-                                    }
-                                    .directorlist table {
-                                        width: 95%;
-                                        height: 100%;
-                                        background-color: rgb(35, 35, 35);
-                                        color: white;
-                                        padding: 0.5cm;
-                                        margin: auto;
-                                        border-radius: 1cm;
-                                    }
-                                    .directorlist th {
-                                        border-right: 2px solid gray;
-                                        border-bottom: 2px solid gray;
-                                        padding: 0.25cm 0.5cm 0.25cm 0.5cm;
-                                    }
-                                    .directorlist th:last-child {
-                                        border-right: none;
-                                    }
-                                    .directorlist td {
-                                        border-right: 2px solid gray;
-                                        padding: 0.25cm 0.5cm 0.25cm 0.5cm;
-                                    }
-                                    .directorlist td:last-child {
-                                        border-right: none;
+                                        font-weight: bold;
                                     }
                                 </style>
-                                <?php
-                                $query = $link->query("SELECT * FROM regisseuren");
-                                $regisseurs = $query->fetchAll();
-                                ?>
-                                <tr>
-                                    <th style="width: 2cm;">Director ID</th>
-                                    <th style="width: 7.5cm;">Director name</th>
-                                    <th style="width: 2cm;">Delete</th>
-                                </tr>
-                                <?php 
-                                foreach($regisseurs as $regisseur):
-                                ?>
-                                <tr>
-                                    <td style="text-align: right;"><?php echo $regisseur['RegisseurID']; ?></td>
-                                    <td style="text-align: right;"><?php echo $regisseur['Naam']; ?></td>
-                                    <?php
-                                    $directorid = $regisseur['RegisseurID'];
-                                    echo "<td style='text-align: right';><a href='deleteDirector.php?nr=$directorid'>Delete</a></td>";
-                                    ?>
-                                </tr>
-                                <?php
-                                endforeach;
-                                ?>
-                            </table>
+                                <form action="" method="POST">
+                                    <label for="directorname">Director(s) name(s)</label>
+                                    <br>
+                                    <input type="text" name="directorname" id="directorname" size="auto" required/>
+                                    <br><br>
+                                    <input type="submit" name="submitdirector" value="Add director('s)" style="width: auto;"/>
+                                </form>
+                            </div>
                         </div>
                     </td>
                     <td>
                         <div class="agelist">
-                            <h1>Ages</h1>
-                            <table>
+                            <div>
+                                <h1>Ages</h1>
+                                <table>
+                                    <style>
+                                        .agelist {
+                                            margin: auto;
+                                            justify-content: center;
+                                            width: 85%;
+                                            height: 100%;
+                                            background-color: rgb(35, 35, 35);
+                                            padding: 0.5cm;
+                                            margin: auto;
+                                            border-radius: 1cm;
+                                        }
+                                        .agelist h1 {
+                                            text-align: center;
+                                            color: white;
+                                        }
+                                        .agelist h2 {
+                                            text-align: left;
+                                            color: white;
+                                        }
+                                        .agelist table {
+                                            color: white;
+                                        }
+                                        .agelist th {
+                                            border-right: 2px solid gray;
+                                            border-bottom: 2px solid gray;
+                                            padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                                        }
+                                        .agelist th:last-child {
+                                            border-right: none;
+                                        }
+                                        .agelist td {
+                                            border-right: 2px solid gray;
+                                            padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                                        }
+                                        .agelist td:last-child {
+                                            border-right: none;
+                                        }
+                                    </style>
+                                    <?php
+                                    $query = $link->query("SELECT * FROM leeftijden");
+                                    $leeftijden = $query->fetchAll();
+                                    ?>
+                                    <tr>
+                                        <th style="width: 2cm;">Age ID</th>
+                                        <th style="width: 7.5cm;">Age name</th>
+                                        <th style="width: 2cm;">Delete</th>
+                                    </tr>
+                                    <?php 
+                                    foreach($leeftijden as $leeftijd):
+                                    ?>
+                                    <tr>
+                                        <td style="text-align: right;"><?php echo $leeftijd['LeeftijdID']; ?></td>
+                                        <td style="text-align: right;"><?php echo $leeftijd['Naam']; ?></td>
+                                        <?php
+                                        $ageid = $leeftijd['LeeftijdID'];
+                                        echo "<td style='text-align: right';><a href='deleteAge.php?nr=$ageid'>Delete</a></td>";
+                                        ?>
+                                    </tr>
+                                    <?php
+                                    endforeach;
+                                    ?>
+                                </table>
+                            </div>
+                            <p>
+                                <br><br>
+                            </p>
+                            <div class="ageform">
+                                <h2>Add age</h2>
                                 <style>
-                                    .agelist {
-                                        margin: auto;
-                                        justify-content: center;
+                                    .ageform {
+                                        width: 100%;
+                                        background-color: rgb(75, 75, 75);
+                                        padding: 0.25cm;
+                                        padding-left: 0.5cm;
+                                        border-radius: 0.5cm;
+                                        margin: 0.25cm;
                                     }
-                                    .agelist h1 {
-                                        text-align: center;
+                                    .ageform, .ageform form {
+                                        width: auto;
+                                    }
+                                    .ageform input {
+                                        padding: 0.15cm;
+                                        border-radius: 0.15cm;
+                                        border: none;
+                                    }
+                                    .ageform label {
                                         color: white;
-                                    }
-                                    .agelist table {
-                                        width: 95%;
-                                        height: 100%;
-                                        background-color: rgb(35, 35, 35);
-                                        color: white;
-                                        padding: 0.5cm;
-                                        margin: auto;
-                                        border-radius: 1cm;
-                                    }
-                                    .agelist th {
-                                        border-right: 2px solid gray;
-                                        border-bottom: 2px solid gray;
-                                        padding: 0.25cm 0.5cm 0.25cm 0.5cm;
-                                    }
-                                    .agelist th:last-child {
-                                        border-right: none;
-                                    }
-                                    .agelist td {
-                                        border-right: 2px solid gray;
-                                        padding: 0.25cm 0.5cm 0.25cm 0.5cm;
-                                    }
-                                    .agelist td:last-child {
-                                        border-right: none;
+                                        font-weight: bold;
                                     }
                                 </style>
-                                <?php
-                                $query = $link->query("SELECT * FROM leeftijden");
-                                $leeftijden = $query->fetchAll();
-                                ?>
-                                <tr>
-                                    <th style="width: 2cm;">Age ID</th>
-                                    <th style="width: 7.5cm;">Age name</th>
-                                    <th style="width: 2cm;">Delete</th>
-                                </tr>
-                                <?php 
-                                foreach($leeftijden as $leeftijd):
-                                ?>
-                                <tr>
-                                    <td style="text-align: right;"><?php echo $leeftijd['LeeftijdID']; ?></td>
-                                    <td style="text-align: right;"><?php echo $leeftijd['Naam']; ?></td>
-                                    <?php
-                                    $leeftijdid = $leeftijd['LeeftijdID'];
-                                    echo "<td style='text-align: right';><a href='deleteAge.php?nr=$leeftijdid'>Delete</a></td>";
-                                    ?>
-                                </tr>
-                                <?php
-                                endforeach;
-                                ?>
-                            </table>
+                                <form action="" method="POST">
+                                    <label for="agename">Age</label>
+                                    <br>
+                                    <input type="text" name="agename" id="agename" size="auto" required/>
+                                    <br><br>
+                                    <input type="submit" name="submitage" value="Add age" style="width: auto;"/>
+                                </form>
+                            </div>
                         </div>
                     </td>
                 </tr>
             </table>
         </div>
+        <br>
         <div class="productlist">
             <h1>Products</h1>
             <table>
@@ -479,19 +603,19 @@ if ($result['isAdmin'] != 1) {
                     .productlist {
                         margin: auto;
                         justify-content: center;
+                        width: 95%;
+                        height: 100%;
+                        background-color: rgb(35, 35, 35);
+                        padding: 0.5cm;
+                        margin: auto;
+                        border-radius: 1cm 1cm 0cm 0cm;
                     }
                     .productlist h1 {
                         text-align: center;
                         color: white;
                     }
                     .productlist table {
-                        width: 95%;
-                        height: 100%;
-                        background-color: rgb(35, 35, 35);
                         color: white;
-                        padding: 0.5cm;
-                        margin: auto;
-                        border-radius: 1cm 1cm 0cm 0cm;
                     }
                     .productlist th {
                         border-right: 2px solid gray;
@@ -543,6 +667,221 @@ if ($result['isAdmin'] != 1) {
                 endforeach;
                 ?>
             </table>
+            <p>
+                <br><br>
+            </p>
+            <div class="producttable">
+                <style>
+                    .producttable {
+                        width: 100%;
+                        border: none;
+                    }
+                    .producttable td {
+                        border: none;
+                        vertical-align: top;
+                    }
+                </style>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="productform">
+                                <style>
+                                    .productform {
+                                        width: 100%;
+                                        background-color: rgb(75, 75, 75);
+                                        padding: 0.25cm;
+                                        border-radius: 0.5cm;
+                                    }
+                                    .productform form {
+                                        width: auto;
+                                    }
+                                    .productform th {
+                                        text-align: left;
+                                        border: none;
+                                    }
+                                    .productform td {
+                                        justify-content: right;
+                                    }
+                                    .productform label {
+                                        color: white;
+                                        font-weight: bold;
+                                    }
+                                    .productform input {
+                                        padding: 0.15cm;
+                                        border-radius: 0.15cm;
+                                        margin: 0.15cm;
+                                        border: none;
+                                    }
+                                </style>
+                                <form action="" method="POST">
+                                    <table>
+                                        <tr>
+                                            <th>
+                                                <h2>Add product</h2>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="productname">Product name</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" name="productname" id="productname" size="auto" required/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="productprice">Product price</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" name="productprice" id="productprice" size="auto" required/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="productage">Product age restriction ID</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" name="productage" id="productage" size="auto" required/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="productdescription">Product description</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" name="productdescription" id="productdescription" size="auto" required/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="productdirector">Product director ID</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" name="productdirector" id="productdirector" size="auto" required/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="productamount">Product amount</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" name="productamount" id="productamount" size="auto" required/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="submit" name="submit" value="Add product"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="productformwijzigen">
+                                <style>
+                                    .productformwijzigen {
+                                        width: 100%;
+                                        background-color: rgb(75, 75, 75);
+                                        padding: 0.25cm;
+                                        border-radius: 0.5cm;
+                                    }
+                                    .productformwijzigen form {
+                                        width: auto;
+                                    }
+                                    .productformwijzigen th {
+                                        text-align: left;
+                                        border: none;
+                                    }
+                                    .productformwijzigen td {
+                                        justify-content: right;
+                                    }
+                                    .productformwijzigen label {
+                                        color: white;
+                                        font-weight: bold;
+                                    }
+                                    .productformwijzigen input {
+                                        padding: 0.15cm;
+                                        border-radius: 0.15cm;
+                                        margin: 0.15cm;
+                                        border: none;
+                                    }
+                                </style>
+                                <form action="" method="POST">
+                                    <table>
+                                        <tr>
+                                            <th>
+                                                <h2>Edit product</h2>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="productidwijzigen">Product ID</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" name="productidwijzigen" id="productidwijzigen" size="auto" required/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="productnamewijzigen">Product name</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" name="productnamewijzigen" id="productnamewijzigen" size="auto" required/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="productpricewijzigen">Product price</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" name="productpricewijzigen" id="productpricewijzigen" size="auto" required/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="productagewijzigen">Product age restriction ID</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" name="productagewijzigen" id="productagewijzigen" size="auto" required/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="productdescriptionwijzigen">Product description</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" name="productdescriptionwijzigen" id="productdescriptionwijzigen" size="auto" required/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="productdirectorwijzigen">Product director ID</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" name="productdirectorwijzigen" id="productdirectorwijzigen" size="auto" required/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label for="productamountwijzigen">Product amount</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" name="productamountwijzigen" id="productamountwijzigen" size="auto" required/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="submit" name="submitwijzigen" value="Edit product"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </body>
