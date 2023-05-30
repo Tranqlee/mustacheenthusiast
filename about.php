@@ -77,7 +77,7 @@ $result = $stmt->fetch();
                             margin-left: 0.25cm;
                             width: fit-content;
                             border: none;
-                            border-radius: 0.25cm;
+                            border-radius: 0.5cm;
                             background-color: lightblue;
                             transition: 0.05s;
                         }
@@ -131,7 +131,7 @@ $result = $stmt->fetch();
                                 padding: 0.5cm;
                                 width: 75%;
                                 border: none;
-                                border-radius: 0.25cm;
+                                border-radius: 0.5cm;
                                 background-color: lightgray;
                                 transition: 0.05s;
                                 box-shadow: 0px 0px 10px 2px black;
@@ -202,7 +202,7 @@ $result = $stmt->fetch();
                             margin-right: 0.25cm;
                             width: fit-content;
                             border: none;
-                            border-radius: 0.25cm;
+                            border-radius: 0.5cm;
                             background-color: firebrick;
                             transition: 0.05s;
                         }
@@ -225,183 +225,206 @@ $result = $stmt->fetch();
             </td>
         </tr>
     </table>
-    <div class="center">
-        <style>
-            div.center {
-                display: flex;
-                justify-content: center;
-                flex-direction: column;
-                align-items: center;
-                margin: auto;
-                margin-top: 2cm;
-                position: absolute;
-            }
-        </style>
-        <div class="about">
+    <div style="margin: auto;">
+        <div class="center">
             <style>
-                .about {
-                    background-color: rgb(35, 35, 35);
-                    color: white;
-                    border: none;
-                    border-radius: 1cm 1cm 0cm 0cm;
-                    box-shadow: 0px 0px 10px 2px black;
-                    padding: 0.50cm;
-                    width: 85%;
-                }
-                .about td {
-                    width: 50%;
-                    padding: 0.25cm;
-                }
-                .about td:first-child {
-                    border-right: 1px solid white;
-                }
-                .about h3 {
-                    text-align: center;
-                    color: white;
-                }
-                .about p {
-                    text-align: left;
-                    color: white;
-                }
-                .about li {
-                    padding: 0.05cm;
-                    color: white;
+                div.center {
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-top: 1cm;
+                    position: absolute;
+                    width: 100%;
                 }
             </style>
-            <table>
-                <tr>
-                    <th>
-                        <h3>Over deze webshop</h3>
-                    </th>
-                    <th>
-                        <h3>About this webshop</h3>
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        <p>Deze webshop is een project voor mijn GIP dat ik heb opgezet rondom de verkoop van fysieke exemplaren van films.</p>
-                        <br><br>
-                        <p>Op deze webshop kan je:</p>
-                        <ul>
-                            <li>
-                                Inloggen
-                            </li>
-                            <li>
-                                Registreren
-                            </li>
-                            <li>
-                                Je wachtwoord veranderen
-                            </li>
-                            <li>
-                                Jouw gebruikersinformatie zien
-                            </li>
-                            <li>
-                                Producten zien
-                            </li>
-                            <li>
-                                Producten toevoegen aan je winkelmandje
-                            </li>
-                            <li>
-                                Producten verwijderen uit je winkelmandje
-                            </li>
-                            <li>
-                                ...
-                            </li>
-                        </ul>
-                        <p>Als een admin kan je ook nog:</p>
-                        <ul>
-                            <li>
-                                Producten toevoegen
-                            </li>
-                            <li>
-                                Producten aanpassen
-                            </li>
-                            <li>
-                                Producten verwijderen
-                            </li>
-                            <li>
-                                Gebruikers verwijderen
-                            </li>
-                            <li>
-                                Regisseurs toevoegen
-                            </li>
-                            <li>
-                                Regisseurs verwijderen
-                            </li>
-                            <li>
-                                Leeftijd categorieën toevoegen
-                            </li>
-                            <li>
-                                Leeftijd categorieën verwijderen
-                            </li>
-                            <li>
-                                ...
-                            </li>
-                        </ul>
-                    </td>
-                    <td>
-                        <p>This webshop is a project for my GIP which i made around selling physical copies of movies.</p>
-                        <br><br>
-                        <p>On this webshop you can:</p>
-                        <ul>
-                            <li>
-                                Log in
-                            </li>
-                            <li>
-                                Register
-                            </li>
-                            <li>
-                                Reset your password
-                            </li>
-                            <li>
-                                View your user information
-                            </li>
-                            <li>
-                                View products
-                            </li>
-                            <li>
-                                Add products to your cart
-                            </li>
-                            <li>
-                                Remove products from your cart
-                            </li>
-                            <li>
-                                ...
-                            </li>
-                        </ul>
-                        <p>As an admin you can also:</p>
-                        <ul>
-                            <li>
-                                Add products
-                            </li>
-                            <li>
-                                Edit products
-                            </li>
-                            <li>
-                                Remove products
-                            </li>
-                            <li>
-                                Remove users
-                            </li>
-                            <li>
-                                Add directors
-                            </li>
-                            <li>
-                                Remove directors
-                            </li>
-                            <li>
-                                Add age categories
-                            </li>
-                            <li>
-                                Remove age categories
-                            </li>
-                            <li>
-                                ...
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
+            <div class="about">
+                <style>
+                    .about {
+                        justify-content: center;
+                        background-color: rgb(35, 35, 35);
+                        color: white;
+                        border: none;
+                        border-radius: 1cm;
+                        box-shadow: 0px 0px 10px 2px black;
+                        padding: 0.50cm;
+                        width: fit-content;
+                        margin: auto;
+                        margin-bottom: 1cm;
+                    }
+                    .about table {
+                        width: min-content;
+                    }
+                    .about tr {
+                        width: 100%;
+                    }
+                    .about th {
+                        width: 50%;
+                        padding: 0.25cm;
+                        margin: auto;
+                    }
+                    .about td {
+                        width: 50%;
+                        padding: 0.25cm;
+                    }
+                    .about td:first-child {
+                        border-right: 1px solid white;
+                    }
+                    .about h3 {
+                        text-align: center;
+                        color: white;
+                        width: max-content;
+                        margin: auto;
+                    }
+                    .about p {
+                        text-align: left;
+                        color: white;
+                        width: 100%;
+                    }
+                    .about ul {
+                        width: 100%;
+                    }
+                    .about li {
+                        padding: 0.05cm;
+                        color: white;
+                        width: max-content;
+                    }
+                </style>
+                <table>
+                    <tr>
+                        <th>
+                            <h3>Over deze webshop</h3>
+                        </th>
+                        <th>
+                            <h3>About this webshop</h3>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Deze webshop is een project voor mijn GIP dat ik heb opgezet rondom de verkoop van fysieke exemplaren van films.</p>
+                            <br><br>
+                            <p>Op deze webshop kan je:</p>
+                            <ul>
+                                <li>
+                                    Inloggen
+                                </li>
+                                <li>
+                                    Registreren
+                                </li>
+                                <li>
+                                    Je wachtwoord veranderen
+                                </li>
+                                <li>
+                                    Jouw gebruikersinformatie zien
+                                </li>
+                                <li>
+                                    Producten zien
+                                </li>
+                                <li>
+                                    Producten toevoegen aan je winkelmandje
+                                </li>
+                                <li>
+                                    Producten verwijderen uit je winkelmandje
+                                </li>
+                                <li>
+                                    ...
+                                </li>
+                            </ul>
+                            <p>Als een admin kan je ook nog:</p>
+                            <ul>
+                                <li>
+                                    Producten toevoegen
+                                </li>
+                                <li>
+                                    Producten aanpassen
+                                </li>
+                                <li>
+                                    Producten verwijderen
+                                </li>
+                                <li>
+                                    Gebruikers verwijderen
+                                </li>
+                                <li>
+                                    Regisseurs toevoegen
+                                </li>
+                                <li>
+                                    Regisseurs verwijderen
+                                </li>
+                                <li>
+                                    Leeftijd categorieën toevoegen
+                                </li>
+                                <li>
+                                    Leeftijd categorieën verwijderen
+                                </li>
+                                <li>
+                                    ...
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <p>This webshop is a project for my GIP which i made around selling physical copies of movies.</p>
+                            <br><br>
+                            <p>On this webshop you can:</p>
+                            <ul>
+                                <li>
+                                    Log in
+                                </li>
+                                <li>
+                                    Register
+                                </li>
+                                <li>
+                                    Reset your password
+                                </li>
+                                <li>
+                                    View your user information
+                                </li>
+                                <li>
+                                    View products
+                                </li>
+                                <li>
+                                    Add products to your cart
+                                </li>
+                                <li>
+                                    Remove products from your cart
+                                </li>
+                                <li>
+                                    ...
+                                </li>
+                            </ul>
+                            <p>As an admin you can also:</p>
+                            <ul>
+                                <li>
+                                    Add products
+                                </li>
+                                <li>
+                                    Edit products
+                                </li>
+                                <li>
+                                    Remove products
+                                </li>
+                                <li>
+                                    Remove users
+                                </li>
+                                <li>
+                                    Add directors
+                                </li>
+                                <li>
+                                    Remove directors
+                                </li>
+                                <li>
+                                    Add age categories
+                                </li>
+                                <li>
+                                    Remove age categories
+                                </li>
+                                <li>
+                                    ...
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </body>

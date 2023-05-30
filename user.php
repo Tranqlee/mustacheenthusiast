@@ -26,7 +26,7 @@ $result = $stmt->fetch();
     <script type="text/javascript" src="js/mobile.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="overflow:hidden;">
+<body style="overflow-y: scroll;">
     <style>
         body {
             width: 100%;
@@ -76,7 +76,7 @@ $result = $stmt->fetch();
                             margin-left: 0.25cm;
                             width: fit-content;
                             border: none;
-                            border-radius: 0.25cm;
+                            border-radius: 0.5cm;
                             background-color: lightblue;
                             transition: 0.05s;
                         }
@@ -112,7 +112,7 @@ $result = $stmt->fetch();
                             padding-top: 0.5cm;
                         }
                     </style>
-                    <h1>User information</h1>
+                    <h1><?php echo $_SESSION['user']; ?></h1>
                 </div>
             </td>
             <td>
@@ -129,7 +129,7 @@ $result = $stmt->fetch();
                             margin-right: 0.25cm;
                             width: fit-content;
                             border: none;
-                            border-radius: 0.25cm;
+                            border-radius: 0.5cm;
                             background-color: firebrick;
                             transition: 0.05s;
                         }
@@ -159,39 +159,44 @@ $result = $stmt->fetch();
                 justify-content: center;
                 flex-direction: column;
                 align-items: center;
-                height: 550px;
-                margin: auto;
                 margin-top: 1cm;
                 position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -52.5%);
+                width: 100%;
+            }
+            .center h2 {
+                color: white;
             }
         </style>
+        <h2>User information</h2>
         <table class="centertable">
             <style>
                 .centertable {
                     background-color: rgb(35, 35, 35);
                     color: white;
-                    border-radius: 0.25cm;
-                    width: 30cm;
+                    border-radius: 0.5cm;
+                    width: fit-content;
                     padding: 0.5cm;
                     box-shadow: 0px 0px 10px 1px black;
                 }
+                .centertable tr {
+                    width: fit-content;
+                }
                 .centertable th {
-                    width: 25%;
                     height: 1cm;
                     border: none;
                     text-align: right;
-                    padding-right: 0.5cm;
+                    padding: 0.25cm;
+                    padding-right: 0.50cm;
                     color: cornflowerblue;
+                    width: fit-content;
                 }
                 .centertable td {
-                    width: 25%;
                     height: 1cm;
                     border: none;
                     text-align: left;
+                    padding: 0.25cm;
                     padding-left: 0.5cm;
+                    width: fit-content;
                 }
             </style>
             <tr>
@@ -265,6 +270,45 @@ $result = $stmt->fetch();
                 </td>
                 <td>
                 </td>
+            </tr>
+        </table>
+        <br>
+        <h2>Orders</h2>
+        <table class="centertable">
+            <style>
+                .centertable {
+                    background-color: rgb(35, 35, 35);
+                    color: white;
+                    border-radius: 0.5cm;
+                    width: fit-content;
+                    padding: 0.5cm;
+                    box-shadow: 0px 0px 10px 1px black;
+                }
+                .centertable tr {
+                    width: fit-content;
+                }
+                .centertable th {
+                    height: 1cm;
+                    border: none;
+                    text-align: right;
+                    padding: 0.25cm;
+                    padding-right: 0.50cm;
+                    color: cornflowerblue;
+                    width: fit-content;
+                }
+                .centertable td {
+                    height: 1cm;
+                    border: none;
+                    text-align: left;
+                    padding: 0.25cm;
+                    padding-left: 0.5cm;
+                    width: fit-content;
+                }
+            </style>
+            <tr>
+                <th>
+                    Test
+                </th>
             </tr>
         </table>
     </div>
