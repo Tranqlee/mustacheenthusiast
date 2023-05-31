@@ -8,12 +8,20 @@ $stmt->bindParam(':username', $_SESSION['user']);
 $stmt->execute();
 $result = $stmt->fetch();
 
+
+
+
+
 if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
     header('Location: loginSHOP.php');
 }
 if ($result['isAdmin'] != 1) {
     header('Location: loginSHOP.php');
 }
+
+
+
+
 
 if(isset($_POST['directorname']))
 {
@@ -27,6 +35,16 @@ if(isset($_POST['agename']))
     $stmt->bindParam(':agename', $_POST['agename']);
     $stmt->execute();
 }
+if(isset($_POST['genrename']))
+{
+    $stmt = $link->prepare("INSERT INTO genres (Naam) VALUES (:genrename)");
+    $stmt->bindParam(':genrename', $_POST['genrename']);
+    $stmt->execute();
+}
+
+
+
+
 
 if(isset($_POST['productname']))
 {
@@ -39,7 +57,6 @@ if(isset($_POST['productname']))
     $stmt->bindParam(':productamount', $_POST['productamount']);
     $stmt->execute();
 }
-
 if(isset($_POST['productnamewijzigen']))
 {
     $stmt = $link->prepare("UPDATE product SET Naam = :productnamewijzigen, Prijs = :productpricewijzigen, Leeftijd = :productagewijzigen, Beschrijving = :productdescriptionwijzigen, RegisseurID = :productdirectorsidwijzigen, Aantal = :productamountwijzigen WHERE ProductID = :productidwijzigen");
@@ -53,6 +70,10 @@ if(isset($_POST['productnamewijzigen']))
     $stmt->execute();
 }
 ?>
+
+
+
+
 
 <!-- Website Template by freewebsitetemplates.com -->
 <html lang="en">
@@ -600,6 +621,111 @@ if(isset($_POST['productnamewijzigen']))
                                 </div>
                             </div>
                         </td>
+                        <td>
+                            <div class="genrelist">
+                                <div>
+                                    <h1>Genres</h1>
+                                    <table>
+                                        <style>
+                                            .genrelist {
+                                                margin: auto;
+                                                justify-content: center;
+                                                width: 85%;
+                                                height: 100%;
+                                                background-color: rgb(35, 35, 35);
+                                                padding: 0.5cm;
+                                                margin: auto;
+                                                border-radius: 1cm;
+                                            }
+                                            .genrelist h1 {
+                                                text-align: center;
+                                                color: white;
+                                            }
+                                            .genrelist h2 {
+                                                text-align: left;
+                                                color: white;
+                                            }
+                                            .genrelist table {
+                                                color: white;
+                                            }
+                                            .genrelist th {
+                                                border-right: 2px solid gray;
+                                                border-bottom: 2px solid gray;
+                                                padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                                            }
+                                            .agelgenrelistist th:last-child {
+                                                border-right: none;
+                                            }
+                                            .genrelist td {
+                                                border-right: 2px solid gray;
+                                                padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                                            }
+                                            .genrelist td:last-child {
+                                                border-right: none;
+                                            }
+                                        </style>
+                                        <?php
+                                        $query = $link->query("SELECT * FROM genres");
+                                        $genres = $query->fetchAll();
+                                        ?>
+                                        <tr>
+                                            <th style="width: 2cm;">Age ID</th>
+                                            <th style="width: 7.5cm;">Age name</th>
+                                            <th style="width: 2cm;">Delete</th>
+                                        </tr>
+                                        <?php 
+                                        foreach($genres as $genre):
+                                        ?>
+                                        <tr>
+                                            <td style="text-align: right;"><?php echo $genre['GenreID']; ?></td>
+                                            <td style="text-align: right;"><?php echo $genre['Naam']; ?></td>
+                                            <?php
+                                            $genreid = $genre['GenreID'];
+                                            echo "<td style='text-align: right';><a href='deleteGenre.php?nr=$genreid'>Delete</a></td>";
+                                            ?>
+                                        </tr>
+                                        <?php
+                                        endforeach;
+                                        ?>
+                                    </table>
+                                </div>
+                                <p>
+                                    <br><br>
+                                </p>
+                                <div class="genreform">
+                                    <h2>Add age</h2>
+                                    <style>
+                                        .genreform {
+                                            width: 100%;
+                                            background-color: rgb(75, 75, 75);
+                                            padding: 0.25cm;
+                                            padding-left: 0.5cm;
+                                            border-radius: 0.5cm;
+                                            margin: 0.25cm;
+                                        }
+                                        .genreform, .genreform form {
+                                            width: auto;
+                                        }
+                                        .genreform input {
+                                            padding: 0.15cm;
+                                            border-radius: 0.15cm;
+                                            border: none;
+                                        }
+                                        .genreform label {
+                                            color: white;
+                                            font-weight: bold;
+                                        }
+                                    </style>
+                                    <form action="" method="POST">
+                                        <label for="genrename">Genre</label>
+                                        <br>
+                                        <input type="text" name="genrename" id="genrename" size="auto" required/>
+                                        <br><br>
+                                        <input type="submit" name="submitgenre" value="Add genre" style="width: auto;"/>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -650,11 +776,12 @@ if(isset($_POST['productnamewijzigen']))
                     <tr>
                         <th style="width: 2cm;">ProductID</th>
                         <th style="width: 5cm;">Name</th>
-                        <th style="width: 2cm;">Price</th>
+                        <th style="width: 2cm;">Genre</th>
                         <th style="width: 2cm;">Age Restriction ID</th>
-                        <th style="width: 12cm;">Description</th>
                         <th style="width: 2cm;">Directors ID</th>
+                        <th style="width: 7.5cm;">Description</th>
                         <th style="width: 2cm;">Amount</th>
+                        <th style="width: 2cm;">Price</th>
                         <th style="width: 2cm;">Delete</th>
                     </tr>
                     <?php 
@@ -663,11 +790,12 @@ if(isset($_POST['productnamewijzigen']))
                         <tr>
                             <td style="text-align: right;"><?php echo $product['ProductID']; ?></td>
                             <td style="text-align: right;"><?php echo $product['Naam']; ?></td>
-                            <td style="text-align: right;"><?php echo $product['Prijs']; ?></td>
+                            <td style="text-align: right;"><?php echo $product['Genre']; ?></td>
                             <td style="text-align: right;"><?php echo $product['Leeftijd']; ?></td>
-                            <td style="text-align: right;"><?php echo $product['Beschrijving']; ?></td>  
                             <td style="text-align: right;"><?php echo $product['RegisseurID']; ?></td>
+                            <td style="text-align: right;"><?php echo $product['Beschrijving']; ?></td>  
                             <td style="text-align: right;"><?php echo $product['Aantal']; ?></td>
+                            <td style="text-align: right;"><?php echo $product['Prijs']; ?></td>
                             <?php
                             $productid = $product['ProductID'];
                             echo "<td style='text-align: right';><a href='deleteProduct.php?nr=$productid'>Delete</a></td>";
@@ -740,10 +868,10 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productprice">Product price</label>
+                                                    <label for="productgenre">Product Genre</label>
                                                 </th>
                                                 <td>
-                                                    <input type="text" name="productprice" id="productprice" size="auto" required/>
+                                                    <input type="text" name="productgenre" id="productgenre" size="auto" required/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -756,14 +884,6 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productdescription">Product description</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productdescription" id="productdescription" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
                                                     <label for="productdirector">Product director ID</label>
                                                 </th>
                                                 <td>
@@ -772,10 +892,26 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
+                                                    <label for="productdescription">Product description</label>
+                                                </th>
+                                                <td>
+                                                    <input type="text" name="productdescription" id="productdescription" size="auto" required/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
                                                     <label for="productamount">Product amount</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productamount" id="productamount" size="auto" required/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <label for="productprice">Product price</label>
+                                                </th>
+                                                <td>
+                                                    <input type="text" name="productprice" id="productprice" size="auto" required/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -842,10 +978,10 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productpricewijzigen">Product price</label>
+                                                    <label for="productgenrewijzigen">Product Genre</label>
                                                 </th>
                                                 <td>
-                                                    <input type="text" name="productpricewijzigen" id="productpricewijzigen" size="auto" required/>
+                                                    <input type="text" name="productgenrewijzigen" id="productgenrewijzigen" size="auto" required/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -858,14 +994,6 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productdescriptionwijzigen">Product description</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productdescriptionwijzigen" id="productdescriptionwijzigen" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
                                                     <label for="productdirectorwijzigen">Product director ID</label>
                                                 </th>
                                                 <td>
@@ -874,10 +1002,26 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
+                                                    <label for="productdescriptionwijzigen">Product description</label>
+                                                </th>
+                                                <td>
+                                                    <input type="text" name="productdescriptionwijzigen" id="productdescriptionwijzigen" size="auto" required/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
                                                     <label for="productamountwijzigen">Product amount</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productamountwijzigen" id="productamountwijzigen" size="auto" required/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <label for="productpricewijzigen">Product price</label>
+                                                </th>
+                                                <td>
+                                                    <input type="text" name="productpricewijzigen" id="productpricewijzigen" size="auto" required/>
                                                 </td>
                                             </tr>
                                             <tr>

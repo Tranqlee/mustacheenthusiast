@@ -72,28 +72,27 @@ $result = $stmt->fetch();
                             width: fit-content;
                         }
                         .leftnav a {
-                            padding: 0.5cm;
+                            display: inline-block;
+                            padding: 0.25cm;
                             margin-left: 0.25cm;
                             width: fit-content;
+                            height: fit-content;
                             border: none;
                             border-radius: 0.5cm;
-                            background-color: lightblue;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
                         .leftnav a:hover {
-                            background-color: cornflowerblue;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
-                        .leftnav button {
-                            background-color: transparent;
-                            border: none;
-                        }
-                        .leftnav h3 {
-                            color: black;
+                        .leftnav img {
+                            width: 0.75cm;
+                            height: auto;
                         }
                     </style>
                     <a href="user.php">
-                        <button><h3>Logged in as: <?php echo $_SESSION['user']; ?></h3></button>
+                        <img src="images/userTRANS.png" alt="User Profile">
                     </a>
                 </div>
             </td>
@@ -110,7 +109,14 @@ $result = $stmt->fetch();
                             width: 100%;
                             height: 100%;
                         }
-                        .middlenav td:first-child, .middlenav td, .middlenav td:last-child {
+                        .middlenav td {
+                            width: 33.333%;
+                            height: 100%;
+                            text-align: center;
+                            border-left: 5px solid rgb(75, 75, 75);
+                            border-right: 5px solid rgb(75, 75, 75);
+                        }
+                        .middlenav td:first-child, .middlenav td:last-child {
                             width: 33.333%;
                             height: 100%;
                             border: none;
@@ -123,50 +129,49 @@ $result = $stmt->fetch();
                                 justify-content: center;
                                 align: center;
                                 float: center;
-                                width: 95%;
+                                width: fit-content;
                                 background-color: transparent;
+                                margin: auto;
                             }
                             .button a {
-                                padding: 0.5cm;
-                                width: 75%;
+                                width: fit-content;
+                                height: fit-content;
                                 border: none;
                                 border-radius: 0.5cm;
-                                background-color: lightgray;
+                                color: lightgray;
                                 transition: 0.05s;
                                 box-shadow: 0px 0px 10px 2px black;
+                                text-align: center;
                             }
                             .button a:hover {
                                 background-color: white;
-                                width: 75%;
+                                width: fit-content;
                                 transition: 0.05s;
                                 box-shadow: 0px 0px 10px 2px black;
                             }
-                            .button button {
-                                background-color: transparent;
-                                border: none;
-                                margin: -0.5cm;
-                                width: 100%;
-                                height: 100%;
-                            }
-                            .selected h3 {
-                                text-decoration: underline 1.5px solid black;
+                            .button h3 {
+                                color: lightgray;
+                                width: fit-content;
+                                height: fit-content;
+                                margin: auto;
+                                text-decoration: none;
                             }
                             .selected a {
-                                background-color: white;
+                                text-decoration: underline 1.5px solid white;
                             }
                         </style>
                         <tr>
                             <td>
                                 <div class="button selected">
                                     <a href="index.php">
-                                        <button><h3>HOME</h3></button>
+                                        <h3>HOME</h3>
                                     </a>
                                 </div>
                             </td>
                             <td>
                                 <div class="button">
                                     <a href="about.php">
-                                        <button><h3>ABOUT</h3></button>
+                                        <h3>ABOUT</h3>
                                     </a>
                                 </div>
                             </td>
@@ -176,7 +181,7 @@ $result = $stmt->fetch();
                                 <td>
                                     <div class="button">
                                         <a href="admin.php">
-                                            <button><h3>ADMIN PANEL</h3></button>
+                                            <h3>ADMIN PANEL</h3>
                                         </a>
                                     </div>
                                 </td>
@@ -195,30 +200,32 @@ $result = $stmt->fetch();
                             align: right;
                             float: right;
                             width: fit-content;
+                            height: fit-content;
+                            text-align: center;
                         }
                         .rightnav a {
-                            padding: 0.5cm;
+                            display: inline-block;
+                            padding: 0.25cm;
                             margin-right: 0.25cm;
                             width: fit-content;
+                            height: fit-content;
                             border: none;
                             border-radius: 0.5cm;
-                            background-color: firebrick;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
                         .rightnav a:hover {
-                            background-color: red;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
-                        .rightnav button {
-                            background-color: transparent;
-                            border: none;
+                        .rightnav img {
+                            width: 0.75cm;
+                            height: auto;
                         }
-                        .rightnav h3 {
-                            color: black;
-                        }
+
                     </style>
                     <a href="loginSHOP.php">
-                        <button><h3>Log out</h3></button>
+                        <img src="images/logoutTRANS.png" alt="Logout">
                     </a>
                 </div>
             </td>

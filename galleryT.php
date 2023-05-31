@@ -227,7 +227,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                     width: fit-content;
                     height: fit-content;
                     background-color: rgb(35, 35, 35);
-                    padding: 0.5cm;
+                    padding: 1cm;
                     border-radius: 1cm;
                 }
                 .content table {
@@ -235,31 +235,126 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                     height: 100%;
                 }
             </style>
-            <div>
-                <table>
-                    <style>
-                        .item {
-                            color: white;
-                        }
-                    </style>
-                    <?php
-                    $query = $link->query("SELECT * FROM product");
-                    $producten = $query->fetchAll();
-
-                    foreach($producten as $product)
-                    {
-                        ?>
-                        <tr>
-                            <td>
-                                <div class="item">
-                                    <p><?php echo $product['Naam']; ?></p>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php
+            <div style="width: fit-content;">
+                <style>
+                    .item {
+                        background-color: lightgray;
+                        border-radius: 0.666cm;
+                        margin: -0.5cm;
+                        margin-bottom: 2cm;
+                        padding: 0.5cm;
+                        width: 100%;
+                   }
+                    .item img {
+                        width: 10cm;
+                        height: auto;
                     }
+                    .item p {
+                        color: black;
+                    }
+                    .item {
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                    .info1 {
+                        width: 100%;
+                    }
+                    .info1 td, .info1 th {
+                        width: max-content;
+                        height: min-content;
+                        text-align: left;
+                    }
+                    .info1 td p {
+                        color: blue;
+                        font-weight: bold;
+                    }
+
+                    .info2 {
+                        width: 100%;
+                    }
+                    .info2 td {
+                        width: 50%;
+                        text-align: left;
+                    }
+                    .info2 th {
+                        width: 50%;
+                        height: min-content;
+                        text-align: left;
+                    }
+
+                    .beschrijving {
+                        width: 100%;
+                    }
+                </style>
+                <?php
+                $query = $link->query("SELECT * FROM product");
+                $producten = $query->fetchAll();
+
+                foreach($producten as $product)
+                {
                     ?>
-                </table>
+                    <div class="item">
+                        <table style="border: 1px solid black;">
+                            <tr>
+                                <td>
+                                    <table class="info1" style="border: 1px solid red;">
+                                        <tr>
+                                            <th>
+                                                <p>Name:</p>
+                                            </th>
+                                            <td>
+                                                <p><?php echo $product['Naam']; ?></p>
+                                            </td>
+                                            <th>
+                                                <p>Genre:</p>
+                                            </th>
+                                            <td>
+                                                <p><?php echo $product['Genre']; ?></p>
+                                            </td>
+                                            <th>
+                                                <p>Age restriction:</p>
+                                            </th>
+                                            <td>
+                                                <p><?php echo $product['Leeftijd']; ?></p>
+                                            </td>
+                                            <th>
+                                                <p>Director(s):</p>
+                                            </th>
+                                            <td>
+                                                <p><?php echo $product['RegisseurID']; ?></p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="info2" style="border: 1px solid blue;">
+                                        <tr>
+                                            <td>
+                                                <img src="<?php echo 'productimages/' . $product['Naam']; ?>"alt="Product image">
+                                            </td>
+                                            <td class="beschrijving">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <p><strong>Description:</strong></p>
+                                                            <br>
+                                                            <p><?php echo $product['Beschrijving']; ?></p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <?php
+                }
+                ?>
             </div>
         </div>
     </div>
