@@ -59,79 +59,19 @@ if(isset($_POST['productname']))
     $stmt->bindParam(':productamount', $_POST['productamount']);
     $stmt->execute();
 }
-#if(isset($_POST['productnamewijzigen']))
-#{
-#    $stmt = $link->prepare("UPDATE product SET Afbeelding = :productimagewijzigen, Naam = :productnamewijzigen, GenreID = :productgenrewijzigen, Prijs = :productpricewijzigen, Leeftijd = :productagewijzigen, Beschrijving = :productdescriptionwijzigen, RegisseurID = :productdirectorsidwijzigen, Aantal = :productamountwijzigen WHERE ProductID = :productidwijzigen");
-#    $stmt->bindParam(':productimagewijzigen', $_POST['productimagewijzigen']);
-#    $stmt->bindParam(':productnamewijzigen', $_POST['productnamewijzigen']);
-#    $stmt->bindParam(':productgenrewijzigen', $_POST['productgenrewijzigen']);
-#    $stmt->bindParam(':productpricewijzigen', $_POST['productpricewijzigen']);
-#    $stmt->bindParam(':productagewijzigen', $_POST['productagewijzigen']);
-#    $stmt->bindParam(':productdescriptionwijzigen', $_POST['productdescriptionwijzigen']);
-#    $stmt->bindParam(':productdirectorsidwijzigen', $_POST['productdirectorwijzigen']);
-#    $stmt->bindParam(':productamountwijzigen', $_POST['productamountwijzigen']);
-#    $stmt->bindParam(':productidwijzigen', $_POST['productidwijzigen']);
-#    $stmt->execute();
-#}
-
-if(isset($_POST['productidwijzigen']))
+if(isset($_POST['productnamewijzigen']))
 {
-    if(isset($_POST['productimagewijzigen']))
-    {
-        $stmt = $link->prepare("UPDATE product SET Afbeelding = :productimagewijzigen WHERE ProductID = :productidwijzigen");
-        $stmt->bindParam(':productimagewijzigen', $_POST['productimagewijzigen']);
-        $stmt->bindParam(':productidwijzigen', $_POST['productidwijzigen']);
-        $stmt->execute();
-    }
-    if(isset($_POST['productnamewijzigen']))
-    {
-        $stmt = $link->prepare("UPDATE product SET Naam = :productnamewijzigen WHERE ProductID = :productidwijzigen");
-        $stmt->bindParam(':productnamewijzigen', $_POST['productnamewijzigen']);
-        $stmt->bindParam(':productidwijzigen', $_POST['productidwijzigen']);
-        $stmt->execute();
-    }
-    if(isset($_POST['productgenrewijzigen']))
-    {
-        $stmt = $link->prepare("UPDATE product SET GenreID = :productgenrewijzigen WHERE ProductID = :productidwijzigen");
-        $stmt->bindParam(':productgenrewijzigen', $_POST['productgenrewijzigen']);
-        $stmt->bindParam(':productidwijzigen', $_POST['productidwijzigen']);
-        $stmt->execute();
-    }
-    if(isset($_POST['productpricewijzigen']))
-    {
-        $stmt = $link->prepare("UPDATE product SET Prijs = :productpricewijzigen WHERE ProductID = :productidwijzigen");
-        $stmt->bindParam(':productpricewijzigen', $_POST['productpricewijzigen']);
-        $stmt->bindParam(':productidwijzigen', $_POST['productidwijzigen']);
-        $stmt->execute();
-    }
-    if(isset($_POST['productagewijzigen']))
-    {
-        $stmt = $link->prepare("UPDATE product SET Leeftijd = :productagewijzigen WHERE ProductID = :productidwijzigen");
-        $stmt->bindParam(':productagewijzigen', $_POST['productagewijzigen']);
-        $stmt->bindParam(':productidwijzigen', $_POST['productidwijzigen']);
-        $stmt->execute();
-    }
-    if(isset($_POST['productdescriptionwijzigen']))
-    {
-        $stmt = $link->prepare("UPDATE product SET Beschrijving = :productdescriptionwijzigen WHERE ProductID = :productidwijzigen");
-        $stmt->bindParam(':productdescriptionwijzigen', $_POST['productdescriptionwijzigen']);
-        $stmt->bindParam(':productidwijzigen', $_POST['productidwijzigen']);
-        $stmt->execute();
-    }
-    if(isset($_POST['productdirectorwijzigen']))
-    {
-        $stmt = $link->prepare("UPDATE product SET RegisseurID = :productdirectorsidwijzigen WHERE ProductID = :productidwijzigen");
-        $stmt->bindParam(':productdirectorsidwijzigen', $_POST['productdirectorwijzigen']);
-        $stmt->bindParam(':productidwijzigen', $_POST['productidwijzigen']);
-        $stmt->execute();
-    }
-    if(isset($_POST['productamountwijzigen']))
-    {
-        $stmt = $link->prepare("UPDATE product SET Aantal = :productamountwijzigen WHERE ProductID = :productidwijzigen");
-        $stmt->bindParam(':productamountwijzigen', $_POST['productamountwijzigen']);
-        $stmt->bindParam(':productidwijzigen', $_POST['productidwijzigen']);
-        $stmt->execute();
-    }
+    $stmt = $link->prepare("UPDATE product SET Afbeelding = :productimagewijzigen, Naam = :productnamewijzigen, GenreID = :productgenrewijzigen, Prijs = :productpricewijzigen, Leeftijd = :productagewijzigen, Beschrijving = :productdescriptionwijzigen, RegisseurID = :productdirectorsidwijzigen, Aantal = :productamountwijzigen WHERE ProductID = :productidwijzigen");
+    $stmt->bindParam(':productimagewijzigen', $_POST['productimagewijzigen']);
+    $stmt->bindParam(':productnamewijzigen', $_POST['productnamewijzigen']);
+    $stmt->bindParam(':productgenrewijzigen', $_POST['productgenrewijzigen']);
+    $stmt->bindParam(':productpricewijzigen', $_POST['productpricewijzigen']);
+    $stmt->bindParam(':productagewijzigen', $_POST['productagewijzigen']);
+    $stmt->bindParam(':productdescriptionwijzigen', $_POST['productdescriptionwijzigen']);
+    $stmt->bindParam(':productdirectorsidwijzigen', $_POST['productdirectorwijzigen']);
+    $stmt->bindParam(':productamountwijzigen', $_POST['productamountwijzigen']);
+    $stmt->bindParam(':productidwijzigen', $_POST['productidwijzigen']);
+    $stmt->execute();
 }
 ?>
 
@@ -1076,7 +1016,7 @@ if(isset($_POST['productidwijzigen']))
                                                     <label for="productimagewijzigen">Product image</label>
                                                 </th>
                                                 <td>
-                                                    <input type="text" name="productimagewijzigen" id="productimagewijzigen" size="auto"/>
+                                                    <input type="text" name="productimagewijzigen" id="productimagewijzigen" size="auto" required/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1084,7 +1024,7 @@ if(isset($_POST['productidwijzigen']))
                                                     <label for="productnamewijzigen">Product name</label>
                                                 </th>
                                                 <td>
-                                                    <input type="text" name="productnamewijzigen" id="productnamewijzigen" size="auto"/>
+                                                    <input type="text" name="productnamewijzigen" id="productnamewijzigen" size="auto" required/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1092,7 +1032,7 @@ if(isset($_POST['productidwijzigen']))
                                                     <label for="productgenrewijzigen">Product main genre ID</label>
                                                 </th>
                                                 <td>
-                                                    <input type="text" name="productgenrewijzigen" id="productgenrewijzigen" size="auto"/>
+                                                    <input type="text" name="productgenrewijzigen" id="productgenrewijzigen" size="auto" required/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1100,7 +1040,7 @@ if(isset($_POST['productidwijzigen']))
                                                     <label for="productagewijzigen">Product age restriction ID</label>
                                                 </th>
                                                 <td>
-                                                    <input type="text" name="productagewijzigen" id="productagewijzigen" size="auto"/>
+                                                    <input type="text" name="productagewijzigen" id="productagewijzigen" size="auto" required/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1108,7 +1048,7 @@ if(isset($_POST['productidwijzigen']))
                                                     <label for="productdirectorwijzigen">Product director ID</label>
                                                 </th>
                                                 <td>
-                                                    <input type="text" name="productdirectorwijzigen" id="productdirectorwijzigen" size="auto"/>
+                                                    <input type="text" name="productdirectorwijzigen" id="productdirectorwijzigen" size="auto" required/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1116,7 +1056,7 @@ if(isset($_POST['productidwijzigen']))
                                                     <label for="productdescriptionwijzigen">Product description</label>
                                                 </th>
                                                 <td>
-                                                    <input type="text" name="productdescriptionwijzigen" id="productdescriptionwijzigen" size="auto"/>
+                                                    <input type="text" name="productdescriptionwijzigen" id="productdescriptionwijzigen" size="auto" required/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1124,7 +1064,7 @@ if(isset($_POST['productidwijzigen']))
                                                     <label for="productamountwijzigen">Product amount</label>
                                                 </th>
                                                 <td>
-                                                    <input type="text" name="productamountwijzigen" id="productamountwijzigen" size="auto"/>
+                                                    <input type="text" name="productamountwijzigen" id="productamountwijzigen" size="auto" required/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1132,7 +1072,7 @@ if(isset($_POST['productidwijzigen']))
                                                     <label for="productpricewijzigen">Product price</label>
                                                 </th>
                                                 <td>
-                                                    <input type="text" name="productpricewijzigen" id="productpricewijzigen" size="auto"/>
+                                                    <input type="text" name="productpricewijzigen" id="productpricewijzigen" size="auto" required/>
                                                 </td>
                                             </tr>
                                             <tr>
