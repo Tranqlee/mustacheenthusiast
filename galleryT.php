@@ -58,7 +58,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
         </style>
         <tr>
             <td>
-                <div class="leftnav">
+            <div class="leftnav">
                     <style>
                         .leftnav {
                             justify-content: left;
@@ -67,33 +67,32 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                             width: fit-content;
                         }
                         .leftnav a {
-                            padding: 0.5cm;
+                            display: inline-block;
+                            padding: 0.25cm;
                             margin-left: 0.25cm;
                             width: fit-content;
+                            height: fit-content;
                             border: none;
-                            border-radius: 0.25cm;
-                            background-color: lightgray;
+                            border-radius: 0.5cm;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
                         .leftnav a:hover {
-                            background-color: white;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
-                        .leftnav button {
-                            background-color: transparent;
-                            border: none;
-                        }
-                        .leftnav h3 {
-                            color: black;
+                        .leftnav img {
+                            width: 0.875cm;
+                            height: auto;
                         }
                     </style>
                     <a href="index.php">
-                        <button><h3>HOME</h3></button>
+                        <img src="images/homeTRANSblue.png" alt="User Profile">
                     </a>
                 </div>
             </td>
             <td>
-                <div class="middlenav">
+            <div class="middlenav">
                     <style>
                         .middlenav {
                             justify-content: center;
@@ -105,11 +104,19 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                             width: 100%;
                             height: 100%;
                         }
-                        .middlenav td:first-child, .middlenav td, .middlenav td:last-child {
+                        .middlenav td {
+                            width: 33.333%;
+                            height: 100%;
+                            text-align: center;
+                        }
+                        .middlenav td:first-child, .middlenav td:last-child {
                             width: 33.333%;
                             height: 100%;
                             border: none;
                             text-align: center;
+                        }
+                        .middlenav td:first-child {
+                            border-right: 5px solid rgb(75, 75, 75);
                         }
                     </style>
                     <table>
@@ -118,50 +125,50 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                                 justify-content: center;
                                 align: center;
                                 float: center;
-                                width: 95%;
+                                width: fit-content;
                                 background-color: transparent;
+                                margin: auto;
                             }
                             .button a {
-                                padding: 0.5cm;
-                                width: 75%;
+                                width: fit-content;
+                                height: fit-content;
                                 border: none;
-                                border-radius: 0.25cm;
-                                background-color: lightgray;
+                                border-radius: 0.5cm;
+                                color: lightgray;
                                 transition: 0.05s;
                                 box-shadow: 0px 0px 10px 2px black;
+                                text-align: center;
+                                text-decoration: none;
                             }
                             .button a:hover {
                                 background-color: white;
-                                width: 75%;
+                                width: fit-content;
                                 transition: 0.05s;
                                 box-shadow: 0px 0px 10px 2px black;
+                                text-decoration: underline 1.5px solid white;
                             }
-                            .button button {
-                                background-color: transparent;
-                                border: none;
-                                margin: -0.5cm;
-                                width: 100%;
-                                height: 100%;
-                            }
-                            .selected h3 {
-                                text-decoration: underline 1.5px solid black;
+                            .button h3 {
+                                color: lightgray;
+                                width: fit-content;
+                                height: fit-content;
+                                margin: auto;
                             }
                             .selected a {
-                                background-color: white;
+                                text-decoration: underline 1.5px solid white;
                             }
                         </style>
                         <tr>
                             <td>
                                 <div class="button selected">
-                                    <a href="gallery.php">
-                                        <button><h3>Products</h3></button>
+                                    <a href="galleryT.php">
+                                        <h3>PRODUCTS</h3>
                                     </a>
                                 </div>
                             </td>
                             <td>
                                 <div class="button">
-                                    <a href="shoppingcart.php">
-                                        <button><h3>Shoppingcart</h3></button>
+                                    <a href="shoppingcartT.php">
+                                        <h3>CART</h3>
                                     </a>
                                 </div>
                             </td>
@@ -170,37 +177,39 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                 </div>
             </td>
             <td>
-                <div class="rightnav">
+            <div class="rightnav">
                     <style>
                         .rightnav {
                             justify-content: center;
                             align: right;
                             float: right;
                             width: fit-content;
+                            height: fit-content;
+                            text-align: center;
                         }
                         .rightnav a {
-                            padding: 0.5cm;
+                            display: inline-block;
+                            padding: 0.25cm;
                             margin-right: 0.25cm;
                             width: fit-content;
+                            height: fit-content;
                             border: none;
-                            border-radius: 0.25cm;
-                            background-color: firebrick;
+                            border-radius: 0.5cm;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
                         .rightnav a:hover {
-                            background-color: red;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
-                        .rightnav button {
-                            background-color: transparent;
-                            border: none;
+                        .rightnav img {
+                            width: 0.875cm;
+                            height: auto;
                         }
-                        .rightnav h3 {
-                            color: black;
-                        }
+
                     </style>
                     <a href="loginSHOP.php">
-                        <button><h3>Log out</h3></button>
+                        <img src="images/logoutTRANSred.png" alt="Logout">
                     </a>
                 </div>
             </td>
@@ -224,9 +233,9 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                     margin: auto;
                     margin-top: 1cm;
                     justify-content: center;
-                    width: fit-content;
+                    width: 60%;
                     height: fit-content;
-                    background-color: rgb(35, 35, 35);
+                    background-color: transparent;
                     padding: 1cm;
                     border-radius: 1cm;
                 }
@@ -238,53 +247,70 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
             <div style="width: fit-content;">
                 <style>
                     .item {
-                        background-color: lightgray;
-                        border-radius: 0.666cm;
+                        background-color: rgb(35, 35, 35);
+                        border-radius: 0.666cm 0.666cm 1.25cm 0.666cm;
                         margin: -0.5cm;
                         margin-bottom: 2cm;
                         padding: 0.5cm;
                         width: 100%;
-                   }
+                    }
+                   .item table, .item tr {
+                        width: fit-content;
+                        height: fit-content;
+                    }
+                    .item th, .item td {
+                        width: fit-content;
+                        height: fit-content;
+                    }
                     .item img {
-                        width: 10cm;
+                        width: 5cm;
                         height: auto;
                     }
                     .item p {
-                        color: black;
+                        color: white;
                     }
-                    .item {
-                        width: 100%;
-                        height: 100%;
-                    }
+
+
 
                     .info1 {
                         width: 100%;
+                        height: 100%;
                     }
-                    .info1 td, .info1 th {
-                        width: max-content;
+                    .info1 tr {
+                        padding: 0.15cm;
+                    }
+                    .info1 th {
+                        width: fit-content;
                         height: min-content;
+                        text-align: left;
+                    }
+                    .info1 th p {
+                        color: white;
+                        font-weight: bold;
+                        width: max-content;
+                        padding: 0.25cm
+                    }
+                    .info1 td {
+                        width: max-content;
+                        height: auto;
                         text-align: left;
                     }
                     .info1 td p {
-                        color: blue;
+                        color: cornflowerblue;
                         font-weight: bold;
-                    }
-
-                    .info2 {
-                        width: 100%;
-                    }
-                    .info2 td {
-                        width: 50%;
-                        text-align: left;
-                    }
-                    .info2 th {
-                        width: 50%;
-                        height: min-content;
-                        text-align: left;
                     }
 
                     .beschrijving {
                         width: 100%;
+                    }
+                    .beschrijving strong {
+                        color: white;
+                    }
+                    .image {
+                        width: fit-content;
+                        border: 5px solid black;
+                        border-radius: 0.15cm;
+                        background-color: black;
                     }
                 </style>
                 <?php
@@ -293,12 +319,30 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
 
                 foreach($producten as $product)
                 {
+                    $query = $link->prepare("SELECT * FROM Genres WHERE GenreID = :GenreID");
+                    $query->bindParam(":GenreID", $product['GenreID']);
+                    $query->execute();
+                    $genre = $query->fetch();
+
+                    $query = $link->prepare("SELECT * FROM leeftijden WHERE LeeftijdID = :LeeftijdID");
+                    $query->bindParam(":LeeftijdID", $product['Leeftijd']);
+                    $query->execute();
+                    $leeftijd = $query->fetch();
+
+                    $query = $link->prepare("SELECT * FROM regisseuren WHERE RegisseurID = :RegisseurID");
+                    $query->bindParam(":RegisseurID", $product['RegisseurID']);
+                    $query->execute();
+                    $regisseur = $query->fetch();
+
                     ?>
                     <div class="item">
-                        <table style="border: 1px solid black;">
+                        <table>
                             <tr>
-                                <td>
-                                    <table class="info1" style="border: 1px solid red;">
+                                <td class="image">
+                                    <img src="<?php echo 'productimages/' . $product['Afbeelding']; ?>" alt="Product image">
+                                </td>
+                                <td style="vertical-align: top;">
+                                    <table class="info1">
                                         <tr>
                                             <th>
                                                 <p>Name:</p>
@@ -306,48 +350,58 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                                             <td>
                                                 <p><?php echo $product['Naam']; ?></p>
                                             </td>
+                                        </tr>
+                                        <tr>
                                             <th>
-                                                <p>Genre:</p>
+                                                <p>Main genre:</p>
                                             </th>
                                             <td>
-                                                <p><?php echo $product['Genre']; ?></p>
+                                                <p><?php echo $genre['Naam']; ?></p>
                                             </td>
+                                        </tr>
+                                        <tr>
                                             <th>
                                                 <p>Age restriction:</p>
                                             </th>
                                             <td>
-                                                <p><?php echo $product['Leeftijd']; ?></p>
+                                                <p><?php echo $leeftijd['Naam']; ?></p>
                                             </td>
+                                        </tr>
+                                        <tr>
                                             <th>
                                                 <p>Director(s):</p>
                                             </th>
                                             <td>
-                                                <p><?php echo $product['RegisseurID']; ?></p>
+                                                <p><?php echo $regisseur['Naam']; ?></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="vertical-align: top;">
+                                                <p>Description:</p>
+                                            </th>
+                                            <td>
+                                                <p><?php echo $product['Beschrijving']; ?></p>
                                             </td>
                                         </tr>
                                     </table>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <table class="info2" style="border: 1px solid blue;">
-                                        <tr>
-                                            <td>
-                                                <img src="<?php echo 'productimages/' . $product['Naam']; ?>"alt="Product image">
-                                            </td>
-                                            <td class="beschrijving">
-                                                <table>
-                                                    <tr>
-                                                        <td>
-                                                            <p><strong>Description:</strong></p>
-                                                            <br>
-                                                            <p><?php echo $product['Beschrijving']; ?></p>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                <td style="text-align: right; vertical-align: bottom; display: table-cell; padding-bottom: 0.05cm; padding-left: 0.25cm;">
+                                    <div class="A">
+                                        <style>
+                                            .A a {
+                                                display: table-cell;
+                                                vertical-align: bottom;
+                                            }
+                                            .A img {
+                                                width: 1.5cm;
+                                                height: auto;
+                                                vertical-align: bottom;
+                                            }
+                                        </style>
+                                        <a href="shoppingcartT.php">
+                                            <img src="images/Addtocart.png" alt="Add to cart">
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         </table>

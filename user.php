@@ -63,7 +63,7 @@ $result = $stmt->fetch();
         </style>
         <tr>
             <td>
-                <div class="leftnav">
+            <div class="leftnav">
                     <style>
                         .leftnav {
                             justify-content: left;
@@ -72,28 +72,27 @@ $result = $stmt->fetch();
                             width: fit-content;
                         }
                         .leftnav a {
-                            padding: 0.5cm;
+                            display: inline-block;
+                            padding: 0.25cm;
                             margin-left: 0.25cm;
                             width: fit-content;
+                            height: fit-content;
                             border: none;
                             border-radius: 0.5cm;
-                            background-color: lightblue;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
                         .leftnav a:hover {
-                            background-color: cornflowerblue;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
-                        .leftnav button {
-                            background-color: transparent;
-                            border: none;
-                        }
-                        .leftnav h3 {
-                            color: black;
+                        .leftnav img {
+                            width: 0.875cm;
+                            height: auto;
                         }
                     </style>
                     <a href="index.php">
-                        <button><h3>Back to main menu</h3></button>
+                        <img src="images/homeTRANSblue.png" alt="User Profile">
                     </a>
                 </div>
             </td>
@@ -116,37 +115,39 @@ $result = $stmt->fetch();
                 </div>
             </td>
             <td>
-                <div class="rightnav">
+            <div class="rightnav">
                     <style>
                         .rightnav {
                             justify-content: center;
                             align: right;
                             float: right;
                             width: fit-content;
+                            height: fit-content;
+                            text-align: center;
                         }
                         .rightnav a {
-                            padding: 0.5cm;
+                            display: inline-block;
+                            padding: 0.25cm;
                             margin-right: 0.25cm;
                             width: fit-content;
+                            height: fit-content;
                             border: none;
                             border-radius: 0.5cm;
-                            background-color: firebrick;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
                         .rightnav a:hover {
-                            background-color: red;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
-                        .rightnav button {
-                            background-color: transparent;
-                            border: none;
+                        .rightnav img {
+                            width: 0.875cm;
+                            height: auto;
                         }
-                        .rightnav h3 {
-                            color: black;
-                        }
+
                     </style>
                     <a href="loginSHOP.php">
-                        <button><h3>Log out</h3></button>
+                        <img src="images/logoutTRANSred.png" alt="Logout">
                     </a>
                 </div>
             </td>

@@ -58,7 +58,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
         </style>
         <tr>
             <td>
-                <div class="leftnav">
+            <div class="leftnav">
                     <style>
                         .leftnav {
                             justify-content: left;
@@ -67,28 +67,27 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                             width: fit-content;
                         }
                         .leftnav a {
-                            padding: 0.5cm;
+                            display: inline-block;
+                            padding: 0.25cm;
                             margin-left: 0.25cm;
                             width: fit-content;
+                            height: fit-content;
                             border: none;
-                            border-radius: 0.25cm;
-                            background-color: lightgray;
+                            border-radius: 0.5cm;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
                         .leftnav a:hover {
-                            background-color: white;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
-                        .leftnav button {
-                            background-color: transparent;
-                            border: none;
-                        }
-                        .leftnav h3 {
-                            color: black;
+                        .leftnav img {
+                            width: 0.875cm;
+                            height: auto;
                         }
                     </style>
-                    <a href="index.php">
-                        <button><h3>HOME</h3></button>
+                    <a href="user.php">
+                        <img src="images/homeTRANSblue.png" alt="User Profile">
                     </a>
                 </div>
             </td>
@@ -99,108 +98,51 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                             justify-content: center;
                             align: center;
                             float: center;
-                            width: 100%;
+                            width: fit-content;
+                            margin: auto;
                         }
-                        .middlenav table {
-                            width: 100%;
-                            height: 100%;
-                        }
-                        .middlenav td:first-child, .middlenav td, .middlenav td:last-child {
-                            width: 33.333%;
-                            height: 100%;
-                            border: none;
-                            text-align: center;
+                        .middlenav h1 {
+                            color: white;
+                            padding-top: 0.5cm;
                         }
                     </style>
-                    <table>
-                        <style>
-                            .button {
-                                justify-content: center;
-                                align: center;
-                                float: center;
-                                width: 95%;
-                                background-color: transparent;
-                            }
-                            .button a {
-                                padding: 0.5cm;
-                                width: 75%;
-                                border: none;
-                                border-radius: 0.25cm;
-                                background-color: lightgray;
-                                transition: 0.05s;
-                                box-shadow: 0px 0px 10px 2px black;
-                            }
-                            .button a:hover {
-                                background-color: white;
-                                width: 75%;
-                                transition: 0.05s;
-                                box-shadow: 0px 0px 10px 2px black;
-                            }
-                            .button button {
-                                background-color: transparent;
-                                border: none;
-                                margin: -0.5cm;
-                                width: 100%;
-                                height: 100%;
-                            }
-                            .selected h3 {
-                                text-decoration: underline 1.5px solid black;
-                            }
-                            .selected a {
-                                background-color: white;
-                            }
-                        </style>
-                        <tr>
-                            <td>
-                                <div class="button">
-                                    <a href="gallery.php">
-                                        <button><h3>Products</h3></button>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button selected">
-                                    <a href="shoppingcart.php">
-                                        <button><h3>Shoppingcart</h3></button>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                    <h1><?php echo $_SESSION['user']; ?></h1>
                 </div>
             </td>
             <td>
-                <div class="rightnav">
+            <div class="rightnav">
                     <style>
                         .rightnav {
                             justify-content: center;
                             align: right;
                             float: right;
                             width: fit-content;
+                            height: fit-content;
+                            text-align: center;
                         }
                         .rightnav a {
-                            padding: 0.5cm;
+                            display: inline-block;
+                            padding: 0.25cm;
                             margin-right: 0.25cm;
                             width: fit-content;
+                            height: fit-content;
                             border: none;
-                            border-radius: 0.25cm;
-                            background-color: firebrick;
+                            border-radius: 0.5cm;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
                         .rightnav a:hover {
-                            background-color: red;
+                            background-color: transparent;
                             transition: 0.05s;
                         }
-                        .rightnav button {
-                            background-color: transparent;
-                            border: none;
+                        .rightnav img {
+                            width: 0.875cm;
+                            height: auto;
                         }
-                        .rightnav h3 {
-                            color: black;
-                        }
+
                     </style>
                     <a href="loginSHOP.php">
-                        <button><h3>Log out</h3></button>
+                        <img src="images/logoutTRANSred.png" alt="Logout">
                     </a>
                 </div>
             </td>

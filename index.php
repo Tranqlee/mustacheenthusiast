@@ -87,12 +87,12 @@ $result = $stmt->fetch();
                             transition: 0.05s;
                         }
                         .leftnav img {
-                            width: 0.75cm;
+                            width: 0.875cm;
                             height: auto;
                         }
                     </style>
                     <a href="user.php">
-                        <img src="images/userTRANS.png" alt="User Profile">
+                        <img src="images/userTRANSblue.png" alt="User Profile">
                     </a>
                 </div>
             </td>
@@ -142,26 +142,27 @@ $result = $stmt->fetch();
                                 transition: 0.05s;
                                 box-shadow: 0px 0px 10px 2px black;
                                 text-align: center;
+                                text-decoration: none;
                             }
                             .button a:hover {
                                 background-color: white;
                                 width: fit-content;
                                 transition: 0.05s;
                                 box-shadow: 0px 0px 10px 2px black;
+                                text-decoration: underline 1.5px solid white;
                             }
                             .button h3 {
                                 color: lightgray;
                                 width: fit-content;
                                 height: fit-content;
                                 margin: auto;
-                                text-decoration: none;
                             }
                             .selected a {
                                 text-decoration: underline 1.5px solid white;
                             }
                         </style>
                         <tr>
-                            <td>
+                            <td style="background-color: rgb(40, 40, 40);">
                                 <div class="button selected">
                                     <a href="index.php">
                                         <h3>HOME</h3>
@@ -219,13 +220,13 @@ $result = $stmt->fetch();
                             transition: 0.05s;
                         }
                         .rightnav img {
-                            width: 0.75cm;
+                            width: 0.875cm;
                             height: auto;
                         }
 
                     </style>
                     <a href="loginSHOP.php">
-                        <img src="images/logoutTRANS.png" alt="Logout">
+                        <img src="images/logoutTRANSred.png" alt="Logout">
                     </a>
                 </div>
             </td>

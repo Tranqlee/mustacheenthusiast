@@ -231,8 +231,8 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label for="GeboorteDatum">Date of birth (jjjj-mm-dd)</label>
-                                        <input type="text" name="GeboorteDatum" id="txtGeboorteDatum" size="45cm" required/>
+                                        <label for="GeboorteDatum">Date of birth</label>
+                                        <input type="date" name="GeboorteDatum" id="txtGeboorteDatum" size="45cm" required/>
                                     </td>
                                 </tr>
                             </table>
