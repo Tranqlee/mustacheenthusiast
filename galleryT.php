@@ -3,6 +3,44 @@ require_once('comm.php');
 session_start();
 $link = getDatabase();
 
+if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
+    header('Location: loginSHOP.php');
+}
+
+$stmt = $link->prepare("SELECT * FROM klant WHERE Gebruikersnaam = :username");
+$stmt->bindParam(':username', $_SESSION['user']);
+$stmt->execute();
+$result = $stmt->fetch();
+
+$gevonden = false;
+if( isset($_SESSION['WINKELKAR']) )
+{
+    $winkelkar = $_SESSION['WINKELKAR'];
+
+    for( $i=0; $i<count($winkelkar) and !$gevonden; $i++ )
+    {
+        if( $winkelkar[$i]['ProductID']==$_POST['additemID'] )
+        {
+            $gevonden = true;
+            $winkelkar[$i]['AANTAL']++;
+        }
+    }
+}
+if( !$gevonden )
+{
+    $films = array(
+        'ProductID' => $_POST['additemID'],
+        'AANTAL' => 1
+        );
+
+    $winkelkar[] = $films;
+}
+
+$_SESSION['WINKELKAR'] = $winkelkar;
+unset($_POST['additemID']);
+
+
+
 
 if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
     header('Location: loginSHOP.php');
@@ -37,20 +75,20 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
             }
             .navbar , .navbar tr {
                 width: 100%;
-                height: 2cm;
+                height: 1cm;
             }
             .navbar td:first-child {
-                width: 25%;
+                width: 33.333%;
                 height: 100%;
                 border: none;
             }
             .navbar td {
-                width: 50%;
+                width: 33.333%;
                 height: 100%;
                 border: none;
             }
             .navbar td:last-child {
-                width: 25%;
+                width: 33.333%;
                 height: 100%;
                 border: none;
                 text-align: right;
@@ -58,7 +96,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
         </style>
         <tr>
             <td>
-            <div class="leftnav">
+                <div class="leftnav">
                     <style>
                         .leftnav {
                             justify-content: left;
@@ -86,13 +124,13 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                             height: auto;
                         }
                     </style>
-                    <a href="index.php">
-                        <img src="images/homeTRANSblue.png" alt="User Profile">
+                    <a href="user.php">
+                        <img src="images/userTRANSblue.png" alt="User Profile">
                     </a>
                 </div>
             </td>
             <td>
-            <div class="middlenav">
+                <div class="middlenav">
                     <style>
                         .middlenav {
                             justify-content: center;
@@ -108,14 +146,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                             width: 33.333%;
                             height: 100%;
                             text-align: center;
-                        }
-                        .middlenav td:first-child, .middlenav td:last-child {
-                            width: 33.333%;
-                            height: 100%;
-                            border: none;
-                            text-align: center;
-                        }
-                        .middlenav td:first-child {
+                            border-left: 5px solid rgb(75, 75, 75);
                             border-right: 5px solid rgb(75, 75, 75);
                         }
                     </style>
@@ -159,16 +190,23 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                         </style>
                         <tr>
                             <td>
+                                <div class="button">
+                                    <a href="index.php">
+                                        <h3>HOME</h3>
+                                    </a>
+                                </div>
+                            </td>
+                            <td style="background-color: rgb(40, 40, 40);">
                                 <div class="button selected">
                                     <a href="galleryT.php">
-                                        <h3>PRODUCTS</h3>
+                                        <h3>Products</h3>
                                     </a>
                                 </div>
                             </td>
                             <td>
                                 <div class="button">
                                     <a href="shoppingcartT.php">
-                                        <h3>CART</h3>
+                                        <h3>Cart</h3>
                                     </a>
                                 </div>
                             </td>
@@ -177,7 +215,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                 </div>
             </td>
             <td>
-            <div class="rightnav">
+                <div class="rightnav">
                     <style>
                         .rightnav {
                             justify-content: center;
@@ -208,6 +246,16 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                         }
 
                     </style>
+                    <?php
+                    if($result['isAdmin'] == 1)
+                    {
+                        ?>
+                        <a href="admin.php" style="height: fit-content;">
+                            <img src="images/adminTRANS.png" alt="Admin" style="height: 33.06px; width: auto;">
+                        </a>
+                        <?php
+                    }
+                    ?>
                     <a href="loginSHOP.php">
                         <img src="images/logoutTRANSred.png" alt="Logout">
                     </a>
@@ -263,7 +311,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                         height: fit-content;
                     }
                     .item img {
-                        width: 5cm;
+                        width: 7.5cm;
                         height: auto;
                     }
                     .item p {
@@ -334,6 +382,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                     $query->execute();
                     $regisseur = $query->fetch();
 
+                    $temporaryitemID = $product['ProductID'];
                     ?>
                     <div class="item">
                         <table>
@@ -348,7 +397,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                                                 <p>Name:</p>
                                             </th>
                                             <td>
-                                                <p><?php echo $product['Naam']; ?></p>
+                                                <p><?php echo $product['Naam'] . " ||| " . $temporaryitemID; ?></p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -388,19 +437,20 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                                 <td style="text-align: right; vertical-align: bottom; display: table-cell; padding-bottom: 0.05cm; padding-left: 0.25cm;">
                                     <div class="A">
                                         <style>
-                                            .A a {
+                                            form input {
                                                 display: table-cell;
                                                 vertical-align: bottom;
                                             }
-                                            .A img {
+                                            form input {
                                                 width: 1.5cm;
                                                 height: auto;
                                                 vertical-align: bottom;
                                             }
                                         </style>
-                                        <a href="shoppingcartT.php">
-                                            <img src="images/Addtocart.png" alt="Add to cart">
-                                        </a>
+                                        <form action="" method="POST">
+                                            <input type="hidden" name="additemID" value="<?php echo $temporaryitemID; ?>">
+                                            <input type="image" src="images/Addtocart.png" alt="Submit">
+                                        </form>
                                     </div>
                                 </td>
                             </tr>

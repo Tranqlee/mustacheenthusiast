@@ -109,7 +109,7 @@ if(isset($_POST['productnamewijzigen']))
             }
             .navbar , .navbar tr {
                 width: 100%;
-                height: 2cm;
+                height: 1cm;
             }
             .navbar td:first-child {
                 width: 25%;
@@ -182,12 +182,6 @@ if(isset($_POST['productnamewijzigen']))
                             text-align: center;
                             border-left: 5px solid rgb(75, 75, 75);
                             border-right: 5px solid rgb(75, 75, 75);
-                        }
-                        .middlenav td:first-child, .middlenav td:last-child {
-                            width: 33.333%;
-                            height: 100%;
-                            border: none;
-                            text-align: center;
                         }
                     </style>
                     <table>

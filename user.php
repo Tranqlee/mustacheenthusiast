@@ -42,7 +42,7 @@ $result = $stmt->fetch();
             }
             .navbar , .navbar tr {
                 width: 100%;
-                height: 2cm;
+                height: 1cm;
             }
             .navbar td:first-child {
                 width: 25%;
@@ -96,22 +96,66 @@ $result = $stmt->fetch();
                     </a>
                 </div>
             </td>
-            <td>
-                <div class="middlenav">
+            <td style="padding-top: -50%;">
+            <div class="middlenav">
                     <style>
                         .middlenav {
                             justify-content: center;
                             align: center;
                             float: center;
-                            width: fit-content;
-                            margin: auto;
+                            width: 100%;
                         }
-                        .middlenav h1 {
-                            color: white;
-                            padding-top: 0.5cm;
+                        .middlenav table {
+                            width: 100%;
+                            height: 100%;
+                        }
+                        .middlenav td {
+                            width: 33.333%;
+                            height: 100%;
+                            text-align: center;
+                            border-left: 5px solid rgb(75, 75, 75);
+                            border-right: 5px solid rgb(75, 75, 75);
                         }
                     </style>
-                    <h1><?php echo $_SESSION['user']; ?></h1>
+                    <table>
+                        <style>
+                            .button {
+                                justify-content: center;
+                                align: center;
+                                float: center;
+                                width: fit-content;
+                                background-color: transparent;
+                                margin: auto;
+                            }
+                            .button a {
+                                width: fit-content;
+                                height: fit-content;
+                                border: none;
+                                border-radius: 0.5cm;
+                                color: lightgray;
+                                transition: 0.05s;
+                                box-shadow: 0px 0px 10px 2px black;
+                                text-align: center;
+                                text-decoration: none;
+                            }
+                            .button h3 {
+                                color: lightgray;
+                                width: fit-content;
+                                height: fit-content;
+                                margin: auto;
+                            }
+                        </style>
+                        <tr>
+                            <td>
+                                <div class="button">
+                                    <a>
+                                        <h3><?php echo $_SESSION['user']; ?></h3>
+                                    </a>
+                                </div>
+                            </td>
+
+                        </tr>
+                    </table>
                 </div>
             </td>
             <td>

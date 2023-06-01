@@ -3,9 +3,18 @@ require_once('comm.php');
 session_start();
 $link = getDatabase();
 
-
 if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
     header('Location: loginSHOP.php');
+}
+
+$stmt = $link->prepare("SELECT * FROM klant WHERE Gebruikersnaam = :username");
+$stmt->bindParam(':username', $_SESSION['user']);
+$stmt->execute();
+$result = $stmt->fetch();
+
+if(!isset($_SESSION['editamount']))
+{
+    $_SESSION['editamount'] = 0;
 }
 ?>
 
@@ -37,20 +46,20 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
             }
             .navbar , .navbar tr {
                 width: 100%;
-                height: 2cm;
+                height: 1cm;
             }
             .navbar td:first-child {
-                width: 25%;
+                width: 33.333%;
                 height: 100%;
                 border: none;
             }
             .navbar td {
-                width: 50%;
+                width: 33.333%;
                 height: 100%;
                 border: none;
             }
             .navbar td:last-child {
-                width: 25%;
+                width: 33.333%;
                 height: 100%;
                 border: none;
                 text-align: right;
@@ -58,7 +67,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
         </style>
         <tr>
             <td>
-            <div class="leftnav">
+                <div class="leftnav">
                     <style>
                         .leftnav {
                             justify-content: left;
@@ -86,13 +95,13 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                             height: auto;
                         }
                     </style>
-                    <a href="index.php">
-                        <img src="images/homeTRANSblue.png" alt="User Profile">
+                    <a href="user.php">
+                        <img src="images/userTRANSblue.png" alt="User Profile">
                     </a>
                 </div>
             </td>
             <td>
-            <div class="middlenav">
+                <div class="middlenav">
                     <style>
                         .middlenav {
                             justify-content: center;
@@ -108,17 +117,9 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                             width: 33.333%;
                             height: 100%;
                             text-align: center;
-                        }
-                        .middlenav td:first-child, .middlenav td:last-child {
-                            width: 33.333%;
-                            height: 100%;
-                            border: none;
-                            text-align: center;
-                        }
-                        .middlenav td:first-child {
+                            border-left: 5px solid rgb(75, 75, 75);
                             border-right: 5px solid rgb(75, 75, 75);
                         }
-
                     </style>
                     <table>
                         <style>
@@ -161,15 +162,22 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                         <tr>
                             <td>
                                 <div class="button">
-                                    <a href="galleryT.php">
-                                        <h3>PRODUCTS</h3>
+                                    <a href="index.php">
+                                        <h3>HOME</h3>
                                     </a>
                                 </div>
                             </td>
                             <td>
+                                <div class="button">
+                                    <a href="galleryT.php">
+                                        <h3>Products</h3>
+                                    </a>
+                                </div>
+                            </td>
+                            <td style="background-color: rgb(40, 40, 40);">
                                 <div class="button selected">
                                     <a href="shoppingcartT.php">
-                                        <h3>CART</h3>
+                                        <h3>Cart</h3>
                                     </a>
                                 </div>
                             </td>
@@ -178,7 +186,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                 </div>
             </td>
             <td>
-            <div class="rightnav">
+                <div class="rightnav">
                     <style>
                         .rightnav {
                             justify-content: center;
@@ -209,6 +217,16 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                         }
 
                     </style>
+                    <?php
+                    if($result['isAdmin'] == 1)
+                    {
+                        ?>
+                        <a href="admin.php" style="height: fit-content;">
+                            <img src="images/adminTRANS.png" alt="Admin" style="height: 33.06px; width: auto;">
+                        </a>
+                        <?php
+                    }
+                    ?>
                     <a href="loginSHOP.php">
                         <img src="images/logoutTRANSred.png" alt="Logout">
                     </a>
@@ -229,7 +247,85 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
             }
         </style>
         <div class="content">
-            <h1>HIER KOMT CODE</h1>
+            <div class="table">
+                <table>
+                    <tr>
+                        <th>
+                            <p>Afbeelding:</p>
+                        </th>
+                        <th>
+                            <p>BestelID:</p>
+                        </th>
+                        <th>
+                            <p>ProductID:</p>
+                        </th>
+                        <th>
+                            <p>Productnaam:</p>
+                        </th>
+                        <th>
+                            <p>Prijs:</p>
+                        </th>
+                        <th>
+                            <p>Aantal:</p>
+                        </th>
+                    </tr>
+                    <?php
+                    $winkelkar = $_SESSION['WINKELKAR'];
+                    for( $i=0; $i<count($winkelkar); $i++ )
+                    {
+                        if($i != 0)
+                        {
+                            $stmt = $link->prepare("SELECT * FROM product WHERE ProductID = :ProductID");
+                            $stmt->bindParam(':ProductID', $winkelkar[$i]['ProductID']);
+                            $stmt->execute();
+                            $itemresult = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                            ?>
+                            <tr>
+                                <td>
+                                    <img src="<?php echo 'productimages/' . $itemresult['Afbeelding']; ?>" alt="Product image">
+                                </td>
+                                <td>
+                                    <p><?php echo $i; ?></p>
+                                </td>
+                                <td>
+                                    <p><?php echo $winkelkar[$i]['ProductID']; ?></p>
+                                </td>
+                                <td>
+                                    <p><?php echo $itemresult['Naam']; ?></p>
+                                </td>
+                                <td>
+                                    <p><?php echo $itemresult['Prijs']; ?></p>
+                                </td>
+                                <td>
+                                    <p><?php echo $winkelkar[$i]['AANTAL'] + $_SESSION['editamount']; ?></p>
+                                </td>
+                                <td>
+                                    <?php
+                                    $plus1ID = $winkelkar[$i]['ProductID'];
+                                    echo "<td style='text-align: right';><a href='PLUS1.php?nr=$plus1ID'>+1</a></td>";
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    $minus1ID = $winkelkar[$i]['ProductID'];
+                                    echo "<td style='text-align: right';><a href='MINUS1.php?nr=$minus1ID'>-1</a></td>";
+                                    ?>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    }
+                    ?>
+                </table>
+                <form action="<?php if(isset($_POST['submit']))
+                                    {
+                                        unset($_SESSION['WINKELKAR']);
+                                        unset($winkelkar);
+                                    } ?>" method="POST">
+                    <input type="submit" name="submit" value="Delete"/>
+                </form>
+            </div>
         </div>
     </div>
 </body>

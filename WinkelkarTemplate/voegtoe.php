@@ -14,7 +14,7 @@
 
             for( $i=0; $i<count($winkelkar) and !$gevonden; $i++ )
             {
-                if( $winkelkar[$i]['SPEL_ID']==$_GET['SPEL_ID'] and $winkelkar[$i]['CONSOLE_ID']==$_GET['CONSOLE_ID'] )
+                if( $winkelkar[$i]['ProductID']==$_GET['ProductID'] )
                 {
                     $gevonden = true;
                     $winkelkar[$i]['AANTAL']++;
@@ -27,19 +27,17 @@
 
         if( !$gevonden )
         {
-            $spel = array(
-                'SPEL_ID' => $_GET['SPEL_ID'],
-                'CONSOLE_ID' => $_GET['CONSOLE_ID'],
+            $films = array(
+                'ProductID' => $_GET['ProductID'],
                 'AANTAL' => 1
                 );
 
-            $winkelkar[] = $spel;
+            $winkelkar[] = $films;
         }
 
-        //  Onthou de nieuwe of gewijzigde winkelkar
+        //  Onthoud de nieuwe of gewijzigde winkelkar
         $_SESSION['WINKELKAR'] = $winkelkar;
 
         //  ga naar de winkelkar pagina
-        header( 'location:'...);
-    }
+        header( 'location: shoppingcartT.php');
 ?>

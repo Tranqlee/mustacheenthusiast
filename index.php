@@ -42,20 +42,20 @@ $result = $stmt->fetch();
             }
             .navbar , .navbar tr {
                 width: 100%;
-                height: 2cm;
+                height: 1cm;
             }
             .navbar td:first-child {
-                width: 25%;
+                width: 33.333%;
                 height: 100%;
                 border: none;
             }
             .navbar td {
-                width: 50%;
+                width: 33.333%;
                 height: 100%;
                 border: none;
             }
             .navbar td:last-child {
-                width: 25%;
+                width: 33.333%;
                 height: 100%;
                 border: none;
                 text-align: right;
@@ -116,12 +116,6 @@ $result = $stmt->fetch();
                             border-left: 5px solid rgb(75, 75, 75);
                             border-right: 5px solid rgb(75, 75, 75);
                         }
-                        .middlenav td:first-child, .middlenav td:last-child {
-                            width: 33.333%;
-                            height: 100%;
-                            border: none;
-                            text-align: center;
-                        }
                     </style>
                     <table>
                         <style>
@@ -171,24 +165,18 @@ $result = $stmt->fetch();
                             </td>
                             <td>
                                 <div class="button">
-                                    <a href="about.php">
-                                        <h3>ABOUT</h3>
+                                    <a href="galleryT.php">
+                                        <h3>Products</h3>
                                     </a>
                                 </div>
                             </td>
-                            <?php
-                            if($result['isAdmin'] == 1) {
-                                ?>
-                                <td>
-                                    <div class="button">
-                                        <a href="admin.php">
-                                            <h3>ADMIN PANEL</h3>
-                                        </a>
-                                    </div>
-                                </td>
-                                <?php
-                            }
-                            ?>
+                            <td>
+                                <div class="button">
+                                    <a href="shoppingcartT.php">
+                                        <h3>Cart</h3>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -225,6 +213,16 @@ $result = $stmt->fetch();
                         }
 
                     </style>
+                    <?php
+                    if($result['isAdmin'] == 1)
+                    {
+                        ?>
+                        <a href="admin.php" style="height: fit-content;">
+                            <img src="images/adminTRANS.png" alt="Admin" style="height: 33.06px; width: auto;">
+                        </a>
+                        <?php
+                    }
+                    ?>
                     <a href="loginSHOP.php">
                         <img src="images/logoutTRANSred.png" alt="Logout">
                     </a>
@@ -284,22 +282,22 @@ $result = $stmt->fetch();
             <tr>
                 <td>
                     <div class="centerbutton">
-                        <a href="gallery.php">
+                        <a href="galleryT.php">
                             <img src="images/productsTRANS.png" alt="Products">
                         </a>
                     </div>
                 </td>
                 <td>
                     <div class="centerbutton">
-                        <a href="shoppingcart.php">
+                        <a href="shoppingcartT.php">
                             <img src="images/cartTRANS.png" alt="Shopping Cart">
                         </a>
                     </div>
                 </td>
             </tr>
         </table>
-        <a href="galleryT.php">Link naar eigen products page</a>
-        <a href="shoppingcartT.php">Link naar eigen Cart page</a>
+        <a href="gallery.php">Link naar products page</a>
+        <a href="shoppingcart.php">Link naar Cart page</a>
     </div>
 </body>
 </html>

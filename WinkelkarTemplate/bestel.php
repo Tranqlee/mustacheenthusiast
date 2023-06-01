@@ -4,7 +4,7 @@
     //
 
         $sqlInsert = $dbh->prepare(
-            "INSERT INTO bestelling (  klant_id,  betaalwijze )
+            "INSERT INTO order (  klant_id,  betaalwijze )
                              VALUES ( :KLANT_ID, :BETAALWIJZE )"
         );
         $sqlInsert->bindValue( ':KLANT_ID',    $_SESSION['USER']['ID'] );
@@ -19,7 +19,7 @@
     //
 
         $sqlInsert = $dbh->prepare(
-            "INSERT INTO bestelling_spel (  bestelling_id,  spel_id,  console_id,  aantal )
+            "INSERT INTO orderproduct (  bestelling_id,  ProductID,  console_id,  aantal )
                                   VALUES ( :BESTELLING_ID, :SPEL_ID, :CONSOLE_ID, :AANTAL )"
         );
         $sqlInsert->bindValue( ':BESTELLING_ID', $bestelling_id );
