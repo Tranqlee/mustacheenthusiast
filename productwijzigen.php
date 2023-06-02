@@ -7,14 +7,8 @@
 
     $stmt = $link->prepare('SELECT * FROM product WHERE `ProductID` = :id');
     $stmt->bindParam(':id', $productwijzigenid);
-    $product = $stmt->fetch(PDO::FETCH_ASSOC);
-    $Afbeelding = $product['Afbeelding'];
-    $Naam = $product['Naam'];
-    $GenreID = $product['GenreID'];
-    $Leeftijd = $product['Leeftijd'];
-    $RegisseurID = $product['RegisseurID'];
-    $Beschrijving = $product['Beschrijving'];
-    $Aantal = $product['Aantal'];
+    $stmt->execute();
+    $productwijzigen = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if(isset($_POST['afbeelding']))
     {
@@ -118,114 +112,119 @@
     <div class="center" style="background-color: rgb(35, 35, 35); margin: 0.8cm auto auto auto; padding: 0 1cm 0 1cm; width: fit-content; height: fit-content; border-radius: 0.35cm; border: none; box-shadow: 0px 0px 10px 1px black; color: white;">
         <table>
             <tr>
-                <th>
-                    <h2 style="color: white; margin-top: 0.5cm;">Product aanpassen</h2>
-                </th>
-            </tr>
-            <tr>
                 <td>
-                    <div>
-                    <style>
-                            input {
-                                padding: 0.6cm 0.15cm 0.25cm 0.15cm;
-                                border-radius: 0.15cm;
-                                margin: -0.6cm 0 0 0;
-                            }
-                            label {
-                                padding: 0 0 0 0.15cm;
-                                color: black;
-                            }
-                        </style>
-                        <form action="" method="POST">
-                            <table style="color: white;">
-                                <tr>
-                                    <td style="display: table-cell; vertical-align: top;">
-                                        <p for="id">Product ID:<?php echo " " . $productwijzigenid?></p>
-                                    </td>
-                                    <td>
-                                        <label for="afbeelding">Product afbeelding (+ .jpg)</label>
-                                        <input type='text' name='afbeelding' id='txtafbeelding' size='45cm' required/>
+                    <table>
+                        <tr>
+                            <th>
+                                <h2 style="color: white; margin-top: 0.5cm;">Product aanpassen</h2>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                <style>
+                                        input {
+                                            padding: 0.6cm 0.15cm 0.25cm 0.15cm;
+                                            border-radius: 0.15cm;
+                                            margin: -0.6cm 0 0 0;
+                                        }
+                                        label {
+                                            padding: 0 0 0 0.15cm;
+                                            color: black;
+                                        }
+                                    </style>
+                                    <form action="" method="POST">
+                                        <table style="color: white;">
+                                            <tr>
+                                                <td style="display: table-cell; vertical-align: top;">
+                                                    <p for="id">Product ID:<?php echo " " . $productwijzigenid?></p>
+                                                </td>
+                                                <td>
+                                                    <label for="afbeelding">Product afbeelding (+ .jpg)</label>
+                                                    <input type='text' name='afbeelding' id='txtafbeelding' size='45cm' value="<?php echo $productwijzigen['Afbeelding'] ?>" required/>
+                                                    <br>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="naam">Product naam</label>
+                                                    <input type="text" name="naam" id="txtnaam" size="45cm" value="<?php echo $productwijzigen['Naam'] ?>" required/>
+                                                    <br>
+                                                </td>
+                                                <td>
+                                                    <label for="genre">Product hoofdgenre ID</label>
+                                                    <input type="text" name="genre" id="txtgenre" size="45cm" value="<?php echo $productwijzigen['GenreID'] ?>" required/>
+                                                    <br>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="leeftijd">Product leeftijdrestrictie ID</label>
+                                                    <input type="text" name="leeftijd" id="txtleeftijd" size="45cm" value="<?php echo $productwijzigen['Leeftijd'] ?>" required/>
+                                                    <br>
+                                                </td>
+                                                <td>
+                                                    <label for="regisseur">Product regisseur ID</label>
+                                                    <input type="text" name="regisseur" id="txtregisseur" size="45cm" value="<?php echo $productwijzigen['RegisseurID'] ?>" required/>
+                                                    <br>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <br>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="beschrijving">Product beschrijving</label>
+                                                    <input type="text" name="beschrijving" id="txtbeschrijving" size="97.5cm" value="<?php echo $productwijzigen['Beschrijving'] ?>" required/>
+                                                    <br>
+                                                </td>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label for="aantal">Product aantal</label>
+                                                    <input type="text" name="aantal" id="txtaantal" size="45cm" value="<?php echo $productwijzigen['Aantal'] ?>" required/>
+                                                    <br>
+                                                </td>
+                                                <td>
+                                                    <label for="prijs">Product prijs</label>
+                                                    <input type="text" name="prijs" id="txtprijs" size="45cm" step="0.01" value="<?php echo $productwijzigen['Prijs'] ?>" required/>
+                                                    <br>
+                                                </td>
+                                            </tr>
+                                        </table>
                                         <br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label for="naam">Product naam</label>
-                                        <input type="text" name="naam" id="txtnaam" size="45cm" required/>
-                                        <br>
-                                    </td>
-                                    <td>
-                                        <label for="genre">Product hoofdgenre ID</label>
-                                        <input type="text" name="genre" id="txtgenre" size="45cm" required/>
-                                        <br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label for="leeftijd">Product leeftijdrestrictie ID</label>
-                                        <input type="text" name="leeftijd" id="txtleeftijd" size="45cm" required/>
-                                        <br>
-                                    </td>
-                                    <td>
-                                        <label for="regisseur">Product regisseur ID</label>
-                                        <input type="text" name="regisseur" id="txtregisseur" size="45cm" required/>
-                                        <br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label for="beschrijving">Product beschrijving</label>
-                                        <input type="text" name="beschrijving" id="txtbeschrijving" size="45cm" required/>
-                                        <br>
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label for="aantal">Product aantal</label>
-                                        <input type="text" name="aantal" id="txtaantal" size="45cm" required/>
-                                        <br>
-                                    </td>
-                                    <td>
-                                        <label for="prijs">Product prijs</label>
-                                        <input type="text" name="prijs" id="txtprijs" size="45cm" step="0.01" required/>
-                                        <br>
-                                    </td>
-                                </tr>
-                            </table>
-                            <br>
-                            <div class="buttonlogin">
-                                <input class="buttonlogin" type="submit" value="Pas product aan" style="width: 100%;"/>
-                            </div>
-                        </form>
-                        <style>
-                            a {
-                                color: dodgerblue;
-                                font-weight: normal;
-                            }
-                            a:hover {
-                                color: white;
-                                font-weight: normal;
-                            }
-                        </style>
-                        <div style="margin: 0 auto 0 auto; width: fit-content;">
-                            <p><a href="admin.php">Ga terug naar admin.php</a></p>
-                        </div>
-                        <br>
-                    </div>
+                                        <div class="buttonlogin">
+                                            <input class="buttonlogin" type="submit" value="Pas product aan" style="width: 100%;"/>
+                                        </div>
+                                    </form>
+                                    <style>
+                                        a {
+                                            color: dodgerblue;
+                                            font-weight: normal;
+                                        }
+                                        a:hover {
+                                            color: white;
+                                            font-weight: normal;
+                                        }
+                                    </style>
+                                    <div style="margin: 0 auto 0 auto; width: fit-content;">
+                                        <p><a href="admin.php">Ga terug naar admin.php</a></p>
+                                    </div>
+                                    <br>
+                                </div>
+                            </td>
+                        </tr>
+                    </table> 
                 </td>
             </tr>
-        </table> 
+        </table>
     </div>              
 </body>
