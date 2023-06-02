@@ -83,7 +83,7 @@ $result = $stmt->fetch();
                             transition: 0.05s;
                         }
                         .leftnav a:hover {
-                            background-color: transparent;
+                            background-color: rgb(45, 45, 45);
                             transition: 0.05s;
                         }
                         .leftnav img {
@@ -94,6 +94,16 @@ $result = $stmt->fetch();
                     <a href="user.php">
                         <img src="images/userTRANSblue.png" alt="User Profile">
                     </a>
+                    <?php
+                    if($result['isAdmin'] == 1)
+                    {
+                        ?>
+                        <a href="admin.php" style="height: fit-content;">
+                            <img src="images/adminTRANS.png" alt="Admin" style="height: 33.06px; width: auto;">
+                        </a>
+                        <?php
+                    }
+                    ?>
                 </div>
             </td>
             <td>
@@ -159,21 +169,21 @@ $result = $stmt->fetch();
                             <td style="background-color: rgb(40, 40, 40);">
                                 <div class="button selected">
                                     <a href="index.php">
-                                        <h3>HOME</h3>
+                                        <h3>Home</h3>
                                     </a>
                                 </div>
                             </td>
                             <td>
                                 <div class="button">
                                     <a href="galleryT.php">
-                                        <h3>Products</h3>
+                                        <h3>Producten</h3>
                                     </a>
                                 </div>
                             </td>
                             <td>
                                 <div class="button">
                                     <a href="shoppingcartT.php">
-                                        <h3>Cart</h3>
+                                        <h3>Winkelkar</h3>
                                     </a>
                                 </div>
                             </td>
@@ -204,7 +214,7 @@ $result = $stmt->fetch();
                             transition: 0.05s;
                         }
                         .rightnav a:hover {
-                            background-color: transparent;
+                            background-color: rgb(45, 45, 45);
                             transition: 0.05s;
                         }
                         .rightnav img {
@@ -213,16 +223,6 @@ $result = $stmt->fetch();
                         }
 
                     </style>
-                    <?php
-                    if($result['isAdmin'] == 1)
-                    {
-                        ?>
-                        <a href="admin.php" style="height: fit-content;">
-                            <img src="images/adminTRANS.png" alt="Admin" style="height: 33.06px; width: auto;">
-                        </a>
-                        <?php
-                    }
-                    ?>
                     <a href="loginSHOP.php">
                         <img src="images/logoutTRANSred.png" alt="Logout">
                     </a>
@@ -296,8 +296,6 @@ $result = $stmt->fetch();
                 </td>
             </tr>
         </table>
-        <a href="gallery.php">Link naar products page</a>
-        <a href="shoppingcart.php">Link naar Cart page</a>
     </div>
 </body>
 </html>

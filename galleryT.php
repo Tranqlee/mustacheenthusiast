@@ -116,7 +116,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                             transition: 0.05s;
                         }
                         .leftnav a:hover {
-                            background-color: transparent;
+                            background-color: rgb(45, 45, 45);
                             transition: 0.05s;
                         }
                         .leftnav img {
@@ -127,6 +127,16 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                     <a href="user.php">
                         <img src="images/userTRANSblue.png" alt="User Profile">
                     </a>
+                    <?php
+                    if($result['isAdmin'] == 1)
+                    {
+                        ?>
+                        <a href="admin.php" style="height: fit-content;">
+                            <img src="images/adminTRANS.png" alt="Admin" style="height: 33.06px; width: auto;">
+                        </a>
+                        <?php
+                    }
+                    ?>
                 </div>
             </td>
             <td>
@@ -192,21 +202,21 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                             <td>
                                 <div class="button">
                                     <a href="index.php">
-                                        <h3>HOME</h3>
+                                        <h3>Home</h3>
                                     </a>
                                 </div>
                             </td>
                             <td style="background-color: rgb(40, 40, 40);">
                                 <div class="button selected">
                                     <a href="galleryT.php">
-                                        <h3>Products</h3>
+                                        <h3>Producten</h3>
                                     </a>
                                 </div>
                             </td>
                             <td>
                                 <div class="button">
                                     <a href="shoppingcartT.php">
-                                        <h3>Cart</h3>
+                                        <h3>Winkelkar</h3>
                                     </a>
                                 </div>
                             </td>
@@ -237,7 +247,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                             transition: 0.05s;
                         }
                         .rightnav a:hover {
-                            background-color: transparent;
+                            background-color: rgb(45, 45, 45);
                             transition: 0.05s;
                         }
                         .rightnav img {
@@ -246,16 +256,6 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                         }
 
                     </style>
-                    <?php
-                    if($result['isAdmin'] == 1)
-                    {
-                        ?>
-                        <a href="admin.php" style="height: fit-content;">
-                            <img src="images/adminTRANS.png" alt="Admin" style="height: 33.06px; width: auto;">
-                        </a>
-                        <?php
-                    }
-                    ?>
                     <a href="loginSHOP.php">
                         <img src="images/logoutTRANSred.png" alt="Logout">
                     </a>
@@ -296,7 +296,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                 <style>
                     .item {
                         background-color: rgb(35, 35, 35);
-                        border-radius: 0.666cm 0.666cm 1.25cm 0.666cm;
+                        border-radius: 0.5cm;
                         margin: -0.5cm;
                         margin-bottom: 2cm;
                         padding: 0.5cm;
@@ -394,15 +394,15 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                                     <table class="info1">
                                         <tr>
                                             <th>
-                                                <p>Name:</p>
+                                                <p>Naam:</p>
                                             </th>
                                             <td>
-                                                <p><?php echo $product['Naam'] . " ||| " . $temporaryitemID; ?></p>
+                                                <p><?php echo $product['Naam']; ?></p>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>
-                                                <p>Main genre:</p>
+                                                <p>Hoofdgenre:</p>
                                             </th>
                                             <td>
                                                 <p><?php echo $genre['Naam']; ?></p>
@@ -410,7 +410,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                                         </tr>
                                         <tr>
                                             <th>
-                                                <p>Age restriction:</p>
+                                                <p>Leeftijdsrestrictie:</p>
                                             </th>
                                             <td>
                                                 <p><?php echo $leeftijd['Naam']; ?></p>
@@ -418,7 +418,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                                         </tr>
                                         <tr>
                                             <th>
-                                                <p>Director(s):</p>
+                                                <p>Regisseurs:</p>
                                             </th>
                                             <td>
                                                 <p><?php echo $regisseur['Naam']; ?></p>
@@ -426,7 +426,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                                         </tr>
                                         <tr>
                                             <th style="vertical-align: top;">
-                                                <p>Description:</p>
+                                                <p>Beschrijving:</p>
                                             </th>
                                             <td>
                                                 <p><?php echo $product['Beschrijving']; ?></p>

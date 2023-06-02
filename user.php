@@ -19,7 +19,7 @@ $result = $stmt->fetch();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webtoepassing User information</title>
+    <title>Webtoepassing Gebruikersinformatie</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width : 568px)">
     <link rel="stylesheet" type="text/css" href="css/NewStyle.css">
@@ -83,7 +83,7 @@ $result = $stmt->fetch();
                             transition: 0.05s;
                         }
                         .leftnav a:hover {
-                            background-color: transparent;
+                            background-color: rgb(45, 45, 45);
                             transition: 0.05s;
                         }
                         .leftnav img {
@@ -149,7 +149,7 @@ $result = $stmt->fetch();
                             <td>
                                 <div class="button">
                                     <a>
-                                        <h3><?php echo $_SESSION['user']; ?></h3>
+                                        <h3>Gebruiker: <?php echo $_SESSION['user']; ?></h3>
                                     </a>
                                 </div>
                             </td>
@@ -181,7 +181,7 @@ $result = $stmt->fetch();
                             transition: 0.05s;
                         }
                         .rightnav a:hover {
-                            background-color: transparent;
+                            background-color: rgb(45, 45, 45);
                             transition: 0.05s;
                         }
                         .rightnav img {
@@ -212,7 +212,7 @@ $result = $stmt->fetch();
                 color: white;
             }
         </style>
-        <h2>User information</h2>
+        <h2>Gebruikersinformatie</h2>
         <table class="centertable">
             <style>
                 .centertable {
@@ -246,16 +246,16 @@ $result = $stmt->fetch();
             </style>
             <tr>
                 <td>
-                    Username:
+                    Gebruikersnaam:
                 </td>
                 <th>
                     <?php echo $result['Gebruikersnaam']; ?>
                 </th>
                 <td>
-                    Password:
+                    Wachtwoord:
                 </td>
                 <th>
-                    <a href="resetPassword.php" style="color: dodgerblue;">Change your password</a>
+                    <a href="resetPassword.php" style="color: dodgerblue;">Verander je wachtwoord</a>
                 </th>
             </tr>
             <tr>
@@ -266,7 +266,7 @@ $result = $stmt->fetch();
                     <?php echo $result['Email']; ?>
                 </th>
                 <td>
-                    Phone number:
+                    Telefoonnummer:
                 </td>
                 <th>
                     <?php echo $result['Telefoonnummer']; ?>
@@ -278,13 +278,13 @@ $result = $stmt->fetch();
             </tr>
             <tr>
                 <td>
-                    Streetname:
+                    Straatnaam:
                 </td>
                 <th>
                     <?php echo $result['Straatnaam']; ?> 
                 </th>
                 <td>
-                    House number:
+                    Huisnummer:
                 </td>
                 <th>
                     <?php echo $result['Huisnummer']; ?>
@@ -292,13 +292,13 @@ $result = $stmt->fetch();
             </tr>
             <tr>
                 <td>
-                    Postal code:
+                    Postcode:
                 </td>
                 <th>
                     <?php echo $result['Postcode']; ?>
                 </th>
                 <td>
-                    Town/City:
+                    Gemeente:
                 </td>
                 <th>
                     <?php echo $result['Gemeente']; ?>
@@ -306,7 +306,7 @@ $result = $stmt->fetch();
             </tr>
             <tr>
                 <td>
-                    Date of birth:
+                    Geboortedatum:
                 </td>
                 <th>
                     <?php echo $result['GeboorteDatum']; ?> 
@@ -318,7 +318,7 @@ $result = $stmt->fetch();
             </tr>
         </table>
         <br>
-        <h2>Orders</h2>
+        <h2>Bestellingen</h2>
         <table class="centertable">
             <style>
                 .centertable {
@@ -352,7 +352,7 @@ $result = $stmt->fetch();
             </style>
             <tr>
                 <th>
-                    Test
+                    HIER KOMEN DE BESTELLINGEN
                 </th>
             </tr>
         </table>

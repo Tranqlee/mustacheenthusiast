@@ -16,6 +16,12 @@ if(!isset($_SESSION['editamount']))
 {
     $_SESSION['editamount'] = 0;
 }
+
+if(isset($_POST['action']))
+{
+    unset($_SESSION['WINKELKAR']);
+    header('Location: shoppingcartT.php');
+}
 ?>
 
 <!-- Website Template by freewebsitetemplates.com -->
@@ -87,7 +93,7 @@ if(!isset($_SESSION['editamount']))
                             transition: 0.05s;
                         }
                         .leftnav a:hover {
-                            background-color: transparent;
+                            background-color: rgb(45, 45, 45);
                             transition: 0.05s;
                         }
                         .leftnav img {
@@ -98,6 +104,16 @@ if(!isset($_SESSION['editamount']))
                     <a href="user.php">
                         <img src="images/userTRANSblue.png" alt="User Profile">
                     </a>
+                    <?php
+                    if($result['isAdmin'] == 1)
+                    {
+                        ?>
+                        <a href="admin.php" style="height: fit-content;">
+                            <img src="images/adminTRANS.png" alt="Admin" style="height: 33.06px; width: auto;">
+                        </a>
+                        <?php
+                    }
+                    ?>
                 </div>
             </td>
             <td>
@@ -163,21 +179,21 @@ if(!isset($_SESSION['editamount']))
                             <td>
                                 <div class="button">
                                     <a href="index.php">
-                                        <h3>HOME</h3>
+                                        <h3>Home</h3>
                                     </a>
                                 </div>
                             </td>
                             <td>
                                 <div class="button">
                                     <a href="galleryT.php">
-                                        <h3>Products</h3>
+                                        <h3>Producten</h3>
                                     </a>
                                 </div>
                             </td>
                             <td style="background-color: rgb(40, 40, 40);">
                                 <div class="button selected">
                                     <a href="shoppingcartT.php">
-                                        <h3>Cart</h3>
+                                        <h3>Winkelkar</h3>
                                     </a>
                                 </div>
                             </td>
@@ -208,7 +224,7 @@ if(!isset($_SESSION['editamount']))
                             transition: 0.05s;
                         }
                         .rightnav a:hover {
-                            background-color: transparent;
+                            background-color: rgb(45, 45, 45);
                             transition: 0.05s;
                         }
                         .rightnav img {
@@ -217,16 +233,6 @@ if(!isset($_SESSION['editamount']))
                         }
 
                     </style>
-                    <?php
-                    if($result['isAdmin'] == 1)
-                    {
-                        ?>
-                        <a href="admin.php" style="height: fit-content;">
-                            <img src="images/adminTRANS.png" alt="Admin" style="height: 33.06px; width: auto;">
-                        </a>
-                        <?php
-                    }
-                    ?>
                     <a href="loginSHOP.php">
                         <img src="images/logoutTRANSred.png" alt="Logout">
                     </a>
@@ -236,95 +242,230 @@ if(!isset($_SESSION['editamount']))
     </table>
     <div class="center">
         <style>
-            div.center {
+            center {
                 display: flex;
                 justify-content: center;
                 flex-direction: column;
                 align-items: center;
                 margin: auto;
-                margin-top: 1cm;
                 position: absolute;
             }
         </style>
         <div class="content">
-            <div class="table">
-                <table>
-                    <tr>
-                        <th>
-                            <p>Afbeelding:</p>
-                        </th>
-                        <th>
-                            <p>BestelID:</p>
-                        </th>
-                        <th>
-                            <p>ProductID:</p>
-                        </th>
-                        <th>
-                            <p>Productnaam:</p>
-                        </th>
-                        <th>
-                            <p>Prijs:</p>
-                        </th>
-                        <th>
-                            <p>Aantal:</p>
-                        </th>
-                    </tr>
-                    <?php
-                    $winkelkar = $_SESSION['WINKELKAR'];
-                    for( $i=0; $i<count($winkelkar); $i++ )
-                    {
-                        if($i != 0)
-                        {
-                            $stmt = $link->prepare("SELECT * FROM product WHERE ProductID = :ProductID");
-                            $stmt->bindParam(':ProductID', $winkelkar[$i]['ProductID']);
-                            $stmt->execute();
-                            $itemresult = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                            ?>
-                            <tr>
-                                <td>
-                                    <img src="<?php echo 'productimages/' . $itemresult['Afbeelding']; ?>" alt="Product image">
-                                </td>
-                                <td>
-                                    <p><?php echo $i; ?></p>
-                                </td>
-                                <td>
-                                    <p><?php echo $winkelkar[$i]['ProductID']; ?></p>
-                                </td>
-                                <td>
-                                    <p><?php echo $itemresult['Naam']; ?></p>
-                                </td>
-                                <td>
-                                    <p><?php echo $itemresult['Prijs']; ?></p>
-                                </td>
-                                <td>
-                                    <p><?php echo $winkelkar[$i]['AANTAL'] + $_SESSION['editamount']; ?></p>
-                                </td>
-                                <td>
-                                    <?php
-                                    $plus1ID = $winkelkar[$i]['ProductID'];
-                                    echo "<td style='text-align: right';><a href='PLUS1.php?nr=$plus1ID'>+1</a></td>";
-                                    ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    $minus1ID = $winkelkar[$i]['ProductID'];
-                                    echo "<td style='text-align: right';><a href='MINUS1.php?nr=$minus1ID'>-1</a></td>";
-                                    ?>
-                                </td>
-                            </tr>
-                            <?php
-                        }
+            <style>
+                .content {
+                    margin: auto;
+                    justify-content: center;
+                    width: fit-content;
+                    height: fit-content;
+                    background-color: transparent;
+                    padding: 1cm;
+                    border-radius: 1cm;
+                }
+                .content table {
+                    width: 100%;
+                    height: 100%;
+                }
+            </style>
+            <div style="width: fit-content;">
+                <style>
+                    .item {
+                        background-color: rgb(35, 35, 35);
+                        border-radius: 0.5cm;
+                        margin: -0.5cm;
+                        margin-bottom: 0.5cm;
+                        margin-top: 0.5cm;
+                        padding: 0.5cm;
+                        width: 100%;
                     }
-                    ?>
+                   .item table, .item tr {
+                        width: fit-content;
+                        height: fit-content;
+                    }
+                    .item th, .item td {
+                        width: fit-content;
+                        height: fit-content;
+                    }
+                    .item img {
+                        width: 3.2cm;
+                        height: auto;
+                    }
+                    .item p {
+                        color: white;
+                    }
+
+
+
+                    .info1 {
+                        width: 100%;
+                        height: 100%;
+                        background-color: transparent;
+                    }
+                    .info1 tr {
+                        padding: 0.15cm;
+                    }
+                    .info1 th {
+                        width: fit-content;
+                        height: min-content;
+                        text-align: left;
+                    }
+                    .info1 th p {
+                        color: white;
+                        font-weight: bold;
+                        width: max-content;
+                        padding: 0.25cm
+                    }
+                    .info1 td {
+                        width: max-content;
+                        height: auto;
+                        text-align: left;
+                    }
+                    .info1 td p {
+                        color: cornflowerblue;
+                        font-weight: bold;
+                        width: 7.5cm;
+                    }
+
+                    .beschrijving {
+                        width: 100%;
+                    }
+                    .beschrijving strong {
+                        color: white;
+                    }
+                    .image {
+                        width: fit-content;
+                        border: 5px solid black;
+                        border-radius: 0.15cm;
+                        background-color: black;
+                    }
+                    .aantaledit td a img {
+                        width: 1cm;
+                        height: 1cm;
+                        
+                    }
+                </style>
+                <?php
+                $winkelkar = $_SESSION['WINKELKAR'];
+                for($i = 0; $i < count($winkelkar); $i++)
+                {
+                    if($i > 0)
+                    {
+                        $stmt = $link->prepare("SELECT * FROM product WHERE ProductID = :ProductID");
+                        $stmt->bindParam(':ProductID', $winkelkar[$i]['ProductID']);
+                        $stmt->execute();
+                        $itemresult = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                        $stmt = $link->prepare("SELECT * FROM product WHERE ProductID = :ProductID");
+                        $stmt->bindParam(':ProductID', $winkelkar[$i]['ProductID']);
+                        $stmt->execute();
+                        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                        $temporaryitemID = $product['ProductID'];
+                        ?>
+                        <div class="item">
+                            <table>
+                                <tr>
+                                    <td class="image">
+                                        <img src="<?php echo 'productimages/' . $product['Afbeelding']; ?>" alt="Product image">
+                                    </td>
+                                    <td style="vertical-align: top;">
+                                        <table class="info1">
+                                            <tr>
+                                                <th>
+                                                    <p>Naam:</p>
+                                                </th>
+                                                <td>
+                                                    <p><?php echo $product['Naam']; ?></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <p>Prijs:</p>
+                                                </th>
+                                                <td>
+                                                    <p><?php echo $itemresult['Prijs']; ?></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <p>Aantal:</p>
+                                                </th>
+                                                <td>
+                                                    <p><?php echo $winkelkar[$i]['AANTAL']; ?></p>
+                                                </td>
+                                            </tr>
+                                            <tr class="aantaledit">
+                                                <td>
+                                                    <?php
+                                                    $plus1ID = $winkelkar[$i]['ProductID'];
+                                                    echo "<a href='PLUS1.php?nr=$plus1ID'><img src='images/mobile-collapse.png' alt='+1'></a>";
+                                                    $minus1ID = $winkelkar[$i]['ProductID'];
+                                                    echo "<a href='MINUS1.php?nr=$minus1ID'><img src='images/mobile-expand.png' alt='-1'></a>";
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
+                <style>
+                    .bestellen td {
+                        align-content: flex-end;
+                    }
+                    .bestellen input {
+                        width: auto;
+                        height: 1cm;
+                        background-color: rgb(35, 35, 35);
+                        border-radius: 0.35cm;
+                        padding: 0.15cm;
+                    }
+                    .bestellen input:hover {
+                        width: auto;
+                        height: 1cm;
+                        background-color: rgb(45, 45, 45);
+                        border-radius: 0.35cm;
+                        padding: 0.15cm;
+                    }
+                    .extra input {
+                        width: auto;
+                        height: 0.8cm;
+                        padding: 0.25cm;
+                    }
+                    .extra input:hover {
+                        width: auto;
+                        height: 0.8cm;
+                        padding: 0.25cm;
+                    }
+                    .bestellen form:first-child {
+                        margin-right: 0.125cm;
+                    }
+                    .bestellen form:last-child {
+                        margin-left: 0.125cm;
+                    }
+                </style>
+                <table style="margin: 0 0.5cm 0 0.5cm; padding: 0 -0.5cm 0 -0.5cm; height: min-content;" class="bestellen">
+                    <tr>
+                        <td style="text-align: right; display: inline-flex;">
+                            <form action="<?php if(isset($_POST['Submit']))
+                                                {
+                                                    echo "YES";
+                                                } ?>" method="POST">
+                                <input type="image" src="images/cartTRANS.png" alt="Submit"/>
+                            </form>
+                            <form action="" method="POST" class="extra">
+                                <input type="hidden" name="action" value="empty">
+                                <input type="image" src="images/garbageTRANS.png" alt="Submit"/>
+                            </form>
+                        </td>
+                    </tr>
                 </table>
-                <form action="<?php if(isset($_POST['submit']))
-                                    {
-                                        unset($_SESSION['WINKELKAR']);
-                                        unset($winkelkar);
-                                    } ?>" method="POST">
-                    <input type="submit" name="submit" value="Delete"/>
-                </form>
             </div>
         </div>
     </div>

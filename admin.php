@@ -84,7 +84,7 @@ if(isset($_POST['productnamewijzigen']))
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webtoepassing Admin panel</title>
+    <title>Webtoepassing Admin paneel</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width : 568px)">
     <link rel="stylesheet" type="text/css" href="css/NewStyle.css">
@@ -112,17 +112,17 @@ if(isset($_POST['productnamewijzigen']))
                 height: 1cm;
             }
             .navbar td:first-child {
-                width: 25%;
+                width: 33.333%;
                 height: 100%;
                 border: none;
             }
             .navbar td {
-                width: 50%;
+                width: 33.333%;
                 height: 100%;
                 border: none;
             }
             .navbar td:last-child {
-                width: 25%;
+                width: 33.333%;
                 height: 100%;
                 border: none;
                 text-align: right;
@@ -150,7 +150,7 @@ if(isset($_POST['productnamewijzigen']))
                             transition: 0.05s;
                         }
                         .leftnav a:hover {
-                            background-color: transparent;
+                            background-color: rgb(45, 45, 45);
                             transition: 0.05s;
                         }
                         .leftnav img {
@@ -226,30 +226,24 @@ if(isset($_POST['productnamewijzigen']))
                             <td>
                                 <div class="button">
                                     <a href="index.php">
-                                        <h3>HOME</h3>
+                                        <h3>Home</h3>
                                     </a>
                                 </div>
                             </td>
                             <td>
                                 <div class="button">
-                                    <a href="about.php">
-                                        <h3>ABOUT</h3>
+                                    <a href="galleryT.php">
+                                        <h3>Producten</h3>
                                     </a>
                                 </div>
                             </td>
-                            <?php
-                            if($result['isAdmin'] == 1) {
-                                ?>
-                                <td style="background-color: rgb(40, 40, 40);">
-                                    <div class="button selected">
-                                        <a href="admin.php">
-                                            <h3>ADMIN PANEL</h3>
-                                        </a>
-                                    </div>
-                                </td>
-                                <?php
-                            }
-                            ?>
+                            <td>
+                                <div class="button">
+                                    <a href="shoppingcartT.php">
+                                        <h3>Winkelkar</h3>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -277,7 +271,7 @@ if(isset($_POST['productnamewijzigen']))
                             transition: 0.05s;
                         }
                         .rightnav a:hover {
-                            background-color: transparent;
+                            background-color: rgb(45, 45, 45);
                             transition: 0.05s;
                         }
                         .rightnav img {
@@ -310,7 +304,7 @@ if(isset($_POST['productnamewijzigen']))
                 }
             </style>
             <div class="userlist">
-                <h1>Users</h1>
+                <h1>Gebruikers</h1>
                 <table>
                     <style>
                         .userlist {
@@ -359,16 +353,16 @@ if(isset($_POST['productnamewijzigen']))
                     $klanten = $query->fetchAll();
                     ?>
                     <tr>
-                        <th style="width: auto;">Customer ID</th>
-                        <th style="width: auto;">Username</th>
+                        <th style="width: auto;">Klanten ID</th>
+                        <th style="width: auto;">Gebruikersnaam</th>
                         <th style="width: auto;">E-mail</th>
-                        <th style="width: auto;">Phone number</th>
-                        <th style="width: auto;">Street number</th>
-                        <th style="width: auto;">House number</th>
-                        <th style="width: auto;">Postal code</th>
-                        <th style="width: auto;">Town/City</th>
-                        <th style="width: auto;">Date of birth</th>
-                        <th style="width: auto;">Delete</th>
+                        <th style="width: auto;">Telefoonnummer</th>
+                        <th style="width: auto;">Straatnaam</th>
+                        <th style="width: auto;">Huisnummer</th>
+                        <th style="width: auto;">Postcode</th>
+                        <th style="width: auto;">Gemeente</th>
+                        <th style="width: auto;">Geboortedatum</th>
+                        <th style="width: auto;">Verwijderen</th>
                     </tr>
                     <?php 
                     foreach($klanten as $klant):
@@ -385,7 +379,7 @@ if(isset($_POST['productnamewijzigen']))
                         <td style="text-align: right;"><?php echo $klant['GeboorteDatum']; ?></td>
                         <?php
                         $userid = $klant['KlantenID'];
-                        echo "<td style='text-align: right';><a href='deleteUser.php?nr=$userid'>Delete</a></td>";
+                        echo "<td style='text-align: right';><a href='deleteUser.php?nr=$userid'>Verwijderen</a></td>";
                         ?>
                     </tr>
                     <?php
@@ -417,7 +411,7 @@ if(isset($_POST['productnamewijzigen']))
                         <td>
                             <div class="directorlist">
                                 <div>
-                                    <h1>Directors</h1>
+                                    <h1>Regisseurs</h1>
                                     <table>
                                         <style>
                                             .directorlist {
@@ -472,9 +466,9 @@ if(isset($_POST['productnamewijzigen']))
                                         $regisseurs = $query->fetchAll();
                                         ?>
                                         <tr>
-                                            <th style="width: 2cm;">Director(s) ID</th>
-                                            <th style="width: 7.5cm;">Director(s) name(s)</th>
-                                            <th style="width: 2cm;">Delete</th>
+                                            <th style="width: 2cm;">Regisseur ID</th>
+                                            <th style="width: 7.5cm;">Regisseur namen</th>
+                                            <th style="width: 2cm;">Verwijderen</th>
                                         </tr>
                                         <?php 
                                         foreach($regisseurs as $regisseur):
@@ -484,7 +478,7 @@ if(isset($_POST['productnamewijzigen']))
                                             <td style="text-align: right;"><?php echo $regisseur['Naam']; ?></td>
                                             <?php
                                             $directorid = $regisseur['RegisseurID'];
-                                            echo "<td style='text-align: right';><a href='deleteDirector.php?nr=$directorid'>Delete</a></td>";
+                                            echo "<td style='text-align: right';><a href='deleteDirector.php?nr=$directorid'>Verwijderen</a></td>";
                                             ?>
                                         </tr>
                                         <?php
@@ -496,7 +490,7 @@ if(isset($_POST['productnamewijzigen']))
                                     <br><br>
                                 </p>
                                 <div class="directorform">
-                                    <h2>Add director(s)</h2>
+                                    <h2>Regisseur toevoegen</h2>
                                     <style>
                                         .directorform {
                                             width: fit-content;
@@ -523,11 +517,11 @@ if(isset($_POST['productnamewijzigen']))
                                         }
                                     </style>
                                     <form action="" method="POST">
-                                        <label for="directorname">Director(s) name(s)</label>
+                                        <label for="directorname">Regisseur naam</label>
                                         <br>
                                         <input type="text" name="directorname" id="directorname" size="auto" required/>
                                         <br><br>
-                                        <input type="submit" name="submitdirector" value="Add director('s)" style="width: auto;"/>
+                                        <input type="submit" name="submitdirector" value="Regisseur toevoegen" style="width: auto;"/>
                                     </form>
                                 </div>
                             </div>
@@ -535,7 +529,7 @@ if(isset($_POST['productnamewijzigen']))
                         <td>
                             <div class="agelist">
                                 <div>
-                                    <h1>Ages</h1>
+                                    <h1>Leeftijden</h1>
                                     <table>
                                         <style>
                                             .agelist {
@@ -592,9 +586,9 @@ if(isset($_POST['productnamewijzigen']))
                                         $leeftijden = $query->fetchAll();
                                         ?>
                                         <tr>
-                                            <th style="width: fit-content;">Age ID</th>
-                                            <th style="width: fit-content;">Age name</th>
-                                            <th style="width: fit-content;">Delete</th>
+                                            <th style="width: fit-content;">Leeftijd ID</th>
+                                            <th style="width: fit-content;">Leeftijd namen</th>
+                                            <th style="width: fit-content;">Verwijderen</th>
                                         </tr>
                                         <?php 
                                         foreach($leeftijden as $leeftijd):
@@ -604,7 +598,7 @@ if(isset($_POST['productnamewijzigen']))
                                             <td style="text-align: right;"><?php echo $leeftijd['Naam']; ?></td>
                                             <?php
                                             $ageid = $leeftijd['LeeftijdID'];
-                                            echo "<td style='text-align: right';><a href='deleteAge.php?nr=$ageid'>Delete</a></td>";
+                                            echo "<td style='text-align: right';><a href='deleteAge.php?nr=$ageid'>Verwijderen</a></td>";
                                             ?>
                                         </tr>
                                         <?php
@@ -616,7 +610,7 @@ if(isset($_POST['productnamewijzigen']))
                                     <br><br>
                                 </p>
                                 <div class="ageform">
-                                    <h2>Add age</h2>
+                                    <h2>Leeftijd toevoegen</h2>
                                     <style>
                                         .ageform {
                                             width: 100%;
@@ -641,11 +635,11 @@ if(isset($_POST['productnamewijzigen']))
                                         }
                                     </style>
                                     <form action="" method="POST">
-                                        <label for="agename">Age</label>
+                                        <label for="agename">Leeftijd</label>
                                         <br>
                                         <input type="text" name="agename" id="agename" size="auto" required/>
                                         <br><br>
-                                        <input type="submit" name="submitage" value="Add age" style="width: auto;"/>
+                                        <input type="submit" name="submitage" value="Leeftijd toevoegen" style="width: auto;"/>
                                     </form>
                                 </div>
                             </div>
@@ -699,8 +693,8 @@ if(isset($_POST['productnamewijzigen']))
                                         ?>
                                         <tr>
                                             <th style="width: 2cm;">Genre ID</th>
-                                            <th style="width: 7.5cm;">Genre name</th>
-                                            <th style="width: 2cm;">Delete</th>
+                                            <th style="width: 7.5cm;">Genre namen</th>
+                                            <th style="width: 2cm;">Verwijderen</th>
                                         </tr>
                                         <?php 
                                         foreach($genres as $genre):
@@ -710,7 +704,7 @@ if(isset($_POST['productnamewijzigen']))
                                             <td style="text-align: right;"><?php echo $genre['Naam']; ?></td>
                                             <?php
                                             $genreid = $genre['GenreID'];
-                                            echo "<td style='text-align: right';><a href='deleteGenre.php?nr=$genreid'>Delete</a></td>";
+                                            echo "<td style='text-align: right';><a href='deleteGenre.php?nr=$genreid'>verwijderen</a></td>";
                                             ?>
                                         </tr>
                                         <?php
@@ -722,7 +716,7 @@ if(isset($_POST['productnamewijzigen']))
                                     <br><br>
                                 </p>
                                 <div class="genreform">
-                                    <h2>Add genre</h2>
+                                    <h2>Genre toevoegen</h2>
                                     <style>
                                         .genreform {
                                             width: 100%;
@@ -750,7 +744,7 @@ if(isset($_POST['productnamewijzigen']))
                                         <br>
                                         <input type="text" name="genrename" id="genrename" size="auto" required/>
                                         <br><br>
-                                        <input type="submit" name="submitgenre" value="Add genre" style="width: auto;"/>
+                                        <input type="submit" name="submitgenre" value="Genre toevoegen" style="width: auto;"/>
                                     </form>
                                 </div>
                             </div>
@@ -760,7 +754,7 @@ if(isset($_POST['productnamewijzigen']))
             </div>
             <br>
             <div class="productlist">
-                <h1>Products</h1>
+                <h1>Producten</h1>
                 <table>
                     <style>
                         .productlist {
@@ -785,14 +779,16 @@ if(isset($_POST['productnamewijzigen']))
                         .productlist th {
                             border-right: 2px solid gray;
                             border-bottom: 2px solid gray;
-                            padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                            padding: 0.25cm 0.15cm 0.25cm 0.15cm;
+                            font-size: small;
                         }
                         .productlist th:last-child {
                             border-right: none;
                         }
                         .productlist td {
                             border-right: 2px solid gray;
-                            padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                            padding: 0.25cm 0.15cm 0.25cm 0.15cm;
+                            font-size: small;
                         }
                         .productlist td:last-child {
                             border-right: none;
@@ -804,30 +800,47 @@ if(isset($_POST['productnamewijzigen']))
                     ?>
                     <tr>
                         <th style="width: 2cm;">ProductID</th>
-                        <th style="width: 5cm;">Name</th>
-                        <th style="width: 2cm;">Genre ID</th>
-                        <th style="width: 2cm;">Age Restriction ID</th>
-                        <th style="width: 2cm;">Directors ID</th>
-                        <th style="width: 7.5cm;">Description</th>
-                        <th style="width: 2cm;">Amount</th>
-                        <th style="width: 2cm;">Price</th>
-                        <th style="width: 2cm;">Delete</th>
+                        <th style="width: 5cm;">Naam</th>
+                        <th style="width: 2cm;">Genre + ID</th>
+                        <th style="width: 2cm;">Leeftijdsrestrictie + ID</th>
+                        <th style="width: 2cm;">Regisseur + ID</th>
+                        <th style="width: 7.5cm;">Beschrijving</th>
+                        <th style="width: 2cm;">Aantal</th>
+                        <th style="width: 2cm;">Prijs</th>
+                        <th style="width: 2cm;">Aanpassen</th>
+                        <th style="width: 2cm;">Verwijderen</th>
                     </tr>
                     <?php 
                     foreach($producten as $product):
+                        $stmt = $link->prepare("SELECT * FROM Genres WHERE GenreID = :genreid");
+                        $stmt->bindParam(':genreid', $product['GenreID']);
+                        $stmt->execute();
+                        $genre = $stmt->fetch();
+
+                        $stmt = $link->prepare("SELECT * FROM leeftijden WHERE LeeftijdID = :leeftijdid");
+                        $stmt->bindParam(':leeftijdid', $product['Leeftijd']);
+                        $stmt->execute();
+                        $leeftijdsrestrictie = $stmt->fetch();
+
+                        $stmt = $link->prepare("SELECT * FROM regisseuren WHERE RegisseurID = :regisseurid");
+                        $stmt->bindParam(':regisseurid', $product['RegisseurID']);
+                        $stmt->execute();
+                        $regisseur = $stmt->fetch();
+
                         ?>
                         <tr>
                             <td style="text-align: right;"><?php echo $product['ProductID']; ?></td>
                             <td style="text-align: right;"><?php echo $product['Naam']; ?></td>
-                            <td style="text-align: right;"><?php echo $product['GenreID']; ?></td>
-                            <td style="text-align: right;"><?php echo $product['Leeftijd']; ?></td>
-                            <td style="text-align: right;"><?php echo $product['RegisseurID']; ?></td>
-                            <td style="text-align: right;"><?php echo $product['Beschrijving']; ?></td>  
+                            <td style="text-align: right;"><?php echo $genre['Naam'] . " | " . $product['GenreID']; ?></td>
+                            <td style="text-align: right;"><?php echo $leeftijdsrestrictie['Naam'] . " | " . $product['Leeftijd']; ?></td>
+                            <td style="text-align: right;"><?php echo $regisseur['Naam'] . " | " . $product['RegisseurID']; ?></td>
+                            <td style="text-align: left;"><?php echo $product['Beschrijving']; ?></td>  
                             <td style="text-align: right;"><?php echo $product['Aantal']; ?></td>
                             <td style="text-align: right;"><?php echo $product['Prijs']; ?></td>
                             <?php
                             $productid = $product['ProductID'];
-                            echo "<td style='text-align: right';><a href='deleteProduct.php?nr=$productid'>Delete</a></td>";
+                            echo "<td style='text-align: right';><a href='productwijzigen.php?nr=$productid'>Aanpassen</a></td>";
+                            echo "<td style='text-align: right';><a href='deleteProduct.php?nr=$productid'>Verwijderen</a></td>";
                             ?>
                         </tr>
                         <?php
@@ -837,6 +850,11 @@ if(isset($_POST['productnamewijzigen']))
                 <p>
                     <br><br>
                 </p>
+                <div>
+                    <td style='text-align: right';>
+                        <a href='producttoevoegen.php'>Toevoegen</a>
+                    </td>
+                </div>
                 <div class="producttable">
                     <style>
                         .producttable {
@@ -849,6 +867,13 @@ if(isset($_POST['productnamewijzigen']))
                         }
                     </style>
                     <table>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
                         <tr>
                             <td>
                                 <div class="productform">
@@ -884,12 +909,12 @@ if(isset($_POST['productnamewijzigen']))
                                         <table>
                                             <tr>
                                                 <th>
-                                                    <h2>Add product</h2>
+                                                    <h2>Product toevoegen</h2>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productimage">Product image</label>
+                                                    <label for="productimage">Product afbeelding</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productimage" id="productimage" size="auto" required/>
@@ -897,7 +922,7 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productname">Product name</label>
+                                                    <label for="productname">Product naam</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productname" id="productname" size="auto" required/>
@@ -905,7 +930,7 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productgenre">Product main genre ID</label>
+                                                    <label for="productgenre">Product hoofdgenre ID</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productgenre" id="productgenre" size="auto" required/>
@@ -913,7 +938,7 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productage">Product age restriction ID</label>
+                                                    <label for="productage">Product Leeftijdsrestrictie ID</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productage" id="productage" size="auto" required/>
@@ -921,7 +946,7 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productdirector">Product director ID</label>
+                                                    <label for="productdirector">Product regisseur ID</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productdirector" id="productdirector" size="auto" required/>
@@ -929,7 +954,7 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productdescription">Product description</label>
+                                                    <label for="productdescription">Product beschrijving</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productdescription" id="productdescription" size="auto" required/>
@@ -937,7 +962,7 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productamount">Product amount</label>
+                                                    <label for="productamount">Product aantal</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productamount" id="productamount" size="auto" required/>
@@ -945,15 +970,15 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productprice">Product price</label>
+                                                    <label for="productprice">Product prijs</label>
                                                 </th>
                                                 <td>
-                                                    <input type="text" name="productprice" id="productprice" size="auto" required/>
+                                                    <input type="text" name="productprice" id="productprice" size="auto" step="0.01" required/>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="submit" name="submit" value="Add product"/>
+                                                    <input type="submit" name="submit" value="Product toevoegen"/>
                                                 </td>
                                             </tr>
                                         </table>
@@ -994,7 +1019,7 @@ if(isset($_POST['productnamewijzigen']))
                                         <table>
                                             <tr>
                                                 <th>
-                                                    <h2>Edit product</h2>
+                                                    <h2>Product aanpassen</h2>
                                                 </th>
                                             </tr>
                                             <tr>
@@ -1007,7 +1032,7 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productimagewijzigen">Product image</label>
+                                                    <label for="productimagewijzigen">Product afbeelding</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productimagewijzigen" id="productimagewijzigen" size="auto" required/>
@@ -1015,7 +1040,7 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productnamewijzigen">Product name</label>
+                                                    <label for="productnamewijzigen">Product naam</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productnamewijzigen" id="productnamewijzigen" size="auto" required/>
@@ -1023,7 +1048,7 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productgenrewijzigen">Product main genre ID</label>
+                                                    <label for="productgenrewijzigen">Product hoofdgenre ID</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productgenrewijzigen" id="productgenrewijzigen" size="auto" required/>
@@ -1031,7 +1056,7 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productagewijzigen">Product age restriction ID</label>
+                                                    <label for="productagewijzigen">Product Leeftijdsrestrictie ID</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productagewijzigen" id="productagewijzigen" size="auto" required/>
@@ -1039,7 +1064,7 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productdirectorwijzigen">Product director ID</label>
+                                                    <label for="productdirectorwijzigen">Product regisseur ID</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productdirectorwijzigen" id="productdirectorwijzigen" size="auto" required/>
@@ -1047,7 +1072,7 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productdescriptionwijzigen">Product description</label>
+                                                    <label for="productdescriptionwijzigen">Product beschrijving</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productdescriptionwijzigen" id="productdescriptionwijzigen" size="auto" required/>
@@ -1055,7 +1080,7 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productamountwijzigen">Product amount</label>
+                                                    <label for="productamountwijzigen">Product aantal</label>
                                                 </th>
                                                 <td>
                                                     <input type="text" name="productamountwijzigen" id="productamountwijzigen" size="auto" required/>
@@ -1063,15 +1088,15 @@ if(isset($_POST['productnamewijzigen']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <label for="productpricewijzigen">Product price</label>
+                                                    <label for="productpricewijzigen">Product prijs</label>
                                                 </th>
                                                 <td>
-                                                    <input type="text" name="productpricewijzigen" id="productpricewijzigen" size="auto" required/>
+                                                    <input type="text" name="productpricewijzigen" id="productpricewijzigen" size="auto" step="0.01" required/>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="submit" name="submitwijzigen" value="Edit product"/>
+                                                    <input type="submit" name="submitwijzigen" value="Product wijzigen"/>
                                                 </td>
                                             </tr>
                                         </table>
