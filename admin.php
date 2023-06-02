@@ -150,8 +150,8 @@ if(isset($_POST['productnamewijzigen']))
                             transition: 0.05s;
                         }
                         .leftnav a:hover {
-                            background-color: rgb(45, 45, 45);
-                            transition: 0.05s;
+                            background-color: rgb(75, 75, 75);
+                            transition: 0.25s;
                         }
                         .leftnav img {
                             width: 0.875cm;
@@ -271,8 +271,8 @@ if(isset($_POST['productnamewijzigen']))
                             transition: 0.05s;
                         }
                         .rightnav a:hover {
-                            background-color: rgb(45, 45, 45);
-                            transition: 0.05s;
+                            background-color: rgb(75, 75, 75);
+                            transition: 0.25s;
                         }
                         .rightnav img {
                             width: 0.875cm;
@@ -335,6 +335,7 @@ if(isset($_POST['productnamewijzigen']))
                             border-bottom: 2px solid gray;
                             padding: 0.15cm 0.15cm 0.15cm 0.15cm;
                             width: auto;
+                            font-size: small;
                         }
                         .userlist th:last-child {
                             border-right: none;
@@ -343,9 +344,22 @@ if(isset($_POST['productnamewijzigen']))
                             border-right: 2px solid gray;
                             padding: 0.15cm 0.15cm 0.25cm 0.15cm;
                             width: auto;
+                            font-size: small;
                         }
                         .userlist td:last-child {
                             border-right: none;
+                        }
+                        .delete1 a {
+                            margin: auto;
+                            padding-right: 0.40cm;
+                        }
+                        .delete1 img {
+                            width: 57.5%;
+                            height: 57.5%;
+                        }
+                        .delete1 img:hover {
+                            transition: 0.1s;
+                            filter: invert(45%);
                         }
                     </style>
                     <?php
@@ -362,7 +376,7 @@ if(isset($_POST['productnamewijzigen']))
                         <th style="width: auto;">Postcode</th>
                         <th style="width: auto;">Gemeente</th>
                         <th style="width: auto;">Geboortedatum</th>
-                        <th style="width: auto;">Verwijderen</th>
+                        <th style="width: 2cm;">Verwijderen</th>
                     </tr>
                     <?php 
                     foreach($klanten as $klant):
@@ -379,7 +393,7 @@ if(isset($_POST['productnamewijzigen']))
                         <td style="text-align: right;"><?php echo $klant['GeboorteDatum']; ?></td>
                         <?php
                         $userid = $klant['KlantenID'];
-                        echo "<td style='text-align: right';><a href='deleteUser.php?nr=$userid'>Verwijderen</a></td>";
+                        echo "<td style='text-align: right;' class='delete1'><a href='deleteUser.php?nr=$userid'><img src='images/garbageTRANS.png' alt='Verwijderen'/></a></td>";
                         ?>
                     </tr>
                     <?php
@@ -393,6 +407,8 @@ if(isset($_POST['productnamewijzigen']))
                     .extralist {
                         margin: auto;
                         justify-content: center;
+                        background-color: rgb(35, 35, 35);
+                        border-radius: 1cm;
                     }
                     .extralist table {
                         width: 95%;
@@ -415,13 +431,11 @@ if(isset($_POST['productnamewijzigen']))
                                     <table>
                                         <style>
                                             .directorlist {
-                                                margin: auto;
                                                 justify-content: center;
                                                 width: fit-content;
                                                 height: 100%;
-                                                background-color: rgb(35, 35, 35);
+                                                background-color: transparent;
                                                 padding: 0.5cm;
-                                                margin: auto;
                                                 border-radius: 1cm;
                                             }
                                             .directorlist h1 {
@@ -445,6 +459,7 @@ if(isset($_POST['productnamewijzigen']))
                                                 border-bottom: 2px solid gray;
                                                 padding: 0.25cm 0.5cm 0.25cm 0.5cm;
                                                 width: fit-content;
+                                                font-size: small;
                                             }
                                             .directorlist th:last-child {
                                                 border-right: none;
@@ -453,6 +468,7 @@ if(isset($_POST['productnamewijzigen']))
                                                 border-right: 2px solid gray;
                                                 padding: 0.25cm 0.5cm 0.25cm 0.5cm;
                                                 width: fit-content;
+                                                font-size: small;
                                             }
                                             .directorlist td:last-child {
                                                 border-right: none;
@@ -481,44 +497,6 @@ if(isset($_POST['productnamewijzigen']))
                                         ?>
                                     </table>
                                 </div>
-                                <!--<p>
-                                    <br><br>
-                                </p>
-                                <div class="directorform">
-                                    <h2>Regisseur toevoegen</h2>
-                                    <style>
-                                        .directorform {
-                                            width: fit-content;
-                                            background-color: rgb(75, 75, 75);
-                                            padding: 0.25cm;
-                                            padding-left: 0.5cm;
-                                            border-radius: 0.5cm;
-                                            margin: 0.25cm;
-                                        }
-                                        .directorform, .directorform form {
-                                            width: fit-content;
-                                        }
-                                        .directorform input {
-                                            padding: 0.15cm;
-                                            border-radius: 0.15cm;
-                                            border: none;
-                                            width: fit-content;
-                                        }
-
-                                        .directorform label {
-                                            color: white;
-                                            font-weight: bold;
-                                            width: fit-content;
-                                        }
-                                    </style>
-                                    <form action="" method="POST">
-                                        <label for="directorname">Regisseur naam</label>
-                                        <br>
-                                        <input type="text" name="directorname" id="directorname" size="auto" required/>
-                                        <br><br>
-                                        <input type="submit" name="submitdirector" value="Regisseur toevoegen" style="width: auto;"/>
-                                    </form>
-                                </div>-->
                             </div>
                         </td>
                         <td>
@@ -528,13 +506,11 @@ if(isset($_POST['productnamewijzigen']))
                                     <table>
                                         <style>
                                             .agelist {
-                                                margin: auto;
                                                 justify-content: center;
                                                 width: fit-content;
                                                 height: 100%;
                                                 background-color: rgb(35, 35, 35);
                                                 padding: 0.5cm;
-                                                margin: auto;
                                                 border-radius: 1cm;
                                             }
                                             .agelist div {
@@ -560,6 +536,7 @@ if(isset($_POST['productnamewijzigen']))
                                                 border-bottom: 2px solid gray;
                                                 padding: 0.25cm 0.5cm 0.25cm 0.5cm;
                                                 width: fit-content;
+                                                font-size: small;
                                             }
                                             .agelist th:last-child {
                                                 border-right: none;
@@ -568,6 +545,7 @@ if(isset($_POST['productnamewijzigen']))
                                                 border-right: 2px solid gray;
                                                 padding: 0.25cm 0.5cm 0.25cm 0.5cm;
                                                 width: fit-content;
+                                                font-size: small;
                                             }
                                             .agelist td:last-child {
                                                 border-right: none;
@@ -596,42 +574,6 @@ if(isset($_POST['productnamewijzigen']))
                                         ?>
                                     </table>
                                 </div>
-                                <!--<p>
-                                    <br><br>
-                                </p>
-                                <div class="ageform">
-                                    <h2>Leeftijd toevoegen</h2>
-                                    <style>
-                                        .ageform {
-                                            width: 100%;
-                                            background-color: rgb(75, 75, 75);
-                                            padding: 0.25cm;
-                                            padding-left: 0.5cm;
-                                            border-radius: 0.5cm;
-                                            margin: 0.25cm;
-                                        }
-                                        .ageform, .ageform form {
-                                            width: fit-content;
-                                            margin-right: 0.2cm;
-                                        }
-                                        .ageform input {
-                                            padding: 0.15cm;
-                                            border-radius: 0.15cm;
-                                            border: none;
-                                        }
-                                        .ageform label {
-                                            color: white;
-                                            font-weight: bold;
-                                        }
-                                    </style>
-                                    <form action="" method="POST">
-                                        <label for="agename">Leeftijd</label>
-                                        <br>
-                                        <input type="text" name="agename" id="agename" size="auto" required/>
-                                        <br><br>
-                                        <input type="submit" name="submitage" value="Leeftijd toevoegen" style="width: auto;"/>
-                                    </form>
-                                </div>-->
                             </div>
                         </td>
                         <td>
@@ -641,13 +583,11 @@ if(isset($_POST['productnamewijzigen']))
                                     <table>
                                         <style>
                                             .genrelist {
-                                                margin: auto;
                                                 justify-content: center;
                                                 width: 85%;
                                                 height: 100%;
                                                 background-color: rgb(35, 35, 35);
                                                 padding: 0.5cm;
-                                                margin: auto;
                                                 border-radius: 1cm;
                                             }
                                             .genrelist h1 {
@@ -665,6 +605,7 @@ if(isset($_POST['productnamewijzigen']))
                                                 border-right: 2px solid gray;
                                                 border-bottom: 2px solid gray;
                                                 padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                                                font-size: small;
                                             }
                                             .genrelist th:last-child {
                                                 border-right: none;
@@ -672,6 +613,7 @@ if(isset($_POST['productnamewijzigen']))
                                             .genrelist td {
                                                 border-right: 2px solid gray;
                                                 padding: 0.25cm 0.5cm 0.25cm 0.5cm;
+                                                font-size: small;
                                             }
                                             .genrelist td:last-child {
                                                 border-right: none;
@@ -697,41 +639,6 @@ if(isset($_POST['productnamewijzigen']))
                                         ?>
                                     </table>
                                 </div>
-                                <!--<p>
-                                    <br><br>
-                                </p>
-                                <div class="genreform">
-                                    <h2>Genre toevoegen</h2>
-                                    <style>
-                                        .genreform {
-                                            width: 100%;
-                                            background-color: rgb(75, 75, 75);
-                                            padding: 0.25cm;
-                                            padding-left: 0.5cm;
-                                            border-radius: 0.5cm;
-                                            margin: 0.25cm;
-                                        }
-                                        .genreform, .genreform form {
-                                            width: auto;
-                                        }
-                                        .genreform input {
-                                            padding: 0.15cm;
-                                            border-radius: 0.15cm;
-                                            border: none;
-                                        }
-                                        .genreform label {
-                                            color: white;
-                                            font-weight: bold;
-                                        }
-                                    </style>
-                                    <form action="" method="POST">
-                                        <label for="genrename">Genre</label>
-                                        <br>
-                                        <input type="text" name="genrename" id="genrename" size="auto" required/>
-                                        <br><br>
-                                        <input type="submit" name="submitgenre" value="Genre toevoegen" style="width: auto;"/>
-                                    </form>
-                                </div>-->
                             </div>
                         </td>
                     </tr>
@@ -777,6 +684,27 @@ if(isset($_POST['productnamewijzigen']))
                         }
                         .productlist td:last-child {
                             border-right: none;
+                        }
+                        .edit img {
+                            width: 100%;
+                            height: 100%;
+                            filter: invert(100%);
+                        }
+                        .edit img:hover {
+                            transition: 0.1s;
+                            filter: invert(55%);
+                        }
+                        .delete a {
+                            margin: auto;
+                            padding-right: 0.40cm;
+                        }
+                        .delete img {
+                            width: 57.5%;
+                            height: 57.5%;
+                        }
+                        .delete img:hover {
+                            transition: 0.1s;
+                            filter: invert(45%);
                         }
                     </style>
                     <?php
@@ -824,20 +752,39 @@ if(isset($_POST['productnamewijzigen']))
                             <td style="text-align: right;"><?php echo $product['Prijs']; ?></td>
                             <?php
                             $productid = $product['ProductID'];
-                            echo "<td style='text-align: right';><a href='productwijzigen.php?nr=$productid'>Aanpassen</a></td>";
-                            echo "<td style='text-align: right';><a href='deleteProduct.php?nr=$productid'>Verwijderen</a></td>";
+                            echo "<td style='text-align: right;' class='edit'><a href='productwijzigen.php?nr=$productid'><img src='images/editTRANS.png' alt='Aanpassen'/></a></td>";
+                            echo "<td style='text-align: right;' class='delete'><a href='deleteProduct.php?nr=$productid'><img src='images/garbageTRANS.png' alt='Verwijderen'/></a></td>";
                             ?>
                         </tr>
                         <?php
                     endforeach;
                     ?>
                 </table>
-                <p>
-                    <br><br>
-                </p>
-                <div>
-                    <td style='text-align: right';>
-                        <a href='producttoevoegen.php'>Toevoegen</a>
+                <div class="add">
+                    <style>
+                        .add {
+                            width: 1.5cm;
+                            height: 1.5cm;
+                            float: right;
+                        }
+                        .add td {
+                            width: fit-content;
+                            height: fit-content;
+                        }
+                        .add a {
+                            text-decoration: none;
+                        }
+                        .add img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                        .add img:hover {
+                            transition: 0.1s;
+                            filter: invert(45%);
+                        }
+                    </style>
+                    <td>
+                        <a href='producttoevoegen.php'><img src="images/Addtocart.png" alt="toevoegen"/></a>
                     </td>
                 </div>
                 <!--<div class="producttable">

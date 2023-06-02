@@ -37,8 +37,4 @@
     //  en maak de winkelkar opnieuw leeg
     //
     unset( $_SESSION['WINKELKAR'] );
-
-    header('location:'....);
-
-
 ?>

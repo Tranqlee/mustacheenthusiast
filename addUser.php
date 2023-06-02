@@ -155,7 +155,7 @@
                             <table style="color: white;">
                                 <tr>
                                     <td>
-                                        <label for="Gebruikersnaam">Username</label>
+                                        <label for="Gebruikersnaam">Gebruikersnaam</label>
                                         <input type="text" name="Gebruikersnaam" id="txtGebruikersnaam" size="45cm" required/>
                                     </td>
                                     <td>
@@ -171,11 +171,11 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label for="password">Password</label>
+                                        <label for="password">Wachtwoord</label>
                                         <input type="password" name="password" id="txtPassword" size="45cm" required/>
                                     </td>
                                     <td>
-                                        <label for="repeatpassword">Repeat Password</label>
+                                        <label for="repeatpassword">Herhaal wachtwoord</label>
                                         <input type="password" name="repeatpassword" id="txtRepeatPassword" size="45cm" required/>
                                     </td>
                                 </tr>
@@ -190,8 +190,8 @@
                                         <input type="email" name="Email" id="txtEmail" size="45cm" required/>
                                     </td>
                                     <td>
-                                        <label for="Telefoonnummer">Phone number</label>
-                                        <input type="text" name="Telefoonnummer" id="txtTelefoonnummer" size="45cm" required/>
+                                        <label for="Telefoonnummer">Telefoonnummer</label>
+                                        <input type="tel" name="Telefoonnummer" id="txtTelefoonnummer" size="45cm" placeholder="0XXX-XX-XX-XX" pattern="[0]{1}[1-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{2}" required/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -201,12 +201,12 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label for="Straatnaam">Street name</label>
+                                        <label for="Straatnaam">Straatnaam</label>
                                         <input type="text" name="Straatnaam" id="txtStraatnaam" size="45cm" required/>
                                     </td>
                                     <td>
-                                        <label for="Huisnummer">House number</label>
-                                        <input type="text" name="Huisnummer" id="txtHuisnummer" size="45cm" required/>
+                                        <label for="Huisnummer">Huisnummer</label>
+                                        <input type="number" name="Huisnummer" id="txtHuisnummer" size="45cm" required/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -216,13 +216,13 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label for="Postcode">Postal code</label>
-                                        <input type="text" name="Postcode" id="txtPostcode" size="45cm" required/>
-                                    </td>
-                                    <td>
-                                        <label for="Gemeente">Town/City</label>
+                                        <label for="Gemeente">Gemeente</label>
                                         <input type="text" name="Gemeente" id="txtGemeente" size="45cm" required/>
                                     </td>
+                                    <td>
+                                        <label for="Postcode">Postcode</label>
+                                        <input type="number" name="Postcode" id="txtPostcode" size="45cm" required/>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -231,14 +231,14 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label for="GeboorteDatum">Date of birth</label>
+                                        <label for="GeboorteDatum">Geboortedatum</label>
                                         <input type="date" name="GeboorteDatum" id="txtGeboorteDatum" size="45cm" required/>
                                     </td>
                                 </tr>
                             </table>
                             <br>
                             <div class="buttonlogin">
-                                <input class="buttonlogin" type="submit" value="Sign up" style="width: 100%;"/>
+                                <input class="buttonlogin" type="submit" value="Account aanmaken" style="width: 100%;"/>
                             </div>
                         </form>
                         <style>
@@ -252,7 +252,7 @@
                             }
                         </style>
                         <div style="margin: 0 auto 0 auto; width: fit-content;">
-                            <p><a href="loginSHOP.php">Return to login page</a></p>
+                            <p><a href="loginSHOP.php">Ga terug naar het login menu</a></p>
                         </div>
                         <br>
                     </div>

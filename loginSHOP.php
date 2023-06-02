@@ -14,7 +14,7 @@ if (isset($_POST['Username'])) {
     $result = $stmt->fetch();
 
     if(!$result){
-        $error = "Username does not exist";
+        $error = "Gebruikersnaam bestaat niet";
     }
 
     if ($result && $error == "") {
@@ -24,7 +24,7 @@ if (isset($_POST['Username'])) {
             $_SESSION['user'] = $username;
             header('Location: index.php');
         } else {
-            $error = "Password is incorrect";
+            $error = "Wachtwoord is niet correct";
         }
     }
 }
@@ -43,7 +43,7 @@ if (isset($_POST['Username'])) {
     <table>
         <tr>
             <th>
-                <h2>Login</h2>
+                <h2>Log in</h2>
             </th>
         </tr>
         <tr>
@@ -51,12 +51,12 @@ if (isset($_POST['Username'])) {
                 <div>
                     <form action="" method="POST">
                         <div class="cssform">
-                            <label for="Username">Username</label>
+                            <label for="Username">Gebruikersnaam</label>
                             <input type="text" name="Username" id="txtUsername" size="45cm" required/>
                         </div>
                         <br>
                         <div class="cssform">
-                            <label for="password">Password</label>
+                            <label for="password">Wachtwoord</label>
                             <input type="password" name="password" id="txtPassword" size="45cm" required/>
                         </div>
                         <br>
@@ -65,10 +65,10 @@ if (isset($_POST['Username'])) {
                         </div>
                     </form>
                     <div style="margin: 0 auto 0 auto; width: fit-content;">
-                        <p>Forgot your password? <a href="resetPassword.php">Reset your password</a></p>
+                        <p>Wachtwoord vergeten? <a href="resetPassword.php">Reset je wachtwoord</a></p>
                     </div>
                     <div style="margin: 0 auto 0 auto; width: fit-content;">
-                        <p>Don't have an account? <a href="addUser.php">Sign up</a></p>
+                        <p>Geen account? <a href="addUser.php">Maak een account aan</a></p>
                     </div>
                     <br>
                     <div class="error">

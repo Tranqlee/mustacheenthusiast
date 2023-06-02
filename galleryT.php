@@ -116,8 +116,8 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                             transition: 0.05s;
                         }
                         .leftnav a:hover {
-                            background-color: rgb(45, 45, 45);
-                            transition: 0.05s;
+                            background-color: rgb(75, 75, 75);
+                            transition: 0.25s;
                         }
                         .leftnav img {
                             width: 0.875cm;
@@ -206,7 +206,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                                     </a>
                                 </div>
                             </td>
-                            <td style="background-color: rgb(40, 40, 40);">
+                            <td style="background-color: rgb(50, 50, 50);">
                                 <div class="button selected">
                                     <a href="galleryT.php">
                                         <h3>Producten</h3>
@@ -247,8 +247,8 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                             transition: 0.05s;
                         }
                         .rightnav a:hover {
-                            background-color: rgb(45, 45, 45);
-                            transition: 0.05s;
+                            background-color: rgb(75, 75, 75);
+                            transition: 0.25s;
                         }
                         .rightnav img {
                             width: 0.875cm;
@@ -446,10 +446,18 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                                                 height: auto;
                                                 vertical-align: bottom;
                                             }
+                                            .addcart:hover {
+                                                filter: invert(55%);
+                                                transition: 0.15s;
+                                            }
+                                            .addcart:active {
+                                                filter: invert(0%);
+                                                transition: 0.0s;
+                                            }
                                         </style>
                                         <form action="" method="POST">
                                             <input type="hidden" name="additemID" value="<?php echo $temporaryitemID; ?>">
-                                            <input type="image" src="images/Addtocart.png" alt="Submit">
+                                            <input class="addcart" type="image" src="images/Addtocart.png" alt="Submit">
                                         </form>
                                     </div>
                                 </td>

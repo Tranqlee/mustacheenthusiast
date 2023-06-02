@@ -14,6 +14,52 @@ $stmt->execute();
 $result = $stmt->fetch();
 ?>
 
+
+
+
+
+
+
+
+<?php
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Ontvang de datum vanuit JavaScript
+    $date = $_POST['date'];
+
+    // Gebruik de ontvangen datum in PHP
+    echo 'Ontvangen datum: ' . $date;
+    exit;
+  }
+?>
+
+<script>
+    setInterval(function() {
+        var date = new Date();
+        var formattedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
+      
+        fetch('', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'date=' + encodeURIComponent(formattedDate)
+        })
+        .then(function(response) {
+            console.log('Datum is succesvol naar PHP gestuurd');
+        });
+      
+        document.getElementById('currentDateTime').textContent = formattedDate;
+    }, 1000);
+</script>
+<div id="currentDateTime"></div>
+
+
+
+
+
+
+
+
 <!-- Website Template by freewebsitetemplates.com -->
 <html lang="en">
 <head>
@@ -83,8 +129,8 @@ $result = $stmt->fetch();
                             transition: 0.05s;
                         }
                         .leftnav a:hover {
-                            background-color: rgb(45, 45, 45);
-                            transition: 0.05s;
+                            background-color: rgb(75, 75, 75);
+                            transition: 0.25s;
                         }
                         .leftnav img {
                             width: 0.875cm;
@@ -166,7 +212,7 @@ $result = $stmt->fetch();
                             }
                         </style>
                         <tr>
-                            <td style="background-color: rgb(40, 40, 40);">
+                            <td style="background-color: rgb(50, 50, 50);">
                                 <div class="button selected">
                                     <a href="index.php">
                                         <h3>Home</h3>
@@ -214,8 +260,8 @@ $result = $stmt->fetch();
                             transition: 0.05s;
                         }
                         .rightnav a:hover {
-                            background-color: rgb(45, 45, 45);
-                            transition: 0.05s;
+                            background-color: rgb(75, 75, 75);
+                            transition: 0.25s;
                         }
                         .rightnav img {
                             width: 0.875cm;

@@ -93,8 +93,8 @@ if(isset($_POST['action']))
                             transition: 0.05s;
                         }
                         .leftnav a:hover {
-                            background-color: rgb(45, 45, 45);
-                            transition: 0.05s;
+                            background-color: rgb(75, 75, 75);
+                            transition: 0.25s;
                         }
                         .leftnav img {
                             width: 0.875cm;
@@ -190,7 +190,7 @@ if(isset($_POST['action']))
                                     </a>
                                 </div>
                             </td>
-                            <td style="background-color: rgb(40, 40, 40);">
+                            <td style="background-color: rgb(50, 50, 50);">
                                 <div class="button selected">
                                     <a href="shoppingcartT.php">
                                         <h3>Winkelkar</h3>
@@ -224,8 +224,8 @@ if(isset($_POST['action']))
                             transition: 0.05s;
                         }
                         .rightnav a:hover {
-                            background-color: rgb(45, 45, 45);
-                            transition: 0.05s;
+                            background-color: rgb(75, 75, 75);
+                            transition: 0.25s;
                         }
                         .rightnav img {
                             width: 0.875cm;
@@ -449,6 +449,14 @@ if(isset($_POST['action']))
                     .bestellen form:last-child {
                         margin-left: 0.125cm;
                     }
+                    .animation:hover {
+                        filter: invert(75%);
+                        transition: 0.15s;
+                    }
+                    .animation:active {
+                        filter: invert(0%);
+                        transition: 0.0s;
+                    }
                 </style>
                 <table style="margin: 0 0.5cm 0 0.5cm; padding: 0 -0.5cm 0 -0.5cm; height: min-content;" class="bestellen">
                     <tr>
@@ -457,11 +465,12 @@ if(isset($_POST['action']))
                                                 {
                                                     echo "YES";
                                                 } ?>" method="POST">
-                                <input type="image" src="images/cartTRANS.png" alt="Submit"/>
+                                <input type="hidden" name="bestellen" value="empty">
+                                <input class="animation" type="image" src="images/cartTRANS.png" alt="Submit"/>
                             </form>
                             <form action="" method="POST" class="extra">
                                 <input type="hidden" name="action" value="empty">
-                                <input type="image" src="images/garbageTRANS.png" alt="Submit"/>
+                                <input class="animation"type="image" src="images/garbageTRANS.png" alt="Submit"/>
                             </form>
                         </td>
                     </tr>

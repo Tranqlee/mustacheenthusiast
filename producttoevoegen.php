@@ -112,7 +112,7 @@
             <tr>
                 <td>
                     <div>
-                    <style>
+                        <style>
                             input {
                                 padding: 0.6cm 0.15cm 0.25cm 0.15cm;
                                 border-radius: 0.15cm;
@@ -121,49 +121,104 @@
                             label {
                                 padding: 0 0 0 0.15cm;
                                 color: black;
+                                z-index: 2;
+                            }
+                            select {
+                                padding: 0.15cm;
+                                margin: 0.15cm;
+                                border: none;
+                                border-radius: 0.10cm;
+                            }
+                            option {
+                                text-align: right;
                             }
                         </style>
                         <form action="" method="POST">
                             <table style="color: white;">
                                 <tr>
                                     <td>
-                                        <label for="afbeelding">Product afbeelding (+ .jpg)</label>
+                                        <label for="afbeelding">Afbeelding (+ .jpg)</label>
                                         <input type="text" name="afbeelding" id="txtafbeelding" size="45cm" required/>
                                         <br>
                                     </td>
                                     <td>
-                                        <label for="naam">Product naam</label>
+                                        <label for="naam">Naam</label>
                                         <input type="text" name="naam" id="txtnaam" size="45cm" required/>
                                         <br>
                                     </td>
                                 </tr>
+                            </table>
+                            <table class="tableID">
+                                <style>
+                                    .tableID {
+                                        width: 100%;
+                                    }
+                                    .tableID td {
+                                        width: 33.333%;
+                                    }
+                                    .tableID label {
+                                        color: white;
+                                    }
+                                </style>
                                 <tr>
                                     <td>
-                                        <label for="genre">Product hoofdgenre ID</label>
-                                        <input type="text" name="genre" id="txtgenre" size="45cm" required/>
+                                        <label for="genre">Hoofdgenre</label>
+                                        <br>
+                                        <div>
+                                            <select id="membersField" name="genre" required/>
+                                                <?php
+                                                    $query = $link->query("SELECT * FROM Genres");
+                                                    $genres = $query->fetchAll();
+
+                                                    foreach($genres as $genre)
+                                                    {
+                                                        echo "<option name='$genre[GenreID]' value='$genre[GenreID]'>$genre[Naam]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
                                         <br>
                                     </td>
                                     <td>
-                                        <label for="leeftijd">Product leeftijdrestrictie ID</label>
-                                        <input type="text" name="leeftijd" id="txtleeftijd" size="45cm" required/>
+                                        <label for="leeftijd">Leeftijdrestrictie</label>
+                                        <div>
+                                            <select id="membersField" name="leeftijd" required/>
+                                                <?php
+                                                    $query = $link->query("SELECT * FROM leeftijden");
+                                                    $leeftijden = $query->fetchAll();
+
+                                                    foreach($leeftijden as $leeftijd)
+                                                    {
+                                                        echo "<option value='$leeftijd[LeeftijdID]'>$leeftijd[Naam]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <br>
+                                    </td>
+                                    <td>
+                                        <label for="regisseur">Regisseur</label>
+                                        <div>
+                                            <select id="membersField" name="regisseur" required/>
+                                                <?php
+                                                    $query = $link->query("SELECT * FROM regisseuren");
+                                                    $regisseurs = $query->fetchAll();
+
+                                                    foreach($regisseurs as $regisseur)
+                                                    {
+                                                        echo "<option value='$regisseur[RegisseurID]'>$regisseur[Naam]</option>";
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
                                         <br>
                                     </td>
                                 </tr>
+                            </table>
+                            <table>
                                 <tr>
                                     <td>
-                                        <label for="regisseur">Product regisseur ID</label>
-                                        <input type="text" name="regisseur" id="txtregisseur" size="45cm" required/>
-                                        <br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label for="beschrijving">Product beschrijving</label>
+                                        <label for="beschrijving">Beschrijving</label>
                                         <input type="text" name="beschrijving" id="txtbeschrijving" size="45cm" required/>
                                         <br>
                                     </td>
@@ -172,18 +227,13 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label for="aantal">Product aantal</label>
-                                        <input type="text" name="aantal" id="txtaantal" size="45cm" required/>
+                                        <label for="aantal">Aantal</label>
+                                        <input type="number" name="aantal" id="txtaantal" size="45cm" required/>
                                         <br>
                                     </td>
                                     <td>
-                                        <label for="prijs">Product prijs</label>
-                                        <input type="text" name="prijs" id="txtprijs" size="45cm" step="0.01" required/>
+                                        <label for="prijs">Prijs</label>
+                                        <input type="number" name="prijs" id="txtprijs" size="45cm" step="0.01" required/>
                                         <br>
                                     </td>
                                 </tr>

@@ -12,6 +12,8 @@ $stmt = $link->prepare("SELECT * FROM klant WHERE Gebruikersnaam = :username");
 $stmt->bindParam(':username', $_SESSION['user']);
 $stmt->execute();
 $result = $stmt->fetch();
+
+$winkelkar = $_SESSION['WINKELKAR'];
 ?>
 
 <!-- Website Template by freewebsitetemplates.com -->
@@ -83,8 +85,8 @@ $result = $stmt->fetch();
                             transition: 0.05s;
                         }
                         .leftnav a:hover {
-                            background-color: rgb(45, 45, 45);
-                            transition: 0.05s;
+                            background-color: rgb(75, 75, 75);
+                            transition: 0.25s;
                         }
                         .leftnav img {
                             width: 0.875cm;
@@ -181,8 +183,8 @@ $result = $stmt->fetch();
                             transition: 0.05s;
                         }
                         .rightnav a:hover {
-                            background-color: rgb(45, 45, 45);
-                            transition: 0.05s;
+                            background-color: rgb(75, 75, 75);
+                            transition: 0.25s;
                         }
                         .rightnav img {
                             width: 0.875cm;
@@ -351,9 +353,12 @@ $result = $stmt->fetch();
                 }
             </style>
             <tr>
-                <th>
-                    HIER KOMEN DE BESTELLINGEN
-                </th>
+                <td>
+                    <div>
+                        <?php
+                        ?>
+                    </div>
+                </td>
             </tr>
         </table>
     </div>

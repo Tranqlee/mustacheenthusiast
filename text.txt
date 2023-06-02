@@ -1,65 +1,61 @@
-if($i > 0)
-                    {
-                        $stmt = $link->prepare("SELECT * FROM product WHERE ProductID = :ProductID");
-                        $stmt->bindParam(':ProductID', $winkelkar[$i]['ProductID']);
-                        $stmt->execute();
-                        $itemresult = $stmt->fetch(PDO::FETCH_ASSOC);
+?>
+<div id="current_date"></p>
+<script>
+    document.cookie = document.getElementById("current_date").innerHTML = Date();
+</script>
+<?php
+$datum = $_COOKIE['current_date'];
+echo $datum;
+?>
 
-                        $stmt = $link->prepare("SELECT * FROM product WHERE ProductID = :ProductID");
-                        $stmt->bindParam(':ProductID', $winkelkar[$i]['ProductID']);
-                        $stmt->execute();
-                        $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                        $temporaryitemID = $product['ProductID'];
-                        ?>
-                        <div class="item">
-                            <table>
-                                <tr>
-                                    <td class="image">
-                                        <img src="<?php echo 'productimages/' . $product['Afbeelding']; ?>" alt="Product image">
-                                    </td>
-                                    <td style="vertical-align: top;">
-                                        <table class="info1">
-                                            <tr>
-                                                <th>
-                                                    <p>Name:</p>
-                                                </th>
-                                                <td>
-                                                    <p><?php echo $product['Naam']; ?></p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <p>Price:</p>
-                                                </th>
-                                                <td>
-                                                    <p><?php echo $itemresult['Prijs']; ?></p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <p>Aantal:</p>
-                                                </th>
-                                                <td>
-                                                    <p><?php echo $winkelkar[$i]['AANTAL']; ?></p>
-                                                </td>
-                                            </tr>
-                                            <tr class="aantaledit">
-                                                <td>
-                                                    <?php
-                                                    $plus1ID = $winkelkar[$i]['ProductID'];
-                                                    echo "<a href='PLUS1.php?nr=$plus1ID'><img src='images/mobile-collapse.png' alt='+1'></a>";
-                                                    $minus1ID = $winkelkar[$i]['ProductID'];
-                                                    echo "<a href='MINUS1.php?nr=$minus1ID'><img src='images/mobile-expand.png' alt='-1'></a>";
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <?php
-                    }
+
+
+
+
+
+
+
+
+
+<?php
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Ontvang de datum vanuit JavaScript
+    $date = $_POST['date'];
+
+    // Gebruik de ontvangen datum in PHP
+    echo 'Ontvangen datum: ' . $date;
+    exit;
+  }
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Datum en tijd</title>
+  <script>
+    setInterval(function() {
+      var date = new Date();
+      var formattedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + date.getHours() + '/' + date.getMinutes();
+      
+      fetch('', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'date=' + encodeURIComponent(formattedDate)
+      })
+      .then(function(response) {
+        console.log('Datum is succesvol naar PHP gestuurd');
+      });
+      
+      document.getElementById('currentDateTime').textContent = formattedDate;
+    }, 1000);
+  </script>
+</head>
+<body>
+  <h1>Huidige datum en tijd:</h1>
+  <div id="currentDateTime"></div>
+</body>
+</html>
+

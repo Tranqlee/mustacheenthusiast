@@ -59,7 +59,7 @@
 
 <!DOCTYPE html>
 <head>
-    <title>Webtoepassing Reset Password</title>
+    <title>Webtoepassing Reset Wachtwoord</title>
     <style>
         html
         {
@@ -142,7 +142,7 @@
         <table>
             <tr>
                 <th>
-                    <h2>Reset Password</h2>
+                    <h2>Reset wachtwoord</h2>
                 </th>
             </tr>
             <tr>
@@ -161,22 +161,22 @@
                         </style>
                         <form action="" method="POST">
                             <div class="cssform">
-                                <label for="Username">Username</label>
+                                <label for="Username">Gebruikersnaam</label>
                                 <input type="text" name="Username" id="txtUsername" size="45cm" required/>
                             </div>
                             <br>
                             <div class="cssform">
-                                <label for="password">New password</label>
+                                <label for="password">Nieuw wachtwoord</label>
                                 <input type="password" name="Newpassword" id="txtNewPassword" size="45cm" required/>
                             </div>
                             <br>
                             <div class="cssform">
-                                <label for="password">Repeat new password</label>
+                                <label for="password">Herhaal nieuw wachtwoord</label>
                                 <input type="password" name="Repeatnewpassword" id="txtRepeatNewPassword" size="45cm" required/>  
                             </div>
                             <br>
                             <div class="buttonresetpassword">
-                                <input class="buttonresetpassword" type="submit" value="Reset password" style="width: 100%;"/>
+                                <input class="buttonresetpassword" type="submit" value="Reset wachtwoord" style="width: 100%;"/>
                             </div>
                         </form>
                         <style>
@@ -190,7 +190,7 @@
                             }
                         </style>
                         <div style="margin: 0 auto 0 auto; width: fit-content;">
-                            <p><a href="loginSHOP.php">Return to login page</a></p>
+                            <p><a href="loginSHOP.php">Ga terug naar het login menu</a></p>
                         </div>
                         <br>
                         <div class="error">
