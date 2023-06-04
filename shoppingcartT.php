@@ -22,19 +22,83 @@ if(isset($_POST['action']))
     unset($_SESSION['WINKELKAR']);
     header('Location: shoppingcartT.php');
 }
+
+
+
+date_default_timezone_set('Europe/Brussels');
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    if (isset($_POST['bestellen']))
+    {
+
+        //haalt de huidige datum en tijd op
+        $huidigeDatum = new DateTime();
+
+        $jaar = $huidigeDatum->format('Y');
+        $maand = $huidigeDatum->format('m');
+        $dag = $huidigeDatum->format('d');
+        $uur = $huidigeDatum->format('H');
+        $minuten = $huidigeDatum->format('i');
+        $seconden = $huidigeDatum->format('s');
+
+        $datumTijd = $jaar . '-' . $maand . '-' . $dag . ' ' . $uur . ':' . $minuten . ':' . $seconden;
+
+        $_SESSION['DATE'] = $datumTijd;
+        $_SESSION['TOTALORDERPRICE'] = $totaaltotaalprijs;
+
+        header("location: bestellen.php");
+    }
+}
+
+
+$gevonden = false;
+if(isset($_SESSION['WINKELKAR']))
+{
+    $winkelkar = $_SESSION['WINKELKAR'];
+
+    for( $i=0; $i<count($winkelkar) and !$gevonden; $i++ )
+    {
+        if( $winkelkar[$i]['ProductID']==$_POST['ProductID'] )
+        {
+            $gevonden = true;
+            $winkelkar[$i]['AANTAL']++;
+        }
+    }
+}
 ?>
+
+
+
+
 
 <!-- Website Template by freewebsitetemplates.com -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webtoepassing Shoppingcart</title>
+    <title>Webtoepassing Winkelkar</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width : 568px)">
     <link rel="stylesheet" type="text/css" href="css/NewStyle.css">
     <script type="text/javascript" src="js/mobile.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+    function sendDate() {
+        // Stuur de datum naar hetzelfde PHP-bestand
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+            console.log('Datum is succesvol naar PHP gestuurd');
+            document.getElementById('currentDateTime').textContent = this.responseText;
+            }
+        };
+        xhttp.open('POST', '', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('bestellen=1');
+    }
+  </script>
 </head>
 <body style="overflow-y: scroll;">
     <style>
@@ -277,6 +341,7 @@ if(isset($_POST['action']))
                         margin-top: 0.5cm;
                         padding: 0.5cm;
                         width: 100%;
+                        box-shadow: 0px 0px 10px 2px black;
                     }
                    .item table, .item tr {
                         width: fit-content;
@@ -326,22 +391,59 @@ if(isset($_POST['action']))
                         width: 7.5cm;
                     }
 
+
+
                     .beschrijving {
                         width: 100%;
                     }
                     .beschrijving strong {
                         color: white;
                     }
+
+
+
                     .image {
                         width: fit-content;
+                    }
+                    .image div {
                         border: 5px solid black;
                         border-radius: 0.15cm;
                         background-color: black;
+                        width: fit-content;
+                        height: fit-content;
                     }
+                    .image img {
+                        width: 3.55cm;
+                        height: auto;
+                    }
+
+
+
                     .aantaledit td a img {
                         width: 1cm;
                         height: 1cm;
                         
+                    }
+
+
+
+                    .totalprice {
+                        background-color: rgb(75, 75, 75);
+                        padding: 0.10cm 0.25cm;
+                        border-radius: 0.25cm;
+                        float: right;
+                        display: table-cell;
+                        width: fit-content;
+                        box-shadow: 0px 0px 10px 2px rgb(15, 15, 15);
+                    }
+                    .totalprice div p {
+                        color: white;
+                        text-align: right;
+                        width: fit-content;
+                    }
+                    .totalprice p {
+                        text-align: right;
+                        width: fit-content;
                     }
                 </style>
                 <?php
@@ -353,20 +455,34 @@ if(isset($_POST['action']))
                         $stmt = $link->prepare("SELECT * FROM product WHERE ProductID = :ProductID");
                         $stmt->bindParam(':ProductID', $winkelkar[$i]['ProductID']);
                         $stmt->execute();
-                        $itemresult = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                        $stmt = $link->prepare("SELECT * FROM product WHERE ProductID = :ProductID");
-                        $stmt->bindParam(':ProductID', $winkelkar[$i]['ProductID']);
-                        $stmt->execute();
                         $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
                         $temporaryitemID = $product['ProductID'];
+
+                        $totaalprijs = ($product['Prijs'] * $winkelkar[$i]['AANTAL']);
+                        $winkelkar[$i]['TOTAALPRIJS'] = $totaalprijs;
+                        $_SESSION['WINKELKAR'] = $winkelkar;
+
+                        if($i == 1)
+                        {
+                            $totaaltotaalprijs = $winkelkar[$i]['TOTAALPRIJS'];
+                            $_SESSION['TOTAALTOTAALPRIJS'] = $totaaltotaalprijs;
+                        }
+                        else
+                        {
+                            $totaaltotaalprijs = $totaaltotaalprijs + $winkelkar[$i]['TOTAALPRIJS'];
+                            $_SESSION['TOTAALTOTAALPRIJS'] = $totaaltotaalprijs;
+                        }
+
+                        $_SESSION['TOTAALTOTAALPRIJS'] = 0;
                         ?>
                         <div class="item">
                             <table>
                                 <tr>
                                     <td class="image">
-                                        <img src="<?php echo 'productimages/' . $product['Afbeelding']; ?>" alt="Product image">
+                                        <div>
+                                            <img src="<?php echo 'productimages/' . $product['Afbeelding']; ?>" alt="Product image">
+                                        </div>
                                     </td>
                                     <td style="vertical-align: top;">
                                         <table class="info1">
@@ -383,7 +499,7 @@ if(isset($_POST['action']))
                                                     <p>Prijs:</p>
                                                 </th>
                                                 <td>
-                                                    <p><?php echo $itemresult['Prijs']; ?></p>
+                                                    <p>€ <?php echo $product['Prijs']; ?></p>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -404,6 +520,12 @@ if(isset($_POST['action']))
                                                     ?>
                                                 </td>
                                                 <td>
+                                                    <div class="totalprice">
+                                                        <div>
+                                                            <p>Totaalprijs:</p>
+                                                        </div>
+                                                        <p style="width: fit-content;">€ <?php echo $winkelkar[$i]['TOTAALPRIJS']; ?></p>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </table>
@@ -416,8 +538,14 @@ if(isset($_POST['action']))
                 }
                 ?>
                 <style>
-                    .bestellen td {
-                        align-content: flex-end;
+                    .bestellen tr {
+                        height: fit-content;
+                    }
+                    .bestellen tr td div form {
+                        display: inline-block;
+                        vertical-align: middle;
+                        margin-bottom: 0cm;
+                        height: 100%;
                     }
                     .bestellen input {
                         width: auto;
@@ -433,22 +561,22 @@ if(isset($_POST['action']))
                         border-radius: 0.35cm;
                         padding: 0.15cm;
                     }
+
+
+
                     .extra input {
                         width: auto;
-                        height: 0.8cm;
-                        padding: 0.25cm;
+                        height: 0.85cm;
+                        padding: 0.225cm;
                     }
                     .extra input:hover {
                         width: auto;
-                        height: 0.8cm;
-                        padding: 0.25cm;
+                        height: 0.85cm;
+                        padding: 0.225cm;
                     }
-                    .bestellen form:first-child {
-                        margin-right: 0.125cm;
-                    }
-                    .bestellen form:last-child {
-                        margin-left: 0.125cm;
-                    }
+
+
+
                     .animation:hover {
                         filter: invert(75%);
                         transition: 0.15s;
@@ -457,21 +585,79 @@ if(isset($_POST['action']))
                         filter: invert(0%);
                         transition: 0.0s;
                     }
+
+
+
+                    .cartbuttons {
+                        background-color: rgb(35, 35, 35);
+                        padding: 0.15cm 0.15cm 0.15cm 0.15cm;
+                        border-radius: 0.25cm;
+                        float: left;
+                        display: table-cell;
+                        vertical-align: middle;
+                        width: fit-content;
+                        box-shadow: 0px 0px 10px 2px black;
+                    }
+                    .cartbuttons form {
+                        display: inline-block;  
+                        height: fit-content;                      
+                    }
+
+
+
+                    .totaltotalprice {
+                        background-color: rgb(35, 35, 35);
+                        padding: 0.15cm 0.25cm 0.15cm 0.15cm;
+                        border-radius: 0.25cm;
+                        float: right;
+                        display: inline-block;
+                        width: fit-content;
+                        box-shadow: 0px 0px 10px 2px black;
+                    }
+                    .totaltotalprice div {
+                        display: inline-block;
+                        vertical-align: top;
+                    }
+                    .totaltotalprice div p {
+                        color: cornflowerblue;
+                        text-align: right;
+                        width: fit-content;
+                        font-weight: bold;
+                    }
+                    .totaltotalprice div div p {
+                        color: white;
+                    }
+                    .totaltotalprice div, .totaltotalprice div form
+                    {
+                        margin-bottom: 0cm;
+                        height: fit-content;
+                    }
                 </style>
-                <table style="margin: 0 0.5cm 0 0.5cm; padding: 0 -0.5cm 0 -0.5cm; height: min-content;" class="bestellen">
+                <table class="bestellen">
                     <tr>
-                        <td style="text-align: right; display: inline-flex;">
-                            <form action="<?php if(isset($_POST['Submit']))
-                                                {
-                                                    echo "YES";
-                                                } ?>" method="POST">
-                                <input type="hidden" name="bestellen" value="empty">
-                                <input class="animation" type="image" src="images/cartTRANS.png" alt="Submit"/>
-                            </form>
-                            <form action="" method="POST" class="extra">
-                                <input type="hidden" name="action" value="empty">
-                                <input class="animation"type="image" src="images/garbageTRANS.png" alt="Submit"/>
-                            </form>
+                        <td>
+                            <div class="cartbuttons">
+                                <form action="" method="POST" class="extra">
+                                    <input type="hidden" name="action" value="empty">
+                                    <input class="animation" type="image" src="images/garbageTRANS.png" alt="Submit"/>
+                                </form>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="totaltotalprice">
+                                <div>
+                                    <form action="" method="POST">
+                                        <input type="hidden" name="bestellen" value="empty">
+                                        <input class="animation" type="image" src="images/cartTRANS.png" alt="Submit"/>
+                                    </form>
+                                </div>
+                                <div>
+                                    <div>
+                                        <p>Totaalprijs:</p>
+                                    </div>
+                                    <p style="width: fit-content;">€ <?php echo $totaaltotaalprijs; $_SESSION['TOTALORDERPRICE'] = $totaaltotaalprijs; ?></p>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </table>

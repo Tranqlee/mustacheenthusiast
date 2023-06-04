@@ -12,60 +12,17 @@ $stmt = $link->prepare("SELECT * FROM klant WHERE Gebruikersnaam = :username");
 $stmt->bindParam(':username', $_SESSION['user']);
 $stmt->execute();
 $result = $stmt->fetch();
+
+//echoed de totaalprijs van elk product uit $_SESSION['totaalprijs']
+$totaalprijs = $_SESSION['totaalprijs'];
 ?>
-
-
-
-
-
-
-
-
-<?php
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Ontvang de datum vanuit JavaScript
-    $date = $_POST['date'];
-
-    // Gebruik de ontvangen datum in PHP
-    echo 'Ontvangen datum: ' . $date;
-    exit;
-  }
-?>
-
-<script>
-    setInterval(function() {
-        var date = new Date();
-        var formattedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
-      
-        fetch('', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: 'date=' + encodeURIComponent(formattedDate)
-        })
-        .then(function(response) {
-            console.log('Datum is succesvol naar PHP gestuurd');
-        });
-      
-        document.getElementById('currentDateTime').textContent = formattedDate;
-    }, 1000);
-</script>
-<div id="currentDateTime"></div>
-
-
-
-
-
-
-
 
 <!-- Website Template by freewebsitetemplates.com -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webtoepassing Menu</title>
+    <title>Webtoepassing Hoofdmenu</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width : 568px)">
     <link rel="stylesheet" type="text/css" href="css/NewStyle.css">

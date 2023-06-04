@@ -52,7 +52,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webtoepassing Products</title>
+    <title>Webtoepassing Producten</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width : 568px)">
     <link rel="stylesheet" type="text/css" href="css/NewStyle.css">
@@ -301,6 +301,7 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                         margin-bottom: 2cm;
                         padding: 0.5cm;
                         width: 100%;
+                        box-shadow: 0px 0px 10px 2px black;
                     }
                    .item table, .item tr {
                         width: fit-content;
@@ -355,6 +356,10 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                         color: white;
                     }
                     .image {
+                        display: table-cell;
+                        vertical-align: top;
+                    }
+                    .image div {
                         width: fit-content;
                         border: 5px solid black;
                         border-radius: 0.15cm;
@@ -388,7 +393,9 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
                         <table>
                             <tr>
                                 <td class="image">
-                                    <img src="<?php echo 'productimages/' . $product['Afbeelding']; ?>" alt="Product image">
+                                    <div>
+                                        <img src="<?php echo 'productimages/' . $product['Afbeelding']; ?>" alt="Product image">
+                                    </div>
                                 </td>
                                 <td style="vertical-align: top;">
                                     <table class="info1">

@@ -11,7 +11,25 @@ if (!isset($_SESSION['user'])) { #if statement to check if the user is logged in
 $stmt = $link->prepare("SELECT * FROM klant WHERE Gebruikersnaam = :username");
 $stmt->bindParam(':username', $_SESSION['user']);
 $stmt->execute();
-$result = $stmt->fetch();
+$user = $stmt->fetch();
+
+//telt alle orders van de klant waarbij isBesteld = 1
+$sql = $link->prepare("SELECT COUNT(*) FROM `order` WHERE KlantenID = :KLANTENID AND isBesteld = 1");
+$sql->bindValue(':KLANTENID', $user['KlantenID']);
+$sql->execute();
+$orders1count = $sql->fetchColumn();
+
+$sql = $link->prepare("SELECT * FROM `order` WHERE KlantenID = :KLANTENID AND isBesteld = 0");
+$sql->bindValue(':KLANTENID', $user['KlantenID']);
+$sql->execute();
+$orders0 = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+$sql = $link->prepare("SELECT * FROM `order` WHERE KlantenID = :KLANTENID AND isBesteld = 1");
+$sql->bindValue(':KLANTENID', $user['KlantenID']);
+$sql->execute();
+$orders1 = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+$datum = $_SESSION['DATE'];
 
 $winkelkar = $_SESSION['WINKELKAR'];
 ?>
@@ -21,7 +39,7 @@ $winkelkar = $_SESSION['WINKELKAR'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webtoepassing Gebruikersinformatie</title>
+    <title>Webtoepassing Profiel</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width : 568px)">
     <link rel="stylesheet" type="text/css" href="css/NewStyle.css">
@@ -151,7 +169,7 @@ $winkelkar = $_SESSION['WINKELKAR'];
                             <td>
                                 <div class="button">
                                     <a>
-                                        <h3>Gebruiker: <?php echo $_SESSION['user']; ?></h3>
+                                        <h3>Gebruiker: <?php echo $_SESSION['user'] . " ||| " . $orders1count; ?></h3>
                                     </a>
                                 </div>
                             </td>
@@ -251,7 +269,7 @@ $winkelkar = $_SESSION['WINKELKAR'];
                     Gebruikersnaam:
                 </td>
                 <th>
-                    <?php echo $result['Gebruikersnaam']; ?>
+                    <?php echo $user['Gebruikersnaam']; ?>
                 </th>
                 <td>
                     Wachtwoord:
@@ -265,13 +283,13 @@ $winkelkar = $_SESSION['WINKELKAR'];
                     E-mail:
                 </td>
                 <th>
-                    <?php echo $result['Email']; ?>
+                    <?php echo $user['Email']; ?>
                 </th>
                 <td>
                     Telefoonnummer:
                 </td>
                 <th>
-                    <?php echo $result['Telefoonnummer']; ?>
+                    <?php echo $user['Telefoonnummer']; ?>
                 </th>
             </tr>
             <tr>
@@ -283,13 +301,13 @@ $winkelkar = $_SESSION['WINKELKAR'];
                     Straatnaam:
                 </td>
                 <th>
-                    <?php echo $result['Straatnaam']; ?> 
+                    <?php echo $user['Straatnaam']; ?> 
                 </th>
                 <td>
                     Huisnummer:
                 </td>
                 <th>
-                    <?php echo $result['Huisnummer']; ?>
+                    <?php echo $user['Huisnummer']; ?>
                 </th>
             </tr>
             <tr>
@@ -297,13 +315,13 @@ $winkelkar = $_SESSION['WINKELKAR'];
                     Postcode:
                 </td>
                 <th>
-                    <?php echo $result['Postcode']; ?>
+                    <?php echo $user['Postcode']; ?>
                 </th>
                 <td>
                     Gemeente:
                 </td>
                 <th>
-                    <?php echo $result['Gemeente']; ?>
+                    <?php echo $user['Gemeente']; ?>
                 </th>
             </tr>
             <tr>
@@ -311,7 +329,7 @@ $winkelkar = $_SESSION['WINKELKAR'];
                     Geboortedatum:
                 </td>
                 <th>
-                    <?php echo $result['GeboorteDatum']; ?> 
+                    <?php echo $user['GeboorteDatum']; ?> 
                 </th>
                 <td>
                 </td>
@@ -320,47 +338,536 @@ $winkelkar = $_SESSION['WINKELKAR'];
             </tr>
         </table>
         <br>
-        <h2>Bestellingen</h2>
-        <table class="centertable">
+        <div class="allebestellingen">
             <style>
-                .centertable {
-                    background-color: rgb(35, 35, 35);
+                .allebestellingen {
+                    width: fit-content;
+                    background-color: transparent;
+                }
+                .allebestellingen table {
+                    width: 100%;
+                }
+                .allebestellingen table tr td h2 {
                     color: white;
-                    border-radius: 0.5cm;
-                    width: fit-content;
-                    padding: 0.5cm;
-                    box-shadow: 0px 0px 10px 1px black;
-                }
-                .centertable tr {
-                    width: fit-content;
-                }
-                .centertable th {
-                    height: 1cm;
-                    border: none;
-                    text-align: right;
                     padding: 0.25cm;
-                    padding-right: 0.50cm;
-                    color: cornflowerblue;
-                    width: fit-content;
+                    text-align: center;
+                    width: 50%;
+                    margin: auto;
                 }
-                .centertable td {
-                    height: 1cm;
-                    border: none;
-                    text-align: left;
+                .allebestellingen table tr td {
                     padding: 0.25cm;
-                    padding-left: 0.5cm;
-                    width: fit-content;
+                    width: 100%;
+                    margin: auto;
+                    vertical-align: top;
+                    white-space: nowrap;
                 }
             </style>
-            <tr>
-                <td>
-                    <div>
-                        <?php
+            <table>
+                <tr>
+                    <td>
+                        <h2>Bestellingen</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="bestellingen">
+                            <style>
+                                .bestellingen {
+                                    width: 100%;
+                                }
+                            </style>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <?php
+                                        foreach ($orders0 as $order0) {
+                                            $stmt = $link->prepare("SELECT * FROM orderproduct WHERE OrderID = :ORDERID");
+                                            $stmt->bindValue(':ORDERID', $order0['OrderID']);
+                                            $stmt->execute();
+                                            $orderproducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                            ?>
+                                            <div class="inhoud">
+                                                <style>
+                                                    .inhoud {
+                                                        background-color: rgb(35, 35, 35);
+                                                        color: white;
+                                                        border-radius: 0.5cm;
+                                                        width: 100%;
+                                                        padding: 0.5cm 0.5cm 0.15cm 0.5cm;
+                                                        box-shadow: 0px 0px 10px 1px black;
+                                                    }
+                                                    .inhoud td {
+                                                        color: white;
+                                                        padding: 0.05cm 0.15cm;
+                                                        white-space: nowrap;
+                                                    }
+                                                    .inhoud th {
+                                                        color: cornflowerblue;
+                                                        padding: 0.05cm 0.15cm;
+                                                        white-space: nowrap;
+                                                    }
+                                                </style>
+                                                <table class="B1">
+                                                    <style>
+                                                        .B1 {
+                                                            padding-bottom: 0.25cm;
+                                                            width: 100%;
+                                                        }
+                                                        .B1, .B1 tr {
+                                                            width: fit-content;
+                                                        }
+                                                        .B1 td {
+                                                            width: 25%;
+                                                        }
+                                                        .B1 th {
+                                                            width: 75%;
+                                                            text-align: left;
+                                                        }
+                                                    </style>
+                                                    <tr>
+                                                        <td>
+                                                            Aanmaakdatum:
+                                                        </td>
+                                                        <th>
+                                                            <?php echo $order0['BestelDatum']; ?>
+                                                        </th>
+                                                    </tr>
+                                                </table>
+                                                <div class="B2">
+                                                    <table>
+                                                        <style>
+                                                            .B2 {
+                                                                width: 100%;
+                                                            }
+                                                            .B2 table {
+                                                                width: 100%;
+                                                                border-top: 2px solid rgb(75, 75, 75);
+                                                            }
+
+
+
+
+                                                            .product {
+                                                                width: auto;
+                                                                text-align: left;
+                                                            }
+                                                            .aantal {
+                                                                width: 2cm;
+                                                                text-align: right;
+                                                            }
+                                                            .prijs {
+                                                                width: 2cm;
+                                                                text-align: right;
+                                                                white-space: nowrap;
+                                                            }
+                                                            .totaal {
+                                                                width: 2cm;
+                                                                text-align: right;
+                                                                white-space: nowrap;
+                                                            }
+                                                        </style>
+                                                        <tr>
+                                                            <td class="product">
+                                                                Product
+                                                            </td>
+                                                            <td class="aantal">
+                                                                Aantal
+                                                            </td>
+                                                            <td class="prijs">
+                                                                Prijs
+                                                            </td>
+                                                            <td class="totaal">
+                                                                Subtotaal
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                        foreach ($orderproducts as $orderproduct) {
+                                                            $stmt = $link->prepare("SELECT * FROM product WHERE ProductID = :PRODUCTID");
+                                                            $stmt->bindValue(':PRODUCTID', $orderproduct['ProductID']);
+                                                            $stmt->execute();
+                                                            $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                                                            ?>
+                                                            <tr>
+                                                                <th class="product">
+                                                                    <?php echo $product['Naam']; ?>
+                                                                </th>
+                                                                <th class="aantal">
+                                                                    <?php echo $orderproduct['Aantal']; ?>
+                                                                </th>
+                                                                <th class="prijs">
+                                                                    <?php echo "€ " . $product['Prijs']; ?>
+                                                                </th>
+                                                                <th class="totaal">
+                                                                    <?php echo "€ " . $product['Prijs'] * $orderproduct['Aantal']; ?>
+                                                                </th>
+                                                            </tr>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </table>
+                                                </div>
+                                                <div class="B3">
+                                                    <style>
+                                                        .B3 {
+                                                            width: 100%;
+                                                        }
+                                                        .B3 table.maintable {
+                                                            width: 100%;
+                                                            border-top: 2px solid rgb(75, 75, 75);
+                                                            padding-top: 0.25cm;
+                                                        }
+                                                        .maintable tr td {
+                                                            width: 50%;
+                                                        }
+                                                    </style>
+                                                    <table class="maintable">
+                                                        <tr>
+                                                            <td>
+                                                                <table class="table1">
+                                                                    <style>
+                                                                        .table1 {
+                                                                            width: 100%;
+
+                                                                        }
+                                                                        .table1 td {
+                                                                            text-align: left;
+                                                                        }
+                                                                    </style>
+                                                                    <tr>
+                                                                        <td class="A1">
+                                                                            <div>
+                                                                                <style>
+                                                                                    .A1 {
+                                                                                        width: fit-content;
+                                                                                        text-align: left;
+                                                                                    }
+                                                                                    .A1 a img {
+                                                                                        background-color: rgb(75, 75, 75);
+                                                                                        padding: 0.41cm;
+                                                                                        margin: -0.51cm 0 -0.5cm 0;
+                                                                                        border-radius: 0.5cm;
+                                                                                    }
+                                                                                    .A1 a img:hover {
+                                                                                        background-color: rgb(55, 55, 55);
+                                                                                        border-radius: 0.5cm;
+                                                                                        transition: 0.15s;
+                                                                                    }
+                                                                                    .A1 a img:active {
+                                                                                        background-color: rgb(75, 75, 75);
+                                                                                        border-radius: 0.5cm;
+                                                                                        transition: 0s;
+                                                                                    }
+                                                                                </style>
+                                                                                <?php
+                                                                                $betaalid = $order0['OrderID'];
+                                                                                echo "<a href='Bestellingverwijderen.php?nr=$betaalid'><img src='images/garbageTRANS.png' style='width: 0.75cm; height: auto;'/></a>";
+                                                                                ?>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="A2">
+                                                                            <div>
+                                                                                <style>
+                                                                                    .A2 {
+                                                                                        width: auto;
+                                                                                        text-align: left;
+                                                                                    }
+                                                                                    .A2 a img {
+                                                                                        background-color: rgb(75, 75, 75);
+                                                                                        padding: 0.25cm;
+                                                                                        margin: -0.50cm;
+                                                                                        border-radius: 0.5cm;
+                                                                                    }
+                                                                                    .A2 a img:hover {
+                                                                                        background-color: rgb(55, 55, 55);
+                                                                                        padding: 0.25cm;
+                                                                                        margin: -0.50cm;
+                                                                                        border-radius: 0.5cm;
+                                                                                        transition: 0.15s;
+                                                                                    }
+                                                                                    .A2 a img:active {
+                                                                                        background-color: rgb(75, 75, 75);
+                                                                                        padding: 0.25cm;
+                                                                                        margin: -0.50cm;
+                                                                                        border-radius: 0.5cm;
+                                                                                        transition: 0s;
+                                                                                    }
+                                                                                </style>
+                                                                                <?php
+                                                                                echo "<a href='Bestellingafronden.php?nr=$betaalid'><img src='images/cartTRANS.png' style='width: 1.2cm; height: auto;'/></a>";
+                                                                                ?>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td>
+                                                                <table class="table2">
+                                                                    <style>
+                                                                        .table2 {
+                                                                            width: 100%;
+                                                                        }
+                                                                        .table2 td {
+                                                                            width: 85%;
+                                                                            text-align: right;
+                                                                        }
+                                                                        .table2 th {
+                                                                            width: 15%;
+                                                                            text-align: right;
+                                                                        }
+                                                                    </style>
+                                                                    <tr>
+                                                                        <td>
+                                                                            Totaalprijs:
+                                                                        </td>
+                                                                        <th>
+                                                                            <?php echo "€ " . $order0['Totaalprijs']; ?>
+                                                                        </th>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <?php
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h2>Afgeronde bestellingen</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <?php
+                    if($orders1count > 0)
+                    {
                         ?>
-                    </div>
-                </td>
-            </tr>
-        </table>
+                        <td>
+                            <div class="bestellingen">
+                                <style>
+                                    .bestellingen {
+                                        width: 93.5%;
+                                    }
+                                </style>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <?php
+                                            foreach ($orders1 as $order1) {
+                                                $stmt = $link->prepare("SELECT * FROM orderproduct WHERE OrderID = :ORDERID");
+                                                $stmt->bindValue(':ORDERID', $order1['OrderID']);
+                                                $stmt->execute();
+                                                $orderproducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                                ?>
+                                                <div class="inhoud">
+                                                    <style>
+                                                        .inhoud {
+                                                            background-color: rgb(35, 35, 35);
+                                                            color: white;
+                                                            border-radius: 0.5cm;
+                                                            width: 100%;
+                                                            padding: 0.5cm;
+                                                            box-shadow: 0px 0px 10px 1px black;
+                                                        }
+                                                        .inhoud td {
+                                                            color: white;
+                                                            padding: 0.05cm 0.15cm;
+                                                            white-space: nowrap;
+                                                        }
+                                                        .inhoud th {
+                                                            color: cornflowerblue;
+                                                            padding: 0.05cm 0.15cm;
+                                                            white-space: nowrap;
+                                                        }
+                                                    </style>
+                                                    <table class="B1">
+                                                        <style>
+                                                            .B1 {
+                                                                padding-bottom: 0.25cm;
+                                                                width: 100%;
+                                                            }
+                                                            .B1, .B1 tr {
+                                                                width: fit-content;
+                                                            }
+                                                            .B1 td {
+                                                                width: 25%;
+                                                            }
+                                                            .B1 th {
+                                                                width: 75%;
+                                                                text-align: left;
+                                                            }
+                                                        </style>
+                                                        <tr>
+                                                            <td>
+                                                                Besteldatum:
+                                                            </td>
+                                                            <th>
+                                                                <?php echo $order1['BestelDatum']; ?>
+                                                            </th>
+                                                        </tr>
+                                                    </table>
+                                                    <div class="B2">
+                                                        <table>
+                                                            <style>
+                                                                .B2 {
+                                                                    width: 100%;
+                                                                }
+                                                                .B2 table {
+                                                                    width: 100%;
+                                                                    border-top: 2px solid rgb(75, 75, 75);
+                                                                }
+
+
+
+
+                                                                .product {
+                                                                    width: auto;
+                                                                    text-align: left;
+                                                                }
+                                                                .aantal {
+                                                                    width: 2cm;
+                                                                    text-align: right;
+                                                                }
+                                                                .prijs {
+                                                                    width: 2cm;
+                                                                    text-align: right;
+                                                                    white-space: nowrap;
+                                                                }
+                                                                .totaal {
+                                                                    width: 2cm;
+                                                                    text-align: right;
+                                                                    white-space: nowrap;
+                                                                }
+                                                            </style>
+                                                            <tr>
+                                                                <td class="product">
+                                                                    Product
+                                                                </td>
+                                                                <td class="aantal">
+                                                                    Aantal
+                                                                </td>
+                                                                <td class="prijs">
+                                                                    Prijs
+                                                                </td>
+                                                                <td class="totaal">
+                                                                    Totaal
+                                                                </td>
+                                                            </tr>
+                                                            <?php
+                                                            foreach ($orderproducts as $orderproduct) {
+                                                                $stmt = $link->prepare("SELECT * FROM product WHERE ProductID = :PRODUCTID");
+                                                                $stmt->bindValue(':PRODUCTID', $orderproduct['ProductID']);
+                                                                $stmt->execute();
+                                                                $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                                                                ?>
+                                                                <tr>
+                                                                    <th class="product">
+                                                                        <?php echo $product['Naam']; ?>
+                                                                    </th>
+                                                                    <th class="aantal">
+                                                                        <?php echo $orderproduct['Aantal']; ?>
+                                                                    </th>
+                                                                    <th class="prijs">
+                                                                        <?php echo "€ " . $product['Prijs']; ?>
+                                                                    </th>
+                                                                    <th class="totaal">
+                                                                        <?php echo "€ " . $product['Prijs'] * $orderproduct['Aantal']; ?>
+                                                                    </th>
+                                                                </tr>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </table>
+                                                    </div>
+                                                    <div class="B3">
+                                                        <style>
+                                                            .B3 {
+                                                                width: 100%;
+                                                            }
+                                                            .B3 table.maintable {
+                                                                width: 100%;
+                                                                border-top: 2px solid rgb(75, 75, 75);
+                                                                padding-top: 0.25cm;
+                                                            }
+                                                            .maintable tr td {
+                                                                width: 50%;
+                                                            }
+                                                        </style>
+                                                        <table class="maintable">
+                                                            <tr>
+                                                                <td>
+                                                                    <table class="table1">
+                                                                        <style>
+                                                                            .table1 {
+                                                                                width: 100%;
+                                                                            }
+                                                                            .table1 td {
+                                                                                width: 100%;
+                                                                                text-align: left;
+                                                                            }
+                                                                        </style>
+                                                                        <tr>
+                                                                            <td>
+
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <table class="table2">
+                                                                        <style>
+                                                                            .table2 {
+                                                                                width: 100%;
+                                                                            }
+                                                                            .table2 td {
+                                                                                width: 85%;
+                                                                                text-align: right;
+                                                                            }
+                                                                            .table2 th {
+                                                                                width: 15%;
+                                                                                text-align: right;
+                                                                            }
+                                                                        </style>
+                                                                        <tr>
+                                                                            <td>
+                                                                                Totaalprijs:
+                                                                            </td>
+                                                                            <th>
+                                                                                <?php echo "€ " . $order1['Totaalprijs']; ?>
+                                                                            </th>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <?php
+                                            }
+                                            ?>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <?php
+                    }
+                    ?>
+                </tr>
+            </table>
+        </div>
     </div>
 </body>
 </html>

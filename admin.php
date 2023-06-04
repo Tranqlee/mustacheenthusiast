@@ -84,7 +84,7 @@ if(isset($_POST['productnamewijzigen']))
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webtoepassing Admin paneel</title>
+    <title>Webtoepassing Admin Paneel</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width : 568px)">
     <link rel="stylesheet" type="text/css" href="css/NewStyle.css">
@@ -354,8 +354,8 @@ if(isset($_POST['productnamewijzigen']))
                             padding-right: 0.40cm;
                         }
                         .delete1 img {
-                            width: 57.5%;
-                            height: 57.5%;
+                            width: 40%;
+                            height: 40%;
                         }
                         .delete1 img:hover {
                             transition: 0.1s;
@@ -686,8 +686,8 @@ if(isset($_POST['productnamewijzigen']))
                             border-right: none;
                         }
                         .edit img {
-                            width: 100%;
-                            height: 100%;
+                            width: 75%;
+                            height: 75%;
                             filter: invert(100%);
                         }
                         .edit img:hover {
@@ -699,8 +699,8 @@ if(isset($_POST['productnamewijzigen']))
                             padding-right: 0.40cm;
                         }
                         .delete img {
-                            width: 57.5%;
-                            height: 57.5%;
+                            width: 40%;
+                            height: 40%;
                         }
                         .delete img:hover {
                             transition: 0.1s;
@@ -786,257 +786,6 @@ if(isset($_POST['productnamewijzigen']))
                     <td>
                         <a href='producttoevoegen.php'><img src="images/Addtocart.png" alt="toevoegen"/></a>
                     </td>
-                </div>
-                <!--<div class="producttable">
-                    <style>
-                        .producttable {
-                            width: 100%;
-                            border: none;
-                        }
-                        .producttable td {
-                            border: none;
-                            vertical-align: top;
-                        }
-                    </style>
-                    <table>
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="productform">
-                                    <style>
-                                        .productform {
-                                            width: 100%;
-                                            background-color: rgb(75, 75, 75);
-                                            padding: 0.25cm;
-                                            border-radius: 0.5cm;
-                                        }
-                                        .productform form {
-                                            width: auto;
-                                        }
-                                        .productform th {
-                                            text-align: left;
-                                            border: none;
-                                        }
-                                        .productform td {
-                                            justify-content: right;
-                                        }
-                                        .productform label {
-                                            color: white;
-                                            font-weight: bold;
-                                        }
-                                        .productform input {
-                                            padding: 0.15cm;
-                                            border-radius: 0.15cm;
-                                            margin: 0.15cm;
-                                            border: none;
-                                        }
-                                    </style>
-                                    <form action="" method="POST">
-                                        <table>
-                                            <tr>
-                                                <th>
-                                                    <h2>Product toevoegen</h2>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productimage">Product afbeelding</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productimage" id="productimage" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productname">Product naam</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productname" id="productname" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productgenre">Product hoofdgenre ID</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productgenre" id="productgenre" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productage">Product Leeftijdsrestrictie ID</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productage" id="productage" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productdirector">Product regisseur ID</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productdirector" id="productdirector" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productdescription">Product beschrijving</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productdescription" id="productdescription" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productamount">Product aantal</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productamount" id="productamount" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productprice">Product prijs</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productprice" id="productprice" size="auto" step="0.01" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="submit" name="submit" value="Product toevoegen"/>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </form>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="productformwijzigen">
-                                    <style>
-                                        .productformwijzigen {
-                                            width: 100%;
-                                            background-color: rgb(75, 75, 75);
-                                            padding: 0.25cm;
-                                            border-radius: 0.5cm;
-                                        }
-                                        .productformwijzigen form {
-                                            width: auto;
-                                        }
-                                        .productformwijzigen th {
-                                            text-align: left;
-                                            border: none;
-                                        }
-                                        .productformwijzigen td {
-                                            justify-content: right;
-                                        }
-                                        .productformwijzigen label {
-                                            color: white;
-                                            font-weight: bold;
-                                        }
-                                        .productformwijzigen input {
-                                            padding: 0.15cm;
-                                            border-radius: 0.15cm;
-                                            margin: 0.15cm;
-                                            border: none;
-                                        }
-                                    </style>
-                                    <form action="" method="POST">
-                                        <table>
-                                            <tr>
-                                                <th>
-                                                    <h2>Product aanpassen</h2>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productidwijzigen">Product ID</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productidwijzigen" id="productidwijzigen" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productimagewijzigen">Product afbeelding</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productimagewijzigen" id="productimagewijzigen" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productnamewijzigen">Product naam</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productnamewijzigen" id="productnamewijzigen" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productgenrewijzigen">Product hoofdgenre ID</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productgenrewijzigen" id="productgenrewijzigen" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productagewijzigen">Product Leeftijdsrestrictie ID</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productagewijzigen" id="productagewijzigen" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productdirectorwijzigen">Product regisseur ID</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productdirectorwijzigen" id="productdirectorwijzigen" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productdescriptionwijzigen">Product beschrijving</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productdescriptionwijzigen" id="productdescriptionwijzigen" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productamountwijzigen">Product aantal</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productamountwijzigen" id="productamountwijzigen" size="auto" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                    <label for="productpricewijzigen">Product prijs</label>
-                                                </th>
-                                                <td>
-                                                    <input type="text" name="productpricewijzigen" id="productpricewijzigen" size="auto" step="0.01" required/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="submit" name="submitwijzigen" value="Product wijzigen"/>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </form>-->
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
                 </div>
             </div>
         </div>

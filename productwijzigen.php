@@ -31,7 +31,7 @@
 ?>
 <!DOCTYPE html>
 <head>
-    <title>Webtoepassing product aanpassen</title>
+    <title>Webtoepassing Product Aanpassen</title>
     <style>
         html
         {

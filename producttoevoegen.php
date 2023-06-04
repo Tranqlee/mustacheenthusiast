@@ -22,7 +22,7 @@
 ?>
 <!DOCTYPE html>
 <head>
-    <title>Webtoepassing product toevoegen</title>
+    <title>Webtoepassing Product Toevoegen</title>
     <style>
         html
         {
