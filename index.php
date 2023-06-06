@@ -100,9 +100,10 @@ $totaalprijs = $_SESSION['totaalprijs'];
                     <?php
                     if($result['isAdmin'] == 1)
                     {
+                        $_SESSION['alert'] = "";
                         ?>
-                        <a href="admin.php" style="height: fit-content;">
-                            <img src="images/adminTRANS.png" alt="Admin" style="height: 33.06px; width: auto;">
+                        <a href='admin.php' style='height: fit-content;'>
+                            <img src='images/adminTRANS.png' alt='Admin' style='height: 33.06px; width: auto;'>
                         </a>
                         <?php
                     }

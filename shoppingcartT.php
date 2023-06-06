@@ -171,9 +171,10 @@ if(isset($_SESSION['WINKELKAR']))
                     <?php
                     if($result['isAdmin'] == 1)
                     {
+                        $_SESSION['alert'] = "";
                         ?>
-                        <a href="admin.php" style="height: fit-content;">
-                            <img src="images/adminTRANS.png" alt="Admin" style="height: 33.06px; width: auto;">
+                        <a href='admin.php' style='height: fit-content;'>
+                            <img src='images/adminTRANS.png' alt='Admin' style='height: 33.06px; width: auto;'>
                         </a>
                         <?php
                     }
@@ -496,7 +497,7 @@ if(isset($_SESSION['WINKELKAR']))
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    <p>Prijs:</p>
+                                                    <p>Eenheidsprijs:</p>
                                                 </th>
                                                 <td>
                                                     <p>€ <?php echo $product['Prijs']; ?></p>
@@ -522,7 +523,7 @@ if(isset($_SESSION['WINKELKAR']))
                                                 <td>
                                                     <div class="totalprice">
                                                         <div>
-                                                            <p>Totaalprijs:</p>
+                                                            <p>Subtotaal:</p>
                                                         </div>
                                                         <p style="width: fit-content;">€ <?php echo $winkelkar[$i]['TOTAALPRIJS']; ?></p>
                                                     </div>
@@ -653,7 +654,7 @@ if(isset($_SESSION['WINKELKAR']))
                                 </div>
                                 <div>
                                     <div>
-                                        <p>Totaalprijs:</p>
+                                        <p>Totaal:</p>
                                     </div>
                                     <p style="width: fit-content;">€ <?php echo $totaaltotaalprijs; $_SESSION['TOTALORDERPRICE'] = $totaaltotaalprijs; ?></p>
                                 </div>

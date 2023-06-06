@@ -4,10 +4,10 @@
     $productid = $_GET['nr'];
 
     $link = getDatabase();
-    $stmt = $link->prepare('DELETE FROM product WHERE `ProductID` = :id');
+    $stmt = $link->prepare('DELETE FROM regisseuren WHERE `RegisseurID` = :id');
     $stmt->execute(array(':id' => $productid));
     $stmt->execute();
 
-    $_SESSION['alert'] = "Product is verwijderd";
+    $_SESSION['alert'] = "Regisseur is verwijderd";
     header('Location: admin.php');
 ?>

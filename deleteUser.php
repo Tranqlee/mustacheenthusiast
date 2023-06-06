@@ -7,5 +7,7 @@
     $stmt = $link->prepare('DELETE FROM klant WHERE `KlantenID` = :id');
     $stmt->execute(array(':id' => $userid));
     $stmt->execute();
+
+    $_SESSION['alert'] = "Gebruiker is verwijderd";
     header('Location: admin.php');
 ?>

@@ -2,6 +2,7 @@
     require_once('comm.php');
     session_start();
     $link = getDatabase();
+    $_SESSION['alert'] = "";
 
     $isUsernameAndPasswordCorrect = false;
 
@@ -17,6 +18,8 @@
         $stmt->bindParam(':regisseur',$_POST['regisseur']);
         $stmt->bindParam(':aantal',$_POST['aantal']);
         $stmt->execute();
+
+        $_SESSION['alert'] = "Product is toegevoegd";
         header('Location: admin.php');
     }
 ?>
@@ -101,7 +104,7 @@
         }
     </style>
 </head>
-<body class="main" style="width: fit-content; margin: 0 auto 0 auto; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+<body class="main" style="width: fit-content; margin: 0 auto 0 auto; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; background-color: transparent;">
     <div class="center" style="background-color: rgb(35, 35, 35); margin: 0.8cm auto auto auto; padding: 0 1cm 0 1cm; width: fit-content; height: fit-content; border-radius: 0.35cm; border: none; box-shadow: 0px 0px 10px 1px black; color: white;">
         <table>
             <tr>

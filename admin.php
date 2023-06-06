@@ -28,18 +28,7 @@ if(isset($_POST['directorname']))
     $stmt = $link->prepare("INSERT INTO regisseuren (Naam) VALUES (:directorname)");
     $stmt->bindParam(':directorname', $_POST['directorname']);
     $stmt->execute();
-}
-if(isset($_POST['agename']))
-{
-    $stmt = $link->prepare("INSERT INTO leeftijden (Naam) VALUES (:agename)");
-    $stmt->bindParam(':agename', $_POST['agename']);
-    $stmt->execute();
-}
-if(isset($_POST['genrename']))
-{
-    $stmt = $link->prepare("INSERT INTO Genres (Naam) VALUES (:genrename)");
-    $stmt->bindParam(':genrename', $_POST['genrename']);
-    $stmt->execute();
+    $_SESSION['alert'] = "Regisseur is toegevoegd";
 }
 
 
@@ -72,6 +61,38 @@ if(isset($_POST['productnamewijzigen']))
     $stmt->bindParam(':productamountwijzigen', $_POST['productamountwijzigen']);
     $stmt->bindParam(':productidwijzigen', $_POST['productidwijzigen']);
     $stmt->execute();
+}
+
+$alert = $_SESSION['alert'];
+if($alert == "Gebruiker is verwijderd")
+{
+    echo "<script>alert('Gebruiker is verwijderd');</script>";
+    $alert = "";
+}
+elseif($alert == "Product is toegevoegd")
+{
+    echo "<script>alert('Product is toegevoegd');</script>";
+    $alert = "";
+}
+elseif($alert == "Product is verwijderd")
+{
+    echo "<script>alert('Product is verwijderd');</script>";
+    $alert = "";
+}
+elseif($alert == "Product is aangepast")
+{
+    echo "<script>alert('Product is aangepast');</script>";
+    $alert = "";
+}
+elseif($alert == "Regisseur is toegevoegd")
+{
+    echo "<script>alert('Regisseur is toegevoegd');</script>";
+    $alert = "";
+}
+elseif($alert == "Regisseur is verwijderd")
+{
+    echo "<script>alert('Regisseur is verwijderd');</script>";
+    $alert = "";
 }
 ?>
 
@@ -484,22 +505,85 @@ if(isset($_POST['productnamewijzigen']))
                                         <tr>
                                             <th style="width: 2cm;">Regisseur ID</th>
                                             <th style="width: max-content;">Regisseur namen</th>
+                                            <th style="width: fit-content;">Verwijderen</th>
                                         </tr>
                                         <?php 
                                         foreach($regisseurs as $regisseur):
                                         ?>
-                                        <tr>
+                                        <tr class="regisseur1">
+                                            <style>
+                                                .delete1 img {
+                                                    width: 0.875cm;
+                                                    height: auto;
+                                                }
+                                                .delete1 img:hover {
+                                                    transition: 0.1s;
+                                                    filter: invert(45%);
+                                                }
+                                                .regisseur1 td {
+                                                    text-align: right;
+                                                    vertical-align: middle;
+                                                    display: table-cell;
+                                                }
+                                            </style>
                                             <td style="text-align: right;"><?php echo $regisseur['RegisseurID']; ?></td>
                                             <td style="text-align: right;"><?php echo $regisseur['Naam']; ?></td>
+                                            <?php
+                                            $directorid = $regisseur['RegisseurID'];
+                                            echo "<td style='text-align: right;' class='delete1'><a href='deleteDirector.php?nr=$directorid'><img src='images/garbageTRANS.png' alt='Regisseur verwijderen'/></a></td>";
+                                            ?>
                                         </tr>
                                         <?php
                                         endforeach;
                                         ?>
                                     </table>
+                                    <div>
+                                        <style>
+                                            .regisseurtoevoegen {
+                                                color: white;
+                                                width: fit-content;
+                                                margin-left: auto;
+                                                margin-right: auto;
+                                            }
+                                            .regisseurtoevoegen label {
+                                                width: fit-content;
+                                                margin-left: auto;
+                                                margin-right: auto;
+                                                display: block;
+                                            }
+                                            .nameregisseur {
+                                                padding: 0.25cm;
+                                                border: none;
+                                                border-radius: 0.25cm;
+                                            }
+                                            .submitregisseur {
+                                                margin: 0.25cm;
+                                                padding: 0.25cm;
+                                                margin-left: auto;
+                                                margin-right: auto;
+                                                display: block;
+                                                border: none;
+                                                border-radius: 0.25cm;
+                                            }
+                                            .submitregisseur:hover {
+                                                transition: 0.1s;
+                                                filter: invert(25%);
+                                                color: black;
+                                            }
+                                        </style>
+                                        <br><br><br>
+                                        <form action="" method="post" class="regisseurtoevoegen">
+                                            <label for="director">Regisseur toevoegen:</label>
+                                            <br>
+                                            <input type="text" name="directorname" placeholder="" class="nameregisseur" required>
+                                            <br>
+                                            <input type="submit" value="Toevoegen" class="submitregisseur">
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </td>
-                        <td>
+                        <td style="width: max-content;">
                             <div class="agelist">
                                 <div>
                                     <h1>Leeftijden</h1>
